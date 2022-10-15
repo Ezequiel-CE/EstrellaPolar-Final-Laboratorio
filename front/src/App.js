@@ -1,7 +1,9 @@
+import Login from "./Page/Login";
+
 function App() {
   return (
-    <div className="App">
-      <p>primer empiezo</p>
+    <div className="app">
+      <Login />
     </div>
   );
 }
