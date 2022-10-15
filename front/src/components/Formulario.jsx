@@ -10,6 +10,8 @@ import Card from "@mui/material/Card";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import AmaticSCBold from "../assets/AmaticSCBold.ttf";
+import LoginLogo from "../assets/LoginLogo.jpg";
+
 const theme = createTheme({
 	palette: {
 		orange: {
@@ -70,12 +72,9 @@ export default function Formulario() {
 					</Typography>
 				</ThemeProvider>
 			</Grid>
-			<CardMedia
-				component="img"
-				style={{ height: 100, paddingTop: "15px" }}
-				image="assets/login-logo.jpg"
-				alt="Plain Logo"
-			/>
+
+			<CardMedia component="img" src={LoginLogo} alt="Plain Logo" />
+
 			<Grid
 				sx={{
 					display: "flex",
@@ -119,6 +118,11 @@ export default function Formulario() {
 							variant="contained"
 							size="large"
 							color="orange"
+							style={{
+								fontFamily: "Arial",
+								fontSize: "16px",
+								fontWeight: "bold",
+							}}
 							sx={{ mt: 3, mb: 2 }}
 						>
 							Sign In
