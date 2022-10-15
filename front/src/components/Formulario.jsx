@@ -73,7 +73,7 @@ export default function Formulario() {
 				</ThemeProvider>
 			</Grid>
 
-			<CardMedia component="img" src={LoginLogo} alt="Plain Logo" />
+			<CardMedia component="img" image={LoginLogo} alt="Plain Logo" />
 
 			<Grid
 				sx={{
