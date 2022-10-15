@@ -44,7 +44,7 @@ export default function Formulario() {
 			width={"542px"}
 			height={"660px"}
 			sx={{
-				p: "40px 71px 20px 71px",
+				p: "30px 40px 15px 40px",
 				borderRadius: "20px",
 				ml: "48px",
 				backgroundColor: "#F3F3F3",
