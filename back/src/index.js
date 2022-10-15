@@ -1,6 +1,7 @@
 import express from "express";
 import morgan from "morgan";
-import "dotenv/config";
+import db from "./configs/database.js";
+
 import authRouter from "./routes/auth.route.js";
 
 const app = express();
@@ -19,8 +20,12 @@ app.use("*", (_, res) =>
   res.status(404).send("<h1>OPS! the endpoint does not exist :(</h1>")
 );
 
-app.listen(port, () => {
-  console.log(
-    `The connection has been successfully established on port ${port}`
-  );
+app.listen(port, async () => {
+  try {
+    await db.authenticate();
+
+    console.log("Connection has been established successfully.");
+  } catch (error) {
+    console.error("Unable to connect to the database:", error);
+  }
 });
