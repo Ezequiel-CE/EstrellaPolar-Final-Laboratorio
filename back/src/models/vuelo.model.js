@@ -3,7 +3,7 @@
 import { DataTypes } from 'sequelize';
 import db from '../configs/database.js';
 
-export const Vuelo = db.define(
+const Vuelo = db.define(
   'vuelo',
   {
     id: {
@@ -13,8 +13,8 @@ export const Vuelo = db.define(
       primaryKey: true,
     },
     tarifa: { field: 'tarifa', type: DataTypes.DECIMAL(10, 2), allowNull: false },
-    destino: { field: 'destino', type: DataTypes.STRING, allowNull: false },
-    origen: { field: 'origen', type: DataTypes.STRING, allowNull: false },
+    destino: { field: 'destino', type: DataTypes.STRING(60), allowNull: false },
+    origen: { field: 'origen', type: DataTypes.STRING(60), allowNull: false },
   },
   { tableName: 'vuelo', timestamps: false },
 );
