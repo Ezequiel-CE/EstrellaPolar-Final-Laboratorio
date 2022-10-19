@@ -12,11 +12,7 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import CardMedia from '@mui/material/CardMedia';
 import Card from '@mui/material/Card';
-import {
-  createTheme,
-  responsiveFontSizes,
-  ThemeProvider,
-} from '@mui/material/styles';
+import { createTheme, responsiveFontSizes, ThemeProvider } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 
 const theme = createTheme({
@@ -60,12 +56,7 @@ export default function Formulario() {
           '200px 132px 96px rgba(0, 0, 0, 0.01), 113px 74px 81px rgba(0, 0, 0, 0.05), 50px 33px 60px rgba(0, 0, 0, 0.09), 13px 8px 33px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1);',
       }}
     >
-      <Grid
-        container
-        direction="column"
-        justifyContent="center"
-        alignItems="center"
-      >
+      <Grid container direction="column" justifyContent="center" alignItems="center">
         <ThemeProvider theme={Rtheme}>
           <Typography variant="h5">Welcome</Typography>
           <Typography variant="h5">to</Typography>
@@ -74,12 +65,7 @@ export default function Formulario() {
           </Typography>
         </ThemeProvider>
       </Grid>
-      <CardMedia
-        component="img"
-        height="140"
-        image="/front/src/assets/login-logo.jpg"
-        alt="Plain Logo"
-      />
+      <CardMedia component="img" height="140" image="/front/src/assets/login-logo.jpg" alt="Plain Logo" />
       <Grid
         sx={{
           display: 'flex',
@@ -109,22 +95,9 @@ export default function Formulario() {
             autoComplete="current-password"
           />
         </Box>
-        <Grid
-          container
-          direction="row"
-          justifyContent="center"
-          alignItems="center"
-          xs={5}
-        >
+        <Grid container direction="row" justifyContent="center" alignItems="center" xs={5}>
           <ThemeProvider theme={theme}>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              size="large"
-              color="orange"
-              sx={{ mt: 3, mb: 2 }}
-            >
+            <Button type="submit" fullWidth variant="contained" size="large" color="orange" sx={{ mt: 3, mb: 2 }}>
               Sign In
             </Button>
           </ThemeProvider>

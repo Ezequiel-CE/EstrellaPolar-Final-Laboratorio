@@ -12,7 +12,7 @@ export const login = async (req, res) => {
 
     // compara contraseña
     if (!(cuenta.contraseña === req.body.contraseña)) {
-      console.log('contraseña incorrecta');
+      console.warn('contraseña incorrecta');
       return res.status(401).json({ msg: 'Usuario o contraseña inválida' });
     }
 
