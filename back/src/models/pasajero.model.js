@@ -1,3 +1,5 @@
+/** @format */
+
 import { DataTypes } from 'sequelize';
 import db from '../configs/database.js';
 
@@ -12,7 +14,7 @@ const Pasajero = db.define(
     },
     nombre: { field: 'nombre', type: DataTypes.STRING(30), allowNull: false },
     apellido: { field: 'apellido', type: DataTypes.STRING(30), allowNull: false },
-    tipo_documento: { field: 'tipo_documento', type: DataTypes(30).STRING, allowNull: false },
+    tipo_documento: { field: 'tipo_documento', type: DataTypes.STRING(30), allowNull: false },
     num_documento: { field: 'num_documento', type: DataTypes.STRING(20), allowNull: false },
     fecha_nacimiento: { field: 'fecha_nacimiento', type: DataTypes.DATEONLY, allowNull: false },
     telefono: { field: 'telefono', type: DataTypes.STRING(20), allowNull: false },
