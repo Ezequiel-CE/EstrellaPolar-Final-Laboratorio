@@ -18,7 +18,6 @@ export const login = async (req, res) => {
 
     return res.status(200).json({ msg: 'logeado com sucesso' });
   } catch (error) {
-    console.log(error);
     // error en el endpoint
     return res.status(500).json({ msg: 'Error al logearse' });
   }
