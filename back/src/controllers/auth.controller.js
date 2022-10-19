@@ -1,5 +1,5 @@
 // import jwt from 'jsonwebtoken';
-import Cuenta from '../models/Cuenta.model.js';
+import Cuenta from '../models/cuenta.model.js';
 
 export const login = async (req, res) => {
   // verifica que el mail exista
