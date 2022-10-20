@@ -1,9 +1,11 @@
+/** @format */
+
 import { DataTypes } from 'sequelize';
 import db from '../configs/database.js';
 import Vuelo from './vuelo.model.js';
 import Avion from './avion.model.js';
 
-const avionVuelo = db.define(
+const AvionVuelo = db.define(
   'avion_vuelo',
   {
     id: {
@@ -40,4 +42,4 @@ const avionVuelo = db.define(
   { tableName: 'avion_vuelo', timestamps: false },
 );
 
-export default avionVuelo;
+export default AvionVuelo;
