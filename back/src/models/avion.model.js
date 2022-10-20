@@ -15,4 +15,4 @@ const Avion = db.define(
   },
   { tableName: 'avion', timestamps: false },
 );
-export default Vuelo;
+export default Avion;

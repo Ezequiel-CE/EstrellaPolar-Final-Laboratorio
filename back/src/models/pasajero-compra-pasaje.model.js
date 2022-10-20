@@ -1,5 +1,3 @@
-/** @format */
-
 import { DataTypes } from 'sequelize';
 import db from '../configs/database.js';
 import Pasajero from './pasajero.model.js';
