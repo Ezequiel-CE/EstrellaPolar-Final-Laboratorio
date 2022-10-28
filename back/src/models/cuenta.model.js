@@ -12,7 +12,12 @@ const Cuenta = db.define(
       autoIncrement: true,
       primaryKey: true,
     },
-    email: { field: 'email', type: DataTypes.STRING, allowNull: false },
+    email: {
+      field: 'email',
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+    },
     password: { field: 'password', type: DataTypes.STRING, allowNull: false },
   },
   { tableName: 'cuenta', timestamps: false },
