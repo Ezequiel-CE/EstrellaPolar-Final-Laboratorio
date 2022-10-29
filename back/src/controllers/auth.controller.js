@@ -14,11 +14,7 @@ export const register = async (req, res) => {
 
   try {
     // encuentra la cuenta
-    const cuenta = await encontrarCuenta(value.email);
-
-    if (cuenta) {
-      throw new Error('cuenta ya exista');
-    }
+    encontrarCuenta(value.email);
 
     // hashea password y crea cuenta
     const hashedPassword = await bcrypt.hash(value.password, 8);
@@ -27,7 +23,7 @@ export const register = async (req, res) => {
 
     res.status(200).json({ mensaje: 'Cuenta creada con exito' });
   } catch (err) {
-    throw new Error('error en el endpoint');
+    res.status(403).json({ mensaje: err });
   }
 };
 
@@ -48,10 +44,7 @@ export const login = async (req, res) => {
     }
 
     // compara cuentas
-    const comparedPassword = await bcrypt.compare(
-      value.password,
-      cuenta.password,
-    );
+    const comparedPassword = await bcrypt.compare(value.password, cuenta.password);
 
     if (!comparedPassword) {
       throw new Error('Usuario o contraseña inválida');
@@ -59,7 +52,9 @@ export const login = async (req, res) => {
 
     // crea token
 
-    const token = jwt.sign({ cuenta: value.email }, process.env.JWT_SECRET, { expiresIn: '2h' });
+    const token = jwt.sign({ cuenta: value.email }, process.env.JWT_SECRET, {
+      expiresIn: '2h',
+    });
 
     return res.status(200).json({ mensaje: 'logeado con exito', token });
   } catch (err) {
