@@ -11,6 +11,9 @@
   },
   "plugins": ["react"],
   "rules": {
+    "newline-per-chained-call": 0,
+    "object-curly-newline": "off",
+    "linebreak-style": 0,
     "no-console": "off",
     "no-restricted-syntax": [
       "error",
