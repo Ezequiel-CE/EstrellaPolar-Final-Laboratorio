@@ -1,6 +1,7 @@
 // import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
-import Cuenta, { encontrarCuenta, crearCuenta } from '../models/cuenta.model.js';
+import jwt from 'jsonwebtoken';
+import { encontrarCuenta, crearCuenta } from '../models/cuenta.model.js';
 import cuentaValidation from '../lib/validation.js';
 
 export const register = async (req, res) => {
@@ -12,40 +13,57 @@ export const register = async (req, res) => {
   }
 
   try {
+    // encuentra la cuenta
     const cuenta = await encontrarCuenta(value.email);
 
     if (cuenta) {
       throw new Error('cuenta ya exista');
     }
 
+    // hashea password y crea cuenta
     const hashedPassword = await bcrypt.hash(value.password, 8);
 
-    const nuevaCuenta = await crearCuenta(value.email, hashedPassword);
+    await crearCuenta(value.email, hashedPassword);
 
-    res.status(200).json({ mensaje: 'Cuenta creada con exito', nuevaCuenta });
+    res.status(200).json({ mensaje: 'Cuenta creada con exito' });
   } catch (err) {
     throw new Error('error en el endpoint');
   }
 };
 
 export const login = async (req, res) => {
-  // verifica que el mail exista
+  // validation
+  const { error, value } = cuentaValidation(req.body);
+
+  if (error) {
+    throw new Error('datos no coinciden con lo que se solicita');
+  }
+
   try {
-    const cuenta = await Cuenta.findOne({ where: { email: req.body.email } });
+    // verifica que el mail exista
+    const cuenta = await encontrarCuenta(value.email);
 
     if (!cuenta) {
-      return res.status(401).json({ msg: 'Usuario o contraseña inválida' });
+      throw new Error('Usuario o contraseña inválida');
     }
 
-    // compara contraseña
-    if (!(cuenta.contraseña === req.body.contraseña)) {
-      console.warn('contraseña incorrecta');
-      return res.status(401).json({ msg: 'Usuario o contraseña inválida' });
+    // compara cuentas
+    const comparedPassword = await bcrypt.compare(
+      value.password,
+      cuenta.password,
+    );
+
+    if (!comparedPassword) {
+      throw new Error('Usuario o contraseña inválida');
     }
 
-    return res.status(200).json({ msg: 'logeado com sucesso' });
-  } catch (error) {
+    // crea token
+
+    const token = jwt.sign({ cuenta: value.email }, process.env.JWT_SECRET, { expiresIn: '2h' });
+
+    return res.status(200).json({ mensaje: 'logeado con exito', token });
+  } catch (err) {
     // error en el endpoint
-    return res.status(500).json({ msg: 'Error al logearse' });
+    throw new Error('error en el endpoint');
   }
 };
