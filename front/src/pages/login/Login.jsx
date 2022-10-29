@@ -1,5 +1,5 @@
 import '../index.css';
-import Formulario from '../components/Formulario.jsx';
+import Formulario from './components/Formulario.jsx';
 
 const Login = () => {
   return (
