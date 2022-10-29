@@ -24,7 +24,6 @@ export const register = async (req, res) => {
 
     res.status(200).json({ mensaje: 'Cuenta creada con exito', nuevaCuenta });
   } catch (err) {
-    console.log(err);
     throw new Error('error en el endpoint');
   }
 };
