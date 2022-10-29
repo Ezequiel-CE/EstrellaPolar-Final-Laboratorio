@@ -1,7 +1,7 @@
 // import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import { encontrarCuenta, crearCuenta } from '../models/cuenta.model.js';
+import { encontrarCuenta, crearCuenta } from '../services/cuenta.services.js';
 import cuentaValidation from '../lib/validation.js';
 
 export const register = async (req, res) => {

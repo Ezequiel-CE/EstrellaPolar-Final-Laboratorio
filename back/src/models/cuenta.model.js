@@ -21,9 +21,4 @@ const Cuenta = db.define(
   { tableName: 'cuenta', timestamps: false },
 );
 
-export const encontrarCuenta = async (email) => Cuenta.findOne({ where: { email } });
-export const crearCuenta = async (email, password) => Cuenta.create({
-  email,
-  password,
-});
 export default Cuenta;
