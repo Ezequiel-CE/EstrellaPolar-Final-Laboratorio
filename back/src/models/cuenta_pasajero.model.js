@@ -15,7 +15,7 @@ const CuentaPasajero = db.define(
     id_cuenta: {
       field: 'id_cuenta',
       type: DataTypes.INTEGER,
-      allowNull: false,
+
       references: {
         model: Cuenta,
         key: 'id_cuenta',
@@ -26,7 +26,7 @@ const CuentaPasajero = db.define(
     id_pasajero: {
       field: 'id_pasajero',
       type: DataTypes.INTEGER,
-      allowNull: false,
+
       references: {
         model: Pasajero,
         key: 'id_pasajero',

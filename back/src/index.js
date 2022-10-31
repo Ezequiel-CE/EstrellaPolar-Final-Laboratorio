@@ -6,6 +6,8 @@ import authRouter from './routes/auth.route.js';
 import routerVuelo from './routes/vuelo.route.js';
 import pasajeroRouter from './routes/pasajero.route.js';
 import routerPasaje from './routes/pasaje.route.js';
+import routerAvion from './routes/avion.route.js';
+import routerAvionVuelo from './routes/avion_vuelo.route.js';
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -17,6 +19,9 @@ app.use('/API/auth', authRouter);
 app.use('/API/itinerario', routerVuelo);
 app.use('/API/pasajeros', pasajeroRouter);
 app.use('/API/pasaje', routerPasaje);
+app.use('/API/avion', routerAvion);
+
+app.use('/API/rav', routerAvionVuelo);
 
 app.get('/', (_, res) => {
   res.send('API GO');

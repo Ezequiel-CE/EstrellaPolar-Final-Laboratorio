@@ -15,7 +15,7 @@ const PasajeroCompraPasaje = db.define(
     id_vuelo: {
       field: 'id_pasajero',
       type: DataTypes.INTEGER,
-      allowNull: false,
+
       references: {
         model: Pasajero,
         key: 'id',
@@ -26,7 +26,7 @@ const PasajeroCompraPasaje = db.define(
     id_pasaje: {
       field: 'id_pasaje',
       type: DataTypes.INTEGER,
-      allowNull: false,
+
       references: {
         model: Pasaje,
         key: 'id',

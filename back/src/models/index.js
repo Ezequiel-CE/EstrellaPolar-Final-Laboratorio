@@ -1,4 +1,4 @@
-import AvionVuelo from './avion_vuelo.js';
+import AvionVuelo from './avion_vuelo.model.js';
 import Avion from './avion.model.js';
 import CuentaPasajero from './cuenta_pasajero.model.js';
 import Cuenta from './cuenta.model.js';
