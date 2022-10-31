@@ -3,7 +3,7 @@
 import { DataTypes } from 'sequelize';
 import db from '../configs/database.js';
 import Vuelo from './vuelo.model.js';
-// import Pasaje from './pasaje.model.js';
+import Pasaje from './pasaje.model.js';
 
 const PasajeVuelo = db.define(
   'pasaje_vuelo',
@@ -14,7 +14,7 @@ const PasajeVuelo = db.define(
       autoIncrement: true,
       primaryKey: true,
     },
-    id_vuelo: {
+    vuelo: {
       field: 'id_vuelo',
       type: DataTypes.INTEGER,
 
@@ -25,18 +25,22 @@ const PasajeVuelo = db.define(
         onDelete: 'RESTRICT',
       },
     },
-    id_pasaje: {
+    pasaje: {
       field: 'id_pasaje',
       type: DataTypes.INTEGER,
-
       references: {
-        // model: Pasaje,
+        model: Pasaje,
         key: 'id',
         onUpdate: 'CASCADE',
         onDelete: 'RESTRICT',
       },
     },
-    fecha: { field: 'fecha', type: DataTypes.DATEONLY, allowNull: false },
+    fecha: {
+      field: 'fecha',
+      type: DataTypes.DATEONLY,
+
+      defaultValue: DataTypes.NOW,
+    },
     estado: { field: 'estado', type: DataTypes.STRING(60), allowNull: false },
   },
   { tableName: 'pasaje_vuelo', timestamps: false },

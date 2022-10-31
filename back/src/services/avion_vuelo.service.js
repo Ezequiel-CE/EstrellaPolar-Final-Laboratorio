@@ -5,7 +5,7 @@ import AvionVuelo from '../models/avion_vuelo.model.js';
 const postAvionVuelo = async (body) => {
   const { avion, vuelo } = body;
   const exist = await AvionVuelo.findOne({
-    where: { id_avion: avion, id_vuelo: vuelo },
+    where: { avion, vuelo },
   });
 
   if (exist) throw new Error('Ya esta programado');

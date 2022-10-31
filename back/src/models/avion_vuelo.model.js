@@ -12,7 +12,7 @@ const AvionVuelo = db.define(
       autoIncrement: true,
       primaryKey: true,
     },
-    id_vuelo: {
+    vuelo: {
       field: 'id_vuelo',
       type: DataTypes.INTEGER,
 
@@ -23,7 +23,7 @@ const AvionVuelo = db.define(
         onDelete: 'RESTRICT',
       },
     },
-    id_avion: {
+    avion: {
       field: 'id_avion',
       type: DataTypes.INTEGER,
 
