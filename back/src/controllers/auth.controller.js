@@ -21,7 +21,11 @@ export const register = async (req, res) => {
 export const login = async (req, res) => {
   // validation
   try {
-    const { value } = cuentaValidation(req.body);
+    const { error, value } = cuentaValidation(req.body);
+
+    if (error) {
+      throw new Error('mal request body');
+    }
 
     const token = await LogearCuenta(value);
 
