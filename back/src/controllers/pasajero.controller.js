@@ -9,8 +9,15 @@ export const obtenerPasajeros = async (_, res) => {
   }
 };
 
-export const obtenerPasajero = (req, res) => {
-  res.status(200).send('envio de pasajero');
+export const obtenerPasajero = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const pasajero = await serviciosPasajero.getPasajero(id);
+    res.status(200).json(pasajero);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
 };
 
 export const crearPasajero = async (req, res) => {
@@ -18,14 +25,26 @@ export const crearPasajero = async (req, res) => {
     await serviciosPasajero.postPasajero(req.body);
     res.status(200).json({ message: 'se creo pasajero correctamente' });
   } catch (err) {
-    res.status(400).send(err.message);
+    res.status(400).json({ message: err.message });
   }
 };
 
-export const editarPasajero = (req, res) => {
-  res.status(200).send('editar de pasajeros');
+export const editarPasajero = async (req, res) => {
+  const { id } = req.params;
+  try {
+    await serviciosPasajero.patchPasajero(id, req.body);
+    res.status(200).json({ message: 'se edito pasajero correctamente' });
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
 };
 
-export const eliminarPasajero = (req, res) => {
-  res.status(200).send('borrar de pasajeros');
+export const eliminarPasajero = async (req, res) => {
+  const { id } = req.params;
+  try {
+    await serviciosPasajero.deletePasajero(id);
+    res.status(200).json({ message: 'se borro pasajero correctamente' });
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
 };
