@@ -1,28 +1,33 @@
 // import jwt from 'jsonwebtoken';
-import User from '../models/User.model.js';
+import { LogearCuenta, registrarCuenta } from '../services/cuenta.services.js';
+import cuentaValidation from '../lib/validation.js';
 
-export const login = async (req, res) => {
-  // verifica que el mail exista
+export const register = async (req, res) => {
+  // validation
+  const { error, value } = cuentaValidation(req.body);
+
   try {
-    const cuenta = await User.findOne({ where: { mail: req.body.mail } });
-
-    if (!cuenta) {
-      return res.status(401).json({ msg: 'Usuario o contraseña inválida' });
+    if (error) {
+      throw new Error('mal request body');
     }
 
-    // compara contraseña
-    if (!(cuenta.contraseña === req.body.contraseña)) {
-      console.warn('contraseña incorrecta');
-      return res.status(401).json({ msg: 'Usuario o contraseña inválida' });
-    }
-
-    return res.status(200).json({ msg: 'logeado com sucesso' });
-  } catch (error) {
-    // error en el endpoint
-    return res.status(500).json({ msg: 'Error al logearse' });
+    await registrarCuenta(value);
+    res.status(200).json({ mensaje: 'Cuenta creada con exito' });
+  } catch (err) {
+    res.status(403).json({ mensaje: err.message });
   }
 };
 
-export const register = async (req, res) => {
-  res.send('register route');
+export const login = async (req, res) => {
+  // validation
+  try {
+    const { value } = cuentaValidation(req.body);
+
+    const token = await LogearCuenta(value);
+
+    res.status(200).json({ mensaje: 'logeado con exito', token });
+  } catch (err) {
+    // error en el endpoint
+    res.status(403).json({ mensaje: err.message });
+  }
 };
