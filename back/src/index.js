@@ -8,6 +8,7 @@ import pasajeroRouter from './routes/pasajero.route.js';
 import routerPasaje from './routes/pasaje.route.js';
 import routerAvion from './routes/avion.route.js';
 import routerAvionVuelo from './routes/avion_vuelo.route.js';
+import pasajeroCompraPasajeRouter from './routes/pasajero_compra_pasaje.route.js';
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -22,6 +23,7 @@ app.use('/API/pasaje', routerPasaje);
 app.use('/API/avion', routerAvion);
 
 app.use('/API/rav', routerAvionVuelo);
+app.use('/API/rpcp', pasajeroCompraPasajeRouter);
 
 app.get('/', (_, res) => {
   res.send('API GO');
