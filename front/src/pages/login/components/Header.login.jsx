@@ -1,5 +1,6 @@
 import React from 'react';
 import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { createTheme, responsiveFontSizes, ThemeProvider } from '@mui/material/styles';
@@ -26,7 +27,7 @@ theme = responsiveFontSizes(theme);
 
 export default function HeaderFormulario() {
   return (
-    <Grid
+    <Box
       sx={{
         backgroundColor: '#F3F3F3',
         marginTop: 4,
@@ -48,6 +49,6 @@ export default function HeaderFormulario() {
       <Grid>
         <CardMedia component="img" height="140" image={PlainLogo} alt="Plain Logo" />
       </Grid>
-    </Grid>
+    </Box>
   );
 }
