@@ -12,20 +12,21 @@ const postPasajeroCompraPasaje = async (data) => {
 
   if (exist) throw new Error('pasaje ya fue comprado');
 
-  const pasajeComprado = PasajeroCompraPasaje.create(value);
-  return pasajeComprado;
+  return PasajeroCompraPasaje.create(value);
 };
 
-const getPasajeroCompraPasaje = async () => {
-  //   const avionVuelo = await AvionVuelo.findOne({ where: { id } });
-  //   if (!avionVuelo) {
-  //     throw new Error('No se encontro Avion vuelo');
-  //   }
-  //   return avionVuelo;
+const getAllPasajeroCompraPasaje = async () => PasajeroCompraPasaje.findAll();
+
+const getPasajeroCompraPasaje = async (id) => {
+  const pasajecomprado = await PasajeroCompraPasaje.findOne({ where: { id } });
+  if (!pasajecomprado) {
+    throw new Error('No se pasaje comprado');
+  }
+  return pasajecomprado;
 };
 
-const servicio = {
+export default {
   postPasajeroCompraPasaje,
   getPasajeroCompraPasaje,
+  getAllPasajeroCompraPasaje,
 };
-export default servicio;

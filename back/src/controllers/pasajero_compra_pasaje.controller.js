@@ -5,14 +5,25 @@ export const crearRelacionPasajeroCPasaje = async (req, res) => {
     const response = await PasajeroCompraPasajeServico.postPasajeroCompraPasaje(req.body);
     res.status(200).json(response);
   } catch (err) {
-    res.status(404).json({ message: err.message });
+    res.status(400).json({ message: err.message });
   }
 };
 
 export const verRelacionesPasajeroCPasaje = async (_, res) => {
-  res.status(200).send('endpoint mostrar todas las relacion pasajero compra pasaje');
+  try {
+    const resp = await PasajeroCompraPasajeServico.getAllPasajeroCompraPasaje();
+    res.status(200).json(resp);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
 };
 
-export const verRelacionPasajeroCPasaje = async (_, res) => {
-  res.status(200).send('endpoint mostrar relacion pasajero compra pasaje');
+export const verRelacionPasajeroCPasaje = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const pasajeComprado = await PasajeroCompraPasajeServico.getPasajeroCompraPasaje(id);
+    res.status(200).json(pasajeComprado);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
 };
