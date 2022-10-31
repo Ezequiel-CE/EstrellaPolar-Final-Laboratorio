@@ -1,4 +1,4 @@
-import { DataTypes } from 'sequelize';
+import sequelize, { DataTypes } from 'sequelize';
 import db from '../configs/database.js';
 import Pasajero from './pasajero.model.js';
 import Pasaje from './pasaje.model.js';
@@ -12,7 +12,7 @@ const PasajeroCompraPasaje = db.define(
       autoIncrement: true,
       primaryKey: true,
     },
-    id_vuelo: {
+    id_pasajero: {
       field: 'id_pasajero',
       type: DataTypes.INTEGER,
 
@@ -34,8 +34,13 @@ const PasajeroCompraPasaje = db.define(
         onDelete: 'RESTRICT',
       },
     },
-    fecha: { field: 'fecha', type: DataTypes.DATEONLY, allowNull: false },
-    monto: { field: 'monto', type: DataTypes.DECIMAL(10, 2), allowNull: false },
+    fecha: {
+      field: 'fecha',
+      type: DataTypes.DATEONLY,
+      allowNull: false,
+      defaultValue: sequelize.NOW,
+    },
+    monto: { field: 'monto', type: DataTypes.DECIMAL(10, 2) },
   },
   { tableName: 'pasajero_compra_pasaje', timestamps: false },
 );
