@@ -5,6 +5,7 @@ import db from './configs/database.js';
 import authRouter from './routes/auth.route.js';
 import routerVuelo from './routes/vuelo.route.js';
 import pasajeroRouter from './routes/pasajero.route.js';
+import routerPasaje from './routes/pasaje.route.js';
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -15,6 +16,7 @@ app.use(morgan('tiny'));
 app.use('/API/auth', authRouter);
 app.use('/API/itinerario', routerVuelo);
 app.use('/API/pasajeros', pasajeroRouter);
+app.use('/API/pasaje', routerPasaje);
 
 app.get('/', (_, res) => {
   res.send('API GO');
