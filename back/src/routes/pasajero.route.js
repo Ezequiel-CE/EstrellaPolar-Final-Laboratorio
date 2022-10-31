@@ -9,8 +9,6 @@ import {
 
 const pasajeroRouter = Router();
 
-pasajeroRouter.get('/');
-
 pasajeroRouter.get('/', obtenerPasajeros);
 pasajeroRouter.post('/', crearPasajero);
 pasajeroRouter
