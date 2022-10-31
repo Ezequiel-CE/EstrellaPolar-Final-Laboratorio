@@ -1,17 +1,8 @@
-// import jwt from 'jsonwebtoken';
-import { LogearCuenta, registrarCuenta } from '../services/cuenta.services.js';
-import cuentaValidation from '../lib/validation.js';
+import cuentaServicios from '../services/cuenta.service.js';
 
 export const register = async (req, res) => {
-  // validation
-  const { error, value } = cuentaValidation(req.body);
-
   try {
-    if (error) {
-      throw new Error('mal request body');
-    }
-
-    await registrarCuenta(value);
+    await cuentaServicios.registrarCuenta(req.body);
     res.status(200).json({ mensaje: 'Cuenta creada con exito' });
   } catch (err) {
     res.status(403).json({ mensaje: err.message });
@@ -19,19 +10,11 @@ export const register = async (req, res) => {
 };
 
 export const login = async (req, res) => {
-  // validation
   try {
-    const { error, value } = cuentaValidation(req.body);
-
-    if (error) {
-      throw new Error('mal request body');
-    }
-
-    const token = await LogearCuenta(value);
+    const token = await cuentaServicios.LogearCuenta(req.body);
 
     res.status(200).json({ mensaje: 'logeado con exito', token });
   } catch (err) {
-    // error en el endpoint
     res.status(403).json({ mensaje: err.message });
   }
 };
