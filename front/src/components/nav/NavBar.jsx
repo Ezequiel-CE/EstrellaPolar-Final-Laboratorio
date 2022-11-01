@@ -11,9 +11,9 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import FlightIcon from '@mui/icons-material/Flight';
 import Grid from '@mui/material/Grid';
 import { styled } from '@mui/system';
+import OrangeIcon from '../../assets/login-logo-orange.png';
 
 const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
 
@@ -44,14 +44,15 @@ function NavBar() {
       <AppBar position="fixed">
         <Container maxWidth="xl">
           <Toolbar disableGutters>
-            <FlightIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+            <img src={OrangeIcon} height="80%" width="15%" alt="Unstick Airlines Icon" />
             <Typography
               variant="h6"
               noWrap
               component="a"
               href="/"
               sx={{
-                mr: 2,
+                ml: 3,
+                mr: 3,
                 display: { xs: 'none', md: 'flex' },
                 fontFamily: 'monospace',
                 fontWeight: 700,
@@ -99,7 +100,6 @@ function NavBar() {
                 ))}
               </Menu>
             </Box>
-            <FlightIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
             <Typography
               variant="h5"
               noWrap
@@ -133,7 +133,7 @@ function NavBar() {
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                  <Avatar />
                 </IconButton>
               </Tooltip>
               <Menu
