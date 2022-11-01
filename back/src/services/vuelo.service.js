@@ -1,3 +1,4 @@
+import model from '../models/index.js';
 import Vuelo from '../models/vuelo.model.js';
 import { BodyVuelo, editarVuelo } from '../schemas/vuelo.schema.js';
 
@@ -36,7 +37,7 @@ const patchVuelo = async (vuelo) => {
 };
 
 const getVuelo = async (id) => {
-  const vuelo = await Vuelo.findOne({ where: { id } });
+  const vuelo = await Vuelo.findByPk(id, { include: [{ model: model.Avion }] });
   if (!vuelo) {
     throw new Error('No se encontro vuelo');
   }

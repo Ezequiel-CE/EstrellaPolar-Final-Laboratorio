@@ -23,5 +23,18 @@ Vuelo.belongsToMany(Pasajero, { through: PasajeVuelo });
 
 // Relaciones de avion-vuelo
 
-Avion.belongsToMany(Vuelo, { through: AvionVuelo });
-Vuelo.belongsToMany(Avion, { through: AvionVuelo });
+Avion.belongsToMany(Vuelo, {
+  through: AvionVuelo,
+  foreignKey: 'avion',
+});
+Vuelo.belongsToMany(Avion, {
+  through: AvionVuelo,
+  foreignKey: 'vuelo',
+});
+
+const model = {
+  AvionVuelo,
+  Vuelo,
+  Avion,
+};
+export default model;

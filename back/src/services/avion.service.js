@@ -1,4 +1,5 @@
 import Avion from '../models/avion.model.js';
+import model from '../models/index.js';
 import BodyAvion from '../schemas/avion.schema.js';
 
 const postAvion = (body) => {
@@ -10,7 +11,10 @@ const postAvion = (body) => {
 };
 
 const getAvion = async (id) => {
-  const avion = await Avion.findOne({ where: { id } });
+  const avion = await Avion.findOne({
+    where: { id },
+    include: [{ model: model.Vuelo }],
+  });
   if (!avion) {
     throw new Error('No se encontro avion');
   }

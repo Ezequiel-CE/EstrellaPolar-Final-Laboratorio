@@ -1,7 +1,7 @@
 import { DataTypes } from 'sequelize';
 import db from '../configs/database.js';
-import Vuelo from './vuelo.model.js';
 import Avion from './avion.model.js';
+import Vuelo from './vuelo.model.js';
 
 const AvionVuelo = db.define(
   'avion_vuelo',
@@ -19,9 +19,9 @@ const AvionVuelo = db.define(
       references: {
         model: Vuelo,
         key: 'id',
-        onUpdate: 'CASCADE',
-        onDelete: 'RESTRICT',
       },
+      onUpdate: 'CASCADE',
+      onDelete: 'RESTRICT',
     },
     avion: {
       field: 'id_avion',
@@ -30,9 +30,9 @@ const AvionVuelo = db.define(
       references: {
         model: Avion,
         key: 'id',
-        onUpdate: 'CASCADE',
-        onDelete: 'RESTRICT',
       },
+      onUpdate: 'CASCADE',
+      onDelete: 'RESTRICT',
     },
 
     observacion: { field: 'observacion', type: DataTypes.STRING(60), allowNull: false },

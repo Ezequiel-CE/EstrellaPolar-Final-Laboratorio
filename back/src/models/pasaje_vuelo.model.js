@@ -21,9 +21,9 @@ const PasajeVuelo = db.define(
       references: {
         model: Vuelo,
         key: 'id',
-        onUpdate: 'CASCADE',
-        onDelete: 'RESTRICT',
       },
+      onUpdate: 'CASCADE',
+      onDelete: 'RESTRICT',
     },
     pasaje: {
       field: 'id_pasaje',
@@ -31,9 +31,9 @@ const PasajeVuelo = db.define(
       references: {
         model: Pasaje,
         key: 'id',
-        onUpdate: 'CASCADE',
-        onDelete: 'RESTRICT',
       },
+      onUpdate: 'CASCADE',
+      onDelete: 'RESTRICT',
     },
     fecha: {
       field: 'fecha',
