@@ -9,12 +9,18 @@ import Pasajero from './pasajero.model.js';
 import Vuelo from './vuelo.model.js';
 
 // Relaciones de cuenta_pasajero
-Cuenta.belongsToMany(Pasajero, { through: CuentaPasajero });
-Pasajero.belongsToMany(Cuenta, { through: CuentaPasajero });
+Cuenta.belongsToMany(Pasajero, { through: CuentaPasajero, foreignKey: 'id_cuenta' });
+Pasajero.belongsToMany(Cuenta, { through: CuentaPasajero, foreignKey: 'id_pasajero' });
 
 /// Relaciones de pasajero-compra-pasaje.model
-Pasajero.belongsToMany(Pasaje, { through: PasajeroCompraPasaje });
-Pasaje.belongsToMany(Pasajero, { through: PasajeroCompraPasaje });
+Pasajero.belongsToMany(Pasaje, {
+  through: PasajeroCompraPasaje,
+  foreignKey: 'id_pasajero',
+});
+Pasaje.belongsToMany(Pasajero, {
+  through: PasajeroCompraPasaje,
+  foreignKey: 'id_pasaje',
+});
 
 // Relaciones de pasaje-vuelo
 
@@ -34,11 +40,13 @@ Vuelo.belongsToMany(Avion, {
 
 const model = {
   AvionVuelo,
-  Vuelo,
   Avion,
+  CuentaPasajero,
   Cuenta,
   PasajeVuelo,
   Pasaje,
+  PasajeroCompraPasaje,
   Pasajero,
+  Vuelo,
 };
 export default model;

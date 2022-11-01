@@ -3,6 +3,7 @@ import validacionBodyPasajeroCompraPasaje from '../schemas/pasajero_compra_pasaj
 
 const postPasajeroCompraPasaje = async (data) => {
   const { error, value } = validacionBodyPasajeroCompraPasaje(data);
+  console.log(value);
 
   if (error) throw new Error(error);
 

@@ -5,6 +5,7 @@ export const crearRelacionPasajeroCPasaje = async (req, res) => {
     const response = await PasajeroCompraPasajeServico.postPasajeroCompraPasaje(req.body);
     res.status(200).json(response);
   } catch (err) {
+    console.log(err);
     res.status(400).json({ message: err.message });
   }
 };

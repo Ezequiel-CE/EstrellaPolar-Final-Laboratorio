@@ -36,7 +36,7 @@ const CuentaPasajero = db.define(
     },
     puntos: { field: 'puntos', type: DataTypes.INTEGER, allowNull: false },
   },
-  { tableName: 'cuenta', timestamps: false },
+  { tableName: 'cuenta_pasajero', timestamps: false },
 );
 
 export default CuentaPasajero;
