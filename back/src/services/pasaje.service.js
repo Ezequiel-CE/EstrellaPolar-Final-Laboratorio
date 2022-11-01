@@ -1,4 +1,4 @@
-import Pasaje from '../models/pasaje.model.js';
+import model from '../models/index.js';
 import BodyPasaje from '../schemas/pasaje.schema.js';
 
 const postPasaje = (body) => {
@@ -6,11 +6,11 @@ const postPasaje = (body) => {
 
   if (error) throw new Error(error);
 
-  return Pasaje.create(value);
+  return model.Pasaje.create(value);
 };
 
 const getPasaje = async (id) => {
-  const pasaje = await Pasaje.findOne({ where: { id } });
+  const pasaje = await model.Pasaje.findOne({ where: { id } });
   if (!pasaje) {
     throw new Error('No se encontro pasaje');
   }

@@ -1,4 +1,4 @@
-import PasajeroCompraPasaje from '../models/pasajero_compra_pasaje.model.js';
+import model from '../models/index.js';
 import validacionBodyPasajeroCompraPasaje from '../schemas/pasajero_compra_pasaje.schema.js';
 
 const postPasajeroCompraPasaje = async (data) => {
@@ -6,19 +6,19 @@ const postPasajeroCompraPasaje = async (data) => {
 
   if (error) throw new Error(error);
 
-  const exist = await PasajeroCompraPasaje.findOne({
+  const exist = await model.PasajeroCompraPasaje.findOne({
     where: { id_pasajero: value.id_pasajero, id_pasaje: value.id_pasaje },
   });
 
   if (exist) throw new Error('pasaje ya fue comprado');
 
-  return PasajeroCompraPasaje.create(value);
+  return model.PasajeroCompraPasaje.create(value);
 };
 
-const getAllPasajeroCompraPasaje = async () => PasajeroCompraPasaje.findAll();
+const getAllPasajeroCompraPasaje = async () => model.PasajeroCompraPasaje.findAll();
 
 const getPasajeroCompraPasaje = async (id) => {
-  const pasajecomprado = await PasajeroCompraPasaje.findOne({ where: { id } });
+  const pasajecomprado = await model.PasajeroCompraPasaje.findOne({ where: { id } });
   if (!pasajecomprado) {
     throw new Error('No se pasaje comprado');
   }
