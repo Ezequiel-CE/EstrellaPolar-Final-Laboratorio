@@ -1,5 +1,4 @@
 import model from '../models/index.js';
-import Vuelo from '../models/vuelo.model.js';
 import { BodyVuelo, editarVuelo } from '../schemas/vuelo.schema.js';
 
 const postVuelo = (body) => {
@@ -11,7 +10,7 @@ const postVuelo = (body) => {
     throw new Error(error);
   }
 
-  return Vuelo.create({
+  return model.Vuelo.create({
     tarifa,
     destino,
     origen,
@@ -25,7 +24,7 @@ const patchVuelo = async (vuelo) => {
     throw new Error(error);
   }
 
-  const vueloEditado = await Vuelo.update(
+  const vueloEditado = await model.Vuelo.update(
     { ...value },
     {
       where: {
@@ -37,7 +36,7 @@ const patchVuelo = async (vuelo) => {
 };
 
 const getVuelo = async (id) => {
-  const vuelo = await Vuelo.findByPk(id, { include: [{ model: model.Avion }] });
+  const vuelo = await model.Vuelo.findByPk(id, { include: [{ model: model.Avion }] });
   if (!vuelo) {
     throw new Error('No se encontro vuelo');
   }
@@ -45,7 +44,7 @@ const getVuelo = async (id) => {
 };
 
 const deleteVuelo = async (id) => {
-  const vuelo = await Vuelo.destroy({ where: { id } });
+  const vuelo = await model.Vuelo.destroy({ where: { id } });
   if (!vuelo) {
     throw new Error('No se encontro vuelo');
   }
@@ -53,7 +52,7 @@ const deleteVuelo = async (id) => {
 };
 
 const getVuelos = async () => {
-  const vuelos = await Vuelo.findAll();
+  const vuelos = await model.Vuelo.findAll();
   if (vuelos.length === 0) throw new Error('No se encontro vuelos');
   return vuelos;
 };

@@ -36,5 +36,9 @@ const model = {
   AvionVuelo,
   Vuelo,
   Avion,
+  Cuenta,
+  PasajeVuelo,
+  Pasaje,
+  Pasajero,
 };
 export default model;

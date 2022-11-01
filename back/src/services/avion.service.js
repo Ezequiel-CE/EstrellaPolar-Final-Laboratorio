@@ -1,4 +1,3 @@
-import Avion from '../models/avion.model.js';
 import model from '../models/index.js';
 import BodyAvion from '../schemas/avion.schema.js';
 
@@ -7,13 +6,22 @@ const postAvion = (body) => {
 
   if (error) throw new Error(error);
 
-  return Avion.create(value);
+  return model.Avion.create(value);
 };
 
 const getAvion = async (id) => {
-  const avion = await Avion.findOne({
+  const avion = await model.Avion.findOne({
     where: { id },
-    include: [{ model: model.Vuelo }],
+    include: [
+      {
+        model: model.Vuelo,
+        as: 'vuelos',
+        required: true,
+        through: {
+          attributes: [],
+        },
+      },
+    ],
   });
   if (!avion) {
     throw new Error('No se encontro avion');
@@ -21,5 +29,24 @@ const getAvion = async (id) => {
   return avion;
 };
 
-const servicio = { postAvion, getAvion };
+const getVuelosByAvion = async (id) => {
+  const vuelos = await model.Avion.findOne({
+    attributes: { exclude: ['capacidad'] },
+    include: [
+      {
+        model: model.Vuelo,
+        as: 'vuelos',
+        required: true,
+        through: {
+          where: { avion: id },
+          as: 'relacion',
+          attributes: ['id', 'observacion'],
+        },
+      },
+    ],
+  });
+  if (!vuelos) throw new Error('No se encontro vuelos');
+  return vuelos;
+};
+const servicio = { postAvion, getAvion, getVuelosByAvion };
 export default servicio;

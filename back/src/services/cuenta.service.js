@@ -1,7 +1,7 @@
 /* eslint-disable implicit-arrow-linebreak */
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import Cuenta from '../models/cuenta.model.js';
+import model from '../models/index.js';
 import cuentaValidation from '../schemas/cuenta.schema.js';
 
 const registrarCuenta = async (data) => {
@@ -10,13 +10,13 @@ const registrarCuenta = async (data) => {
   if (error) {
     throw new Error(error);
   }
-  const cuenta = await Cuenta.findOne({ where: { email: value.email } });
+  const cuenta = await model.Cuenta.findOne({ where: { email: value.email } });
 
   if (cuenta) throw new Error('Cuenta existe');
 
   const hashedPassword = await bcrypt.hash(value.password, 8);
 
-  await Cuenta.create({
+  await model.Cuenta.create({
     email: value.email,
     password: hashedPassword,
   });
@@ -29,7 +29,7 @@ const LogearCuenta = async (data) => {
     throw new Error(error);
   }
   // encuentra cuenta
-  const cuenta = await Cuenta.findOne({ where: { email: value.email } });
+  const cuenta = await model.Cuenta.findOne({ where: { email: value.email } });
 
   if (!cuenta) throw new Error('Usuario o contraseña inválida');
 
