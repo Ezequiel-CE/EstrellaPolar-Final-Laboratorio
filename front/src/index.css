@@ -4,14 +4,12 @@
   box-sizing: border-box;
 }
 .background {
-  height: 100vh;
-  width: 100%;
-  background: url(../src/assets/background.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
+  background: url(../src/assets/background.jpg);
   background-size: cover;
-  display: grid;
+  min-height: 100vh;
+  min-width: 100vh;
+  display: flex;
+  flex-direction: column;
   justify-content: start;
-  align-content: start;
+  align-items: center;
 }

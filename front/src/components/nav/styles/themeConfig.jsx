@@ -1,21 +1,19 @@
 import { createTheme } from '@mui/material/styles';
-import { pink } from '@mui/material/colors';
 
-const theme = createTheme({
+export const theme = createTheme({
   palette: {
+    type: 'light',
     primary: {
-      main: '#0D0646',
+      main: '#152177',
     },
-    secondary: pink,
+    secondary: {
+      main: 'rgb(220, 0, 78)',
+    },
+    background: {
+      default: '#fff',
+      paper: '#fff',
+    },
   },
-  // breakpoints: {
-  //   values: {
-  //     laptop: 1024,
-  //     tablet: 640,
-  //     mobile: 0,
-  //     desktop: 1280,
-  //   },
-  // },
 });
 
 export default theme;

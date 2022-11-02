@@ -5,9 +5,19 @@ import './index.css';
 
 function App() {
   return (
-    <div className="background">
-      <NavBar />
-      <FindFlight />
+    <div>
+      <div className="background">
+        <header>
+          <NavBar />
+        </header>
+
+        <main>
+          <FindFlight />
+        </main>
+      </div>
+      <div>
+        <footer className="footer">Pie de Pagina</footer>
+      </div>
     </div>
   );
 }
