@@ -5,7 +5,7 @@ import {
 } from '../controllers/avion_vuelo.controller.js';
 
 const routerAvionVuelo = Router();
-routerAvionVuelo.post('/', crearRelacionAvionVuelo);
-routerAvionVuelo.get('/av/:id', verRelacionAvionVuelo);
+routerAvionVuelo.post('/adm/', crearRelacionAvionVuelo);
+routerAvionVuelo.get('/adm/av/:id', verRelacionAvionVuelo);
 
 export default routerAvionVuelo;

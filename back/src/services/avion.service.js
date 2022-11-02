@@ -10,19 +10,7 @@ const postAvion = (body) => {
 };
 
 const getAvion = async (id) => {
-  const avion = await model.Avion.findOne({
-    where: { id },
-    include: [
-      {
-        model: model.Vuelo,
-        as: 'vuelos',
-        required: true,
-        through: {
-          attributes: [],
-        },
-      },
-    ],
-  });
+  const avion = await model.Avion.findByPk(id);
   if (!avion) {
     throw new Error('No se encontro avion');
   }

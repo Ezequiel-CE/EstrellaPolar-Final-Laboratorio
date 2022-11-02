@@ -17,7 +17,6 @@ const PasajeVuelo = db.define(
     vuelo: {
       field: 'id_vuelo',
       type: DataTypes.INTEGER,
-
       references: {
         model: Vuelo,
         key: 'id',
@@ -38,7 +37,6 @@ const PasajeVuelo = db.define(
     fecha: {
       field: 'fecha',
       type: DataTypes.DATEONLY,
-
       defaultValue: DataTypes.NOW,
     },
     estado: { field: 'estado', type: DataTypes.STRING(60), allowNull: false },

@@ -9,10 +9,10 @@ import {
 
 const pasajeroRouter = Router();
 
-pasajeroRouter.get('/', obtenerPasajeros);
-pasajeroRouter.post('/', crearPasajero);
+pasajeroRouter.get('/adm/', obtenerPasajeros);
+pasajeroRouter.post('/post/', crearPasajero);
 pasajeroRouter
-  .route('/:id')
+  .route('/adm/:id')
   .get(obtenerPasajero)
   .patch(editarPasajero)
   .delete(eliminarPasajero);

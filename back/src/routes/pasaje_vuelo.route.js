@@ -6,7 +6,7 @@ import {
 
 const routerPasajeVuelo = Router();
 
-routerPasajeVuelo.post('/', crearRelacionPasajeVuelo);
-routerPasajeVuelo.get('/:id', verRelacionPasajeVuelo);
+routerPasajeVuelo.post('/adm/', crearRelacionPasajeVuelo);
+routerPasajeVuelo.get('/adm/:id', verRelacionPasajeVuelo);
 
 export default routerPasajeVuelo;

@@ -7,8 +7,8 @@ import {
 
 const routerAvion = Router();
 
-routerAvion.post('/', crearAvion);
-routerAvion.get('/:id', verAvion);
-routerAvion.get('/:id/vuelos', verVuelosDelAvion);
+routerAvion.post('/adm/', crearAvion);
+routerAvion.get('/adm/:id', verAvion);
+routerAvion.get('/adm/:id/vuelos', verVuelosDelAvion);
 
 export default routerAvion;

@@ -6,8 +6,8 @@ import {
 } from '../controllers/cuenta_pasajero.controller.js';
 
 const cuentaPasajeroRouter = Router();
-cuentaPasajeroRouter.get('/', verRelacionesCuentaPasajero);
-cuentaPasajeroRouter.get('/:id', verRelacionCuentaPasajero);
-cuentaPasajeroRouter.post('/', crearRelacionCuentaPasajero);
+cuentaPasajeroRouter.get('/adm/', verRelacionesCuentaPasajero);
+cuentaPasajeroRouter.get('/adm/:id', verRelacionCuentaPasajero);
+cuentaPasajeroRouter.post('/adm/', crearRelacionCuentaPasajero);
 
 export default cuentaPasajeroRouter;
