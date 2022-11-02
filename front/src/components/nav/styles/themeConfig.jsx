@@ -8,6 +8,14 @@ const theme = createTheme({
     },
     secondary: pink,
   },
+  // breakpoints: {
+  //   values: {
+  //     laptop: 1024,
+  //     tablet: 640,
+  //     mobile: 0,
+  //     desktop: 1280,
+  //   },
+  // },
 });
 
 export default theme;
