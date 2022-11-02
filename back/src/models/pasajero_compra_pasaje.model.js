@@ -41,6 +41,7 @@ const PasajeroCompraPasaje = db.define(
       defaultValue: sequelize.NOW,
     },
     monto: { field: 'monto', type: DataTypes.DECIMAL(10, 2) },
+    asiento: { field: 'asiento', type: DataTypes.STRING(60), allowNull: false },
   },
   { tableName: 'pasajero_compra_pasaje', timestamps: false },
 );
