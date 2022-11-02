@@ -14,6 +14,15 @@ export const theme = createTheme({
       paper: '#fff',
     },
   },
+  components: {
+    MuiTypography: {
+      styleOverrides: {
+        root: {
+          color: '#152177',
+        },
+      },
+    },
+  },
 });
 
 export default theme;
