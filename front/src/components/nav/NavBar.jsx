@@ -43,7 +43,7 @@ function NavBar() {
     <div>
       <AppBar position="fixed">
         <Toolbar disableGutters>
-          <img src={OrangeIcon} height="80%" width="15%" alt="Unstick Airlines Icon" />
+          <img src={OrangeIcon} height="auto" width="14%" alt="Unstick Airlines Icon" />
           <Typography
             variant="h6"
             noWrap
@@ -63,7 +63,12 @@ function NavBar() {
             Unstick Airlines
           </Typography>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: { xs: 'flex', md: 'none' },
+            }}
+          >
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -117,7 +122,14 @@ function NavBar() {
           >
             Unstick Airlines
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: { xs: 'none', md: 'flex' },
+              justifyContent: 'space-evenly',
+              alignItems: 'center',
+            }}
+          >
             {pages.map((page) => (
               <Button
                 key={page}
@@ -129,7 +141,15 @@ function NavBar() {
             ))}
           </Box>
 
-          <Box sx={{ flexGrow: 0 }}>
+          <Box
+            sx={{
+              mr: 3,
+              flexGrow: 1,
+              display: { xs: 'flex', md: 'flex' },
+              justifyContent: 'end',
+              alignItems: 'center',
+            }}
+          >
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar />
