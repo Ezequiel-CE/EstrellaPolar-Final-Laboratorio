@@ -52,9 +52,8 @@ export const destruirVuelo = async (_, res) => {
 };
 
 export const obtenerVuelosTratados = async (_, res) => {
-  const categoria = 'comercial';
   try {
-    const resp = await servicio.getVuelosTratado(categoria);
+    const resp = await servicio.getVuelosTratado();
     res.status(200).json({ resp });
   } catch (err) {
     res.status(404).json({ message: err.message });

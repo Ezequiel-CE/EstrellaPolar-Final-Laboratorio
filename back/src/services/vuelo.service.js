@@ -1,5 +1,6 @@
 import { Sequelize } from 'sequelize';
 import model from '../models/index.js';
+
 import { BodyVuelo, editarVuelo } from '../schemas/vuelo.schema.js';
 
 const postVuelo = (body) => {
@@ -59,28 +60,21 @@ const getVuelos = async () => {
   return vuelos;
 };
 
-const getVuelosTratado = async (categoria) => {
+const getVuelosTratado = async () => {
   const vuelos = await model.Vuelo.findAll({
+    attributes: ['id', 'origen', 'destino', 'fecha'],
     include: [
       {
-        where: { categoria },
         model: model.Pasaje,
-        as: 'pasaje',
+        as: 'clase',
         required: true,
-        attributes: [],
+        attributes: ['id', [Sequelize.literal('tarifa + costo'), 'total'], 'categoria'],
 
         through: {
-          as: 'relacion',
-          attributes: [],
+          as: 'pasaje_vuelo',
+          attributes: [['id', 'relacionID'], 'vuelo', 'pasaje'],
         },
       },
-    ],
-    attributes: [
-      'origen',
-      'destino',
-      [Sequelize.col('pasaje.categoria'), 'categoria'],
-      'fecha',
-      [Sequelize.literal('tarifa + costo'), 'total'],
     ],
   });
 

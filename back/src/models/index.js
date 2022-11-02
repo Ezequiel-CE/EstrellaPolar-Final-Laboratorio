@@ -24,8 +24,8 @@ Pasaje.belongsToMany(Pasajero, {
 
 // Relaciones de pasaje-vuelo
 
-Vuelo.belongsToMany(Pasaje, { through: PasajeVuelo, foreignKey: 'vuelo', as: 'pasaje' });
-Pasaje.belongsToMany(Vuelo, { through: PasajeVuelo, foreignKey: 'pasaje' });
+Vuelo.belongsToMany(Pasaje, { through: PasajeVuelo, foreignKey: 'vuelo', as: 'clase' });
+Pasaje.belongsToMany(Vuelo, { through: PasajeVuelo, foreignKey: 'pasaje', as: 'vuelo' });
 
 // Relaciones de avion-vuelo
 
