@@ -1,6 +1,6 @@
 import React from 'react';
 import NavBar from './components/nav/NavBar';
-import FindFlight from './components/findFlight/FindFlight';
+import Pasaje from './pages/pasaje/components/MyPassage.pasaje';
 import './index.css';
 
 function App() {
@@ -12,7 +12,7 @@ function App() {
         </header>
 
         <main>
-          <FindFlight />
+          <Pasaje />
         </main>
       </div>
       <div>

@@ -53,7 +53,7 @@ export default function FindFlight() {
   return (
     <Container>
       <Typography variant="h6" align="start">
-        Buscar Vuelo
+        Busca tu vuelo
       </Typography>
       <Box
         shrink
