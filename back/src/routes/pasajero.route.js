@@ -5,6 +5,7 @@ import {
   editarPasajero,
   eliminarPasajero,
   crearPasajero,
+  comprarPasaje,
 } from '../controllers/pasajero.controller.js';
 
 const pasajeroRouter = Router();
@@ -16,5 +17,6 @@ pasajeroRouter
   .get(obtenerPasajero)
   .patch(editarPasajero)
   .delete(eliminarPasajero);
+pasajeroRouter.post('/comprar', comprarPasaje);
 
 export default pasajeroRouter;
