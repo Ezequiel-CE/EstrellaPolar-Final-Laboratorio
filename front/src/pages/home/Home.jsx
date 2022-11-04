@@ -4,7 +4,7 @@ import NavBar from '../../components/nav/NavBar';
 function Home() {
   return (
     <div>
-      <div className="background">
+      <div className="container">
         <header>
           <NavBar />
         </header>
