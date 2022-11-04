@@ -1,17 +1,10 @@
 import React from 'react';
-import NavBar from '../../components/nav/NavBar';
+import FindFlight from './components/FindFlight.home';
 
 function Home() {
   return (
     <div>
-      <div className="container">
-        <header>
-          <NavBar />
-        </header>
-      </div>
-      <div>
-        <footer className="footer">Pie de Pagina</footer>
-      </div>
+      <FindFlight />
     </div>
   );
 }
