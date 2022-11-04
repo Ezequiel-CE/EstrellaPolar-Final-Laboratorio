@@ -13,11 +13,16 @@ import {
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { styled } from '@mui/system';
+import { Link } from 'react-router-dom';
 import OrangeIcon from '../../assets/login-logo-orange.png';
 
 const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
 
-const pages = ['Mi Reserva', 'Vuelos', 'Información'];
+const pages = [
+  { name: 'Mi Reserva', path: '/reserva' },
+  { name: 'Vuelo', path: '/vuelo' },
+  { name: 'Informacion', path: '#' },
+];
 const settings = ['Perfil', 'Cuenta', 'Tablero', 'Cerrar sesión'];
 
 function NavBar() {
@@ -98,8 +103,12 @@ function NavBar() {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                <MenuItem
+                  key={page.name}
+                  onClick={handleCloseNavMenu}
+                  sx={{ textDecoration: 'none' }}
+                >
+                  <Typography textAlign="center">{page.name}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -131,13 +140,15 @@ function NavBar() {
             }}
           >
             {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                {page}
-              </Button>
+              <Link to={page.path} style={{ textDecoration: 'none' }}>
+                <Button
+                  key={page.name}
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: 'white', display: 'block' }}
+                >
+                  {page.name}
+                </Button>
+              </Link>
             ))}
           </Box>
 
