@@ -19,7 +19,7 @@ import OrangeIcon from '../../assets/login-logo-orange.png';
 const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
 
 const pages = [
-  { name: 'Mi Reserva', path: '/reserva' },
+  { name: 'Mi Pasaje', path: '/pasaje' },
   { name: 'Vuelo', path: '/vuelos' },
   { name: 'Informacion', path: '#' },
 ];

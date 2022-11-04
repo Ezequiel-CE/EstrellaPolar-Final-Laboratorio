@@ -4,6 +4,7 @@ import Layout from '../components/layout/Layout';
 import Home from './home/Home';
 import Login from './login/Login';
 import Vuelos from './vuelos/Vuelos';
+import Pasaje from './pasaje/Pasaje';
 
 const router = createBrowserRouter([
   {
@@ -22,12 +23,12 @@ const router = createBrowserRouter([
         path: 'vuelos',
         element: <Vuelos />,
       },
+      {
+        path: 'pasaje',
+        element: <Pasaje />,
+      },
     ],
   },
-  //   {
-  //     path: '/login',
-  //     element: <Login />,
-  //   },
 ]);
 
 export default router;

@@ -1,40 +1,100 @@
-import React from 'react';
-import { Grid, Box } from '@mui/material';
+import * as React from 'react';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Typography from '@mui/material/Typography';
+
+const theme = createTheme({
+  palette: {
+    orange: {
+      main: '#D8552B',
+      contrastText: '#fff',
+    },
+  },
+  typography: {
+    fontFamily: [
+      '-apple-system',
+      'BlinkMacSystemFont',
+      '"Segoe UI"',
+      'Roboto',
+      '"Helvetica Neue"',
+      'Arial',
+      'sans-serif',
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+      '"Amatica SC"',
+    ].join(','),
+  },
+});
 
 function MyPassage() {
   return (
-    <div>
-      <Grid container maxWidth="lg">
-        <Box
-          sx={{
-            width: '400px',
-            height: '400px',
-            backgroundColor: 'lightgrey',
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'center',
-            justifyItems: 'center',
-            alingItems: 'center',
-            alignContent: 'center',
-          }}
-        >
-          <Grid
-            spacing={1}
-            display="flex"
-            flexDirection="column"
-            justifyContent="space-evenly"
-            textAlign="center"
-            alignContent="center"
-            sx={{ height: '200px', width: '200px' }}
-          >
-            <Grid>1</Grid>
-            <Grid>2</Grid>
-            <Grid>3</Grid>
-            <Grid>4</Grid>
-          </Grid>
+    <Grid
+      sx={{
+        backgroundColor: '#F3F3F3',
+      }}
+    >
+      <Grid
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
+        <Box component="form" noValidate sx={{ mt: 1 }}>
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="Nombre"
+            label="Name"
+            name="Nombre"
+            autoComplete="Nombre"
+            autoFocus
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="Apellido"
+            label="Surname"
+            name="Apellido"
+            autoComplete="Apellido"
+            autoFocus
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="Identificacion"
+            label="DNI/RUT/ID/CPF"
+            name="Identificacion"
+            autoComplete="Identificacion"
+            autoFocus
+          />
         </Box>
+        <Grid container direction="row" justifyContent="center" alignItems="center" xs={5}>
+          <ThemeProvider theme={theme}>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              size="large"
+              color="orange"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              <Typography variant="h6" fontFamily="Roboto">
+                SEARCH
+              </Typography>
+            </Button>
+          </ThemeProvider>
+        </Grid>
       </Grid>
-    </div>
+    </Grid>
   );
 }
+
 export default MyPassage;
