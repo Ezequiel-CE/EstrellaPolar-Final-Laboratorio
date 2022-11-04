@@ -3,6 +3,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import Layout from '../components/layout/Layout';
 import Home from './home/Home';
 import Login from './login/Login';
+import Vuelos from './vuelos/Vuelos';
 
 const router = createBrowserRouter([
   {
@@ -25,7 +26,7 @@ const router = createBrowserRouter([
   //   },
   {
     path: '/vuelos',
-    element: <Login />,
+    element: <Vuelos />,
   },
 ]);
 

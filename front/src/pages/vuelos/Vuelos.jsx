@@ -1,12 +1,7 @@
 import React from 'react';
-import NavBar from '../../components/nav/NavBar';
 
 function Vuelos() {
-  return (
-    <div>
-      <NavBar />
-    </div>
-  );
+  return <div />;
 }
 
 export default Vuelos;
