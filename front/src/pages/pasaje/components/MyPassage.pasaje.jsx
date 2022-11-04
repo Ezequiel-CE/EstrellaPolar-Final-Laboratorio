@@ -50,20 +50,18 @@ function MyPassage() {
             required
             fullWidth
             id="Nombre"
-            label="Name"
+            label="Nombre"
             name="Nombre"
             autoComplete="Nombre"
-            autoFocus
           />
           <TextField
             margin="normal"
             required
             fullWidth
             id="Apellido"
-            label="Surname"
+            label="Apellido"
             name="Apellido"
             autoComplete="Apellido"
-            autoFocus
           />
           <TextField
             margin="normal"
@@ -73,10 +71,15 @@ function MyPassage() {
             label="DNI/RUT/ID/CPF"
             name="Identificacion"
             autoComplete="Identificacion"
-            autoFocus
           />
         </Box>
-        <Grid container direction="row" justifyContent="center" alignItems="center" xs={5}>
+        <Grid
+          container
+          direction="row"
+          justifyContent="center"
+          alignItems="center"
+          xs={5}
+        >
           <ThemeProvider theme={theme}>
             <Button
               type="submit"
