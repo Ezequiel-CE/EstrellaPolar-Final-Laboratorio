@@ -60,12 +60,6 @@ export default function FindFlight() {
         sx={{
           width: '110vh',
           height: 'auto',
-          display: 'flex',
-          flexWrap: 'wrap',
-          justifycontent: 'space-evenly',
-          alignContent: 'center',
-          overflow: 'auto',
-          flexDirection: 'row',
           p: 2,
           backgroundColor: 'lightgrey',
           borderRadius: '10px',
