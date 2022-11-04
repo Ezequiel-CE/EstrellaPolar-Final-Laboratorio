@@ -1,25 +1,10 @@
 import React from 'react';
-import NavBar from './components/nav/NavBar';
-import Pasaje from './pages/pasaje/components/MyPassage.pasaje';
 import './index.css';
+import { RouterProvider } from 'react-router-dom';
+import router from './pages/routes';
 
 function App() {
-  return (
-    <div>
-      <div className="container">
-        <header>
-          <NavBar />
-        </header>
-
-        <main>
-          <Pasaje />
-        </main>
-      </div>
-      <div>
-        <footer className="footer">Pie de Pagina</footer>
-      </div>
-    </div>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;
