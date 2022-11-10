@@ -1,7 +1,7 @@
 import sequelize, { DataTypes } from 'sequelize';
 import db from '../configs/database.js';
 import Pasajero from './pasajero.model.js';
-import Vuelo from './vuelo.model.js';
+import pasajeVuelo from './pasaje_vuelo.model.js';
 
 const PasajeroCompraPasaje = db.define(
   'pasajero_compra_pasaje',
@@ -24,11 +24,11 @@ const PasajeroCompraPasaje = db.define(
       onDelete: 'RESTRICT',
     },
 
-    id_vuelo: {
-      field: 'id_vuelo',
+    id_vuelo_pasaje: {
+      field: 'id_vuelo_pasaje',
       type: DataTypes.INTEGER,
       references: {
-        model: Vuelo,
+        model: pasajeVuelo,
         key: 'id',
       },
       onUpdate: 'CASCADE',

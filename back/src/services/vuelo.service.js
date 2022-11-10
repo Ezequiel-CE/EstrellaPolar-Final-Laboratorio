@@ -60,20 +60,37 @@ const getVuelos = async () => {
   return vuelos;
 };
 
-const getVuelosTratado = async () => {
-  const vuelos = await model.Vuelo.findAll({
-    attributes: ['id', 'origen', 'destino', 'fecha'],
+const getVuelosTratado = async (data) => {
+  let vuelos;
+  const { id } = data.params;
 
-    include: {
-      model: model.Pasaje,
-      attributes: ['id', [Sequelize.literal('tarifa + costo'), 'total'], 'categoria'],
-      through: {
-        attributes: [],
+  if (id) {
+    vuelos = await model.Vuelo.findAll({
+      attributes: ['id', 'origen', 'destino', 'fecha'],
+      where: { id },
+      include: {
+        model: model.Pasaje,
+        attributes: ['id', [Sequelize.literal('tarifa + costo'), 'total'], 'categoria'],
+        through: {
+          as: 'relacion_vuelo',
+        },
       },
-    },
-  });
+    });
+  } else {
+    vuelos = await model.Vuelo.findAll({
+      attributes: ['id', 'origen', 'destino', 'fecha'],
 
-  if (vuelos.length === 0) throw new Error('No se encontro vuelos');
+      include: {
+        model: model.Pasaje,
+        attributes: ['id', [Sequelize.literal('tarifa + costo'), 'total'], 'categoria'],
+        through: {
+          attributes: [],
+        },
+      },
+    });
+  }
+
+  if (!vuelos.length) throw new Error('No se encontro vuelos');
 
   return vuelos;
 };

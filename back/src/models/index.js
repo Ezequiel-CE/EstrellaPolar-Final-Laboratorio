@@ -15,8 +15,8 @@ Pasajero.belongsToMany(Cuenta, { through: CuentaPasajero, foreignKey: 'id_pasaje
 
 // Relaciones de PasajeCompraPasaje pasaje
 
-Vuelo.hasMany(PasajeroCompraPasaje, { foreignKey: 'id' });
-PasajeroCompraPasaje.belongsTo(Vuelo, { foreignKey: 'id_vuelo' });
+pasajeVuelo.hasOne(PasajeroCompraPasaje, { foreignKey: 'id' });
+PasajeroCompraPasaje.belongsTo(pasajeVuelo, { foreignKey: 'id_vuelo_pasaje' });
 
 // Relaciones de avion-vuelo
 
