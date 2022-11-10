@@ -33,6 +33,7 @@ const encontrarPasaje = async (data) => {
         attributes: { exclude: ['tarifa'] },
       },
     ],
+    order: [['fecha', 'DESC']],
   });
   return pasajeCompleto;
 };
