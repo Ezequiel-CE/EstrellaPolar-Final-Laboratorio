@@ -2,7 +2,7 @@ import AvionVuelo from './avion_vuelo.model.js';
 import Avion from './avion.model.js';
 import CuentaPasajero from './cuenta_pasajero.model.js';
 import Cuenta from './cuenta.model.js';
-import PasajeVuelo from './pasaje_vuelo.model.js';
+
 import Pasaje from './pasaje.model.js';
 import PasajeroCompraPasaje from './pasajero_compra_pasaje.model.js';
 import Pasajero from './pasajero.model.js';
@@ -12,20 +12,15 @@ import Vuelo from './vuelo.model.js';
 Cuenta.belongsToMany(Pasajero, { through: CuentaPasajero, foreignKey: 'id_cuenta' });
 Pasajero.belongsToMany(Cuenta, { through: CuentaPasajero, foreignKey: 'id_pasajero' });
 
-/// Relaciones de pasajero-compra-pasaje.model
-Pasajero.belongsToMany(Pasaje, {
-  through: PasajeroCompraPasaje,
-  foreignKey: 'id_pasajero',
-});
-Pasaje.belongsToMany(Pasajero, {
-  through: PasajeroCompraPasaje,
-  foreignKey: 'id_pasaje',
-});
+// Relaciones de PasajeCompraPasaje pasaje
 
-// Relaciones de pasaje-vuelo
+Pasaje.hasMany(PasajeroCompraPasaje, { foreignKey: 'id' });
+PasajeroCompraPasaje.belongsTo(Pasaje, { foreignKey: 'id_pasaje' });
 
-Vuelo.belongsToMany(Pasaje, { through: PasajeVuelo, foreignKey: 'vuelo', as: 'clase' });
-Pasaje.belongsToMany(Vuelo, { through: PasajeVuelo, foreignKey: 'pasaje', as: 'vuelo' });
+// Relaciones de PasajeCompraPasaje pasaje
+
+Vuelo.hasMany(PasajeroCompraPasaje, { foreignKey: 'id' });
+PasajeroCompraPasaje.belongsTo(Vuelo, { foreignKey: 'id_vuelo' });
 
 // Relaciones de avion-vuelo
 
@@ -43,7 +38,6 @@ const model = {
   Avion,
   CuentaPasajero,
   Cuenta,
-  PasajeVuelo,
   Pasaje,
   PasajeroCompraPasaje,
   Pasajero,

@@ -2,6 +2,7 @@ import sequelize, { DataTypes } from 'sequelize';
 import db from '../configs/database.js';
 import Pasajero from './pasajero.model.js';
 import Pasaje from './pasaje.model.js';
+import Vuelo from './vuelo.model.js';
 
 const PasajeroCompraPasaje = db.define(
   'pasajero_compra_pasaje',
@@ -34,6 +35,16 @@ const PasajeroCompraPasaje = db.define(
       onUpdate: 'CASCADE',
       onDelete: 'RESTRICT',
     },
+    id_vuelo: {
+      field: 'id_vuelo',
+      type: DataTypes.INTEGER,
+      references: {
+        model: Vuelo,
+        key: 'id',
+      },
+      onUpdate: 'CASCADE',
+      onDelete: 'RESTRICT',
+    },
     fecha: {
       field: 'fecha',
       type: DataTypes.DATEONLY,
@@ -42,6 +53,7 @@ const PasajeroCompraPasaje = db.define(
     },
     monto: { field: 'monto', type: DataTypes.DECIMAL(10, 2) },
     asiento: { field: 'asiento', type: DataTypes.STRING(60), allowNull: false },
+    estado: { field: 'estado', type: DataTypes.STRING(60) },
   },
   { tableName: 'pasajero_compra_pasaje', timestamps: false },
 );

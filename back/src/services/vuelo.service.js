@@ -62,18 +62,17 @@ const getVuelos = async () => {
 
 const getVuelosTratado = async () => {
   const vuelos = await model.Vuelo.findAll({
-    attributes: ['id', 'origen', 'destino', 'fecha'],
+    // attributes: ['id', 'origen', 'destino', 'fecha'],
     include: [
       {
-        model: model.Pasaje,
-        as: 'clase',
-        required: true,
-        attributes: ['id', [Sequelize.literal('tarifa + costo'), 'total'], 'categoria'],
+        model: model.PasajeroCompraPasaje,
+        //        required: true,
+        // attributes: ['id', [Sequelize.literal('tarifa + costo'), 'total'], 'categoria'],
 
-        through: {
-          as: 'pasaje_vuelo',
-          attributes: [['id', 'relacionID'], 'vuelo', 'pasaje'],
-        },
+        // through: {
+        //   as: 'pasaje_vuelo',
+        //   attributes: [['id', 'relacionID'], 'vuelo', 'pasaje'],
+        // },
       },
     ],
   });
