@@ -19,3 +19,12 @@ export const VerPasaje = async (_, res) => {
     return res.status(404).json({ message: err.message });
   }
 };
+
+export const encontrarPasaje = async (req, res) => {
+  try {
+    const resp = await servicio.encontrarPasaje(req.body);
+    return res.status(200).json({ resp });
+  } catch (err) {
+    return res.status(404).json({ message: err.message });
+  }
+};

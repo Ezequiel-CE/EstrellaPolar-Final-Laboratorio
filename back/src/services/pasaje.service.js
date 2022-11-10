@@ -17,6 +17,22 @@ const getPasaje = async (id) => {
   return pasaje;
 };
 
-const servicio = { postPasaje, getPasaje };
+const encontrarPasaje = async (data) => {
+  const { nombre, apellido, tipo_documento, numero_documento } = data;
+
+  const pasajeCompleto = await model.Pasajero.findAll({
+    where: { nombre, apellido, num_documento: numero_documento },
+    include: [
+      {
+        required: true,
+        model: model.PasajeroCompraPasaje,
+      },
+    ],
+  });
+
+  return pasajeCompleto;
+};
+
+const servicio = { postPasaje, getPasaje, encontrarPasaje };
 
 export default servicio;

@@ -18,6 +18,11 @@ Pasajero.belongsToMany(Cuenta, { through: CuentaPasajero, foreignKey: 'id_pasaje
 pasajeVuelo.hasOne(PasajeroCompraPasaje, { foreignKey: 'id' });
 PasajeroCompraPasaje.belongsTo(pasajeVuelo, { foreignKey: 'id_vuelo_pasaje' });
 
+// Relaciones de PasajeCompraPasaje pasajero
+
+Pasajero.hasMany(PasajeroCompraPasaje, { foreignKey: 'id' });
+PasajeroCompraPasaje.belongsTo(Pasajero, { foreignKey: 'id_pasajero' });
+
 // Relaciones de avion-vuelo
 
 Avion.belongsToMany(Vuelo, {
@@ -31,11 +36,11 @@ Vuelo.belongsToMany(Avion, {
 
 Vuelo.belongsToMany(Pasaje, {
   through: pasajeVuelo,
-  foreignKey: 'vuelo',
+  foreignKey: 'id_vuelo',
 });
 Pasaje.belongsToMany(Vuelo, {
   through: pasajeVuelo,
-  foreignKey: 'pasaje',
+  foreignKey: 'id_pasaje',
 });
 
 const model = {
