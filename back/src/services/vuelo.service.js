@@ -62,22 +62,19 @@ const getVuelos = async () => {
 
 const getVuelosTratado = async () => {
   const vuelos = await model.Vuelo.findAll({
-    // attributes: ['id', 'origen', 'destino', 'fecha'],
-    include: [
-      {
-        model: model.PasajeroCompraPasaje,
-        //        required: true,
-        // attributes: ['id', [Sequelize.literal('tarifa + costo'), 'total'], 'categoria'],
+    attributes: ['id', 'origen', 'destino', 'fecha'],
 
-        // through: {
-        //   as: 'pasaje_vuelo',
-        //   attributes: [['id', 'relacionID'], 'vuelo', 'pasaje'],
-        // },
+    include: {
+      model: model.Pasaje,
+      attributes: ['id', [Sequelize.literal('tarifa + costo'), 'total'], 'categoria'],
+      through: {
+        attributes: [],
       },
-    ],
+    },
   });
 
   if (vuelos.length === 0) throw new Error('No se encontro vuelos');
+
   return vuelos;
 };
 

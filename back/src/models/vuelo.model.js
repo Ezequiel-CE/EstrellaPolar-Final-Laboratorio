@@ -19,6 +19,17 @@ const Vuelo = db.define(
       defaultValue: DataTypes.NOW,
       allowNull: false,
     },
+    // id_pasaje: {
+    //   field: 'id_pasaje',
+    //   type: DataTypes.INTEGER,
+
+    //   references: {
+    //     model: Pasaje,
+    //     key: 'id',
+    //   },
+    //   onUpdate: 'CASCADE',
+    //   onDelete: 'RESTRICT',
+    // },
   },
   { tableName: 'vuelo', timestamps: false },
 );
