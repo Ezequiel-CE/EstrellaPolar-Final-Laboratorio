@@ -1,4 +1,5 @@
 import model from '../models/index.js';
+import Vuelo from '../models/vuelo.model.js';
 import BodyPasaje from '../schemas/pasaje.schema.js';
 
 const postPasaje = (body) => {
@@ -18,18 +19,21 @@ const getPasaje = async (id) => {
 };
 
 const encontrarPasaje = async (data) => {
-  const { nombre, apellido, tipo_documento, numero_documento } = data;
+  const { nombre, apellido, tipo_documento, num_documento } = data;
 
-  const pasajeCompleto = await model.Pasajero.findAll({
-    where: { nombre, apellido, num_documento: numero_documento },
+  const pasajeCompleto = await model.PasajeroCompraPasaje.findAll({
+    attributes: { exclude: ['id_vuelo_pasaje'] },
     include: [
       {
-        required: true,
-        model: model.PasajeroCompraPasaje,
+        where: { nombre, apellido, num_documento, tipo_documento },
+        model: model.Pasajero,
+      },
+      {
+        model: model.Vuelo,
+        attributes: { exclude: ['tarifa'] },
       },
     ],
   });
-
   return pasajeCompleto;
 };
 

@@ -27,11 +27,11 @@ PasajeroCompraPasaje.belongsTo(Pasajero, { foreignKey: 'id_pasajero' });
 
 Avion.belongsToMany(Vuelo, {
   through: AvionVuelo,
-  foreignKey: 'avion',
+  foreignKey: 'id_avion',
 });
 Vuelo.belongsToMany(Avion, {
   through: AvionVuelo,
-  foreignKey: 'vuelo',
+  foreignKey: 'id_vuelo',
 });
 
 Vuelo.belongsToMany(Pasaje, {
