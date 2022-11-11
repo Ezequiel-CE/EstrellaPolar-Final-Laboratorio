@@ -53,8 +53,16 @@ export const destruirVuelo = async (_, res) => {
 
 export const obtenerVuelosTratados = async (_, res) => {
   const { id } = _.params;
+  const { origen, destino, fecha } = _.query;
+
+  let resp;
+
   try {
-    const resp = await servicio.getVuelosTratado(id);
+    if (origen && destino && fecha) {
+      resp = await servicio.getVuelosTratadoFiltrado({ origen, destino, fecha });
+    } else {
+      resp = await servicio.getVuelosTratado(id);
+    }
     res.status(200).json({ resp });
   } catch (err) {
     res.status(404).json({ message: err.message });

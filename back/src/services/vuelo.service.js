@@ -1,4 +1,4 @@
-import { Sequelize } from 'sequelize';
+import { Sequelize, Op } from 'sequelize';
 import model from '../models/index.js';
 
 import { BodyVuelo, editarVuelo } from '../schemas/vuelo.schema.js';
@@ -94,6 +94,28 @@ const getVuelosTratado = async (id) => {
   return vuelos;
 };
 
+const getVuelosTratadoFiltrado = async (data) => {
+  const vuelos = await model.Vuelo.findAll({
+    attributes: ['id', 'origen', 'destino', 'fecha'],
+    where: {
+      origen: data.origen,
+      destino: data.destino,
+      fecha: { [Op.substring]: data.fecha },
+    },
+    include: {
+      model: model.Pasaje,
+      attributes: ['id', [Sequelize.literal('tarifa + costo'), 'total'], 'categoria'],
+      through: {
+        as: 'relacion_vuelo',
+      },
+    },
+  });
+
+  if (!vuelos.length) throw new Error('No se encontro vuelos');
+
+  return vuelos;
+};
+
 const servicio = {
   postVuelo,
   getVuelo,
@@ -101,6 +123,7 @@ const servicio = {
   patchVuelo,
   deleteVuelo,
   getVuelosTratado,
+  getVuelosTratadoFiltrado,
 };
 
 export default servicio;
