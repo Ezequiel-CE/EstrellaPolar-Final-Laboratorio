@@ -39,19 +39,18 @@ const getVuelosByAvion = async (id) => {
 };
 
 const getAsientosLibres = async (idVuelo) => {
-  const avion = await model.Vuelo.findOne({
-    include: {
-      model: model.Avion,
-      required: true,
-      attributes: ['id', 'capacidad'],
-      through: {
-        where: { vuelo: idVuelo },
-        as: 'relacion',
+  // traigo el vielo
+  const vuelo = await model.Vuelo.findOne({
+    where: { id: idVuelo },
+    include: [
+      {
+        model: model.Avion,
       },
-    },
+    ],
   });
 
-  const capacidadMaxima = avion.avions[0].capacidad;
+  const capacidadMaxima = vuelo.avions[0].capacidad;
+
   const cantidadPremium = Math.round(capacidadMaxima * 0.3);
 
   const asientos = [];
@@ -63,11 +62,15 @@ const getAsientosLibres = async (idVuelo) => {
     }
   }
 
-  const pasajesComprados = await pasajeroCPasajeService.getAllPasajeroCompraPasaje();
+  // traigo asientos ocupados en el vuelos
+  const pasajesComprados = await pasajeroCPasajeService.obtenerPasajesComprados(idVuelo);
+  // traigo asientos libres
   const asientosOcupados = pasajesComprados.map((pasaje) => pasaje.asiento);
-
   const asientosLibres = asientos.filter((val) => !asientosOcupados.includes(val));
-  return asientosLibres;
+  const asientosPremium = asientosLibres.filter((val) => val.includes('A'));
+  const asientosComerciales = asientosLibres.filter((val) => val.includes('B'));
+
+  return { asientosOcupados, asientosPremium, asientosComerciales };
 };
 
 const servicioAvion = { postAvion, getAvion, getVuelosByAvion, getAsientosLibres };

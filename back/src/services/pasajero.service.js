@@ -47,33 +47,51 @@ const patchPasajero = async (id, data) => {
   if (!pasajeroEditado[0]) throw new Error('No se puedo editar al pasajero');
 };
 
+const getRandom = (arr) => arr[Math.floor(Math.random() * arr.length)];
+
 const comprarPasaje = async (data) => {
+  // todos los vuelos
   const vuelosCompletos = await servicios.getVuelosTratado();
 
+  // encientra el vuelo por id
   const vuelo = vuelosCompletos.find((v) => v.id === data.vuelo);
 
-  const asientos = await servicioAvion.getAsientosLibres(vuelo.id);
+  // trae los asientos disponibles de ese vuelo
+  const { asientosComerciales, asientosPremium } = await servicioAvion.getAsientosLibres(
+    vuelo.id,
+  );
 
   data.pasajeros.forEach(async (informacion) => {
-    const pasajero = await postPasajero(informacion);
-    const { dataValues: pasaje } = vuelo.clase.find((v) => v.id === data.pasaje);
+    // encuentra el tipo de pasaje en el vuelo
+    const { dataValues: pasaje } = vuelo.pasajes.find((v) => v.id === data.pasaje);
+
+    if (!pasaje) throw new Error('no existe tipo de pasaje en este vuelo');
+
+    // agrega al pasajero
+
     let asientoRandom;
 
     if (pasaje.id === 1) {
-      const asientosVip = asientos.filter((asiento) => asiento.includes('A'));
-      asientoRandom = asientosVip[Math.floor(Math.random() * asientosVip.length)];
+      asientoRandom = getRandom(asientosPremium);
     } else {
-      const asientosComunes = asientos.filter((asiento) => asiento.includes('B'));
-      asientoRandom = asientosComunes[Math.floor(Math.random() * asientosComunes.length)];
+      asientoRandom = getRandom(asientosComerciales);
     }
 
+    const pasajero = await postPasajero(informacion);
+
     await pasajeroCompraPasajeServicio.postPasajeroCompraPasaje({
-      id_pasaje: pasaje.id,
+      id_vuelo_pasaje: data.vuelo_pasaje,
       id_pasajero: pasajero.id,
       monto: pasaje.total,
       asiento: asientoRandom,
+      fecha: new Date().toISOString(),
+      estado: 'comprado',
     });
   });
+};
+
+const cambiarPasaje = async (data) => {
+  const nuevoPasaje = await pasajeroCompraPasajeServicio.patchPasajeroCompraPasaje(data);
 };
 
 export default {
@@ -83,4 +101,5 @@ export default {
   deletePasajero,
   patchPasajero,
   comprarPasaje,
+  cambiarPasaje,
 };

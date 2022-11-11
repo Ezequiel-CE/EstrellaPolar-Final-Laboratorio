@@ -52,8 +52,9 @@ export const destruirVuelo = async (_, res) => {
 };
 
 export const obtenerVuelosTratados = async (_, res) => {
+  const { id } = _.params;
   try {
-    const resp = await servicio.getVuelosTratado(_);
+    const resp = await servicio.getVuelosTratado(id);
     res.status(200).json({ resp });
   } catch (err) {
     res.status(404).json({ message: err.message });

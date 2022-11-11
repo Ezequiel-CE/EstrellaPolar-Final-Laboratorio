@@ -57,3 +57,12 @@ export const comprarPasaje = async (req, res) => {
     res.status(400).json({ message: err.message });
   }
 };
+
+export const cambiarPasaje = async (req, res) => {
+  try {
+    await serviciosPasajero.cambiarPasaje(req.body);
+    res.status(200).json({ message: 'se cambio pasaje' });
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+};

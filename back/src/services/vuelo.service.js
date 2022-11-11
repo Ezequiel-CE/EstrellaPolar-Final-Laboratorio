@@ -60,9 +60,8 @@ const getVuelos = async () => {
   return vuelos;
 };
 
-const getVuelosTratado = async (data) => {
+const getVuelosTratado = async (id) => {
   let vuelos;
-  const { id } = data.params;
 
   if (id) {
     vuelos = await model.Vuelo.findAll({
