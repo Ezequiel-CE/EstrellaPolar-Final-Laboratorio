@@ -4,7 +4,7 @@ import Pasaje from './pasaje.model.js';
 import Vuelo from './vuelo.model.js';
 
 const pasajeVuelo = db.define(
-  'vuelo',
+  'vuelo_pasaje',
   {
     id: {
       field: 'id',

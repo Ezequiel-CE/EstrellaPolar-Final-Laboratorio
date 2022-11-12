@@ -67,13 +67,16 @@ const getVuelosTratado = async (id) => {
     vuelos = await model.Vuelo.findAll({
       attributes: ['id', 'origen', 'destino', 'fecha'],
       where: { id },
-      include: {
-        model: model.Pasaje,
-        attributes: ['id', [Sequelize.literal('tarifa + costo'), 'total'], 'categoria'],
-        through: {
-          as: 'relacion_vuelo',
+      include: [
+        {
+          model: model.Pasaje,
+          attributes: ['id', [Sequelize.literal('tarifa + costo'), 'total'], 'categoria'],
+          through: {
+            as: 'relacion_vuelo',
+          },
         },
-      },
+        { model: model.Avion },
+      ],
     });
   } else {
     vuelos = await model.Vuelo.findAll({

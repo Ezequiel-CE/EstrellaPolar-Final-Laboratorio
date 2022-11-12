@@ -1,5 +1,4 @@
 import model from '../models/index.js';
-import Vuelo from '../models/vuelo.model.js';
 import BodyPasaje from '../schemas/pasaje.schema.js';
 
 const postPasaje = (body) => {
