@@ -31,7 +31,7 @@ export const verVuelosDelAvion = async (_, res) => {
 
 export const getAsientosLibres = async (_, res) => {
   try {
-    const resp = await servicio.getAsientosLibres();
+    const resp = await servicio.getAsientosLibres(_.body);
 
     return res.status(200).json({ resp });
   } catch (err) {

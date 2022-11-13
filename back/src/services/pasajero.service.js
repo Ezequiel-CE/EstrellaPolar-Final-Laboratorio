@@ -50,40 +50,26 @@ const patchPasajero = async (id, data) => {
 const getRandom = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
 const comprarPasaje = async (data) => {
-  // todos los vuelos
-  const vuelosCompletos = await servicios.getVuelosTratado();
-
-  // encientra el vuelo por id
-  const vuelo = vuelosCompletos.find((v) => v.id === data.vuelo);
-
   // trae los asientos disponibles de ese vuelo
-  const { asientosComerciales, asientosPremium } = await servicioAvion.getAsientosLibres(
-    vuelo.id,
-  );
+  const { libres } = await servicioAvion.getAsientosLibres({
+    v: data.vuelo,
+    a: data.avion,
+    clase: data.clase,
+  });
+
+  if (libres.length === 0) throw new Error('no hay lugares disponibles');
 
   data.pasajeros.forEach(async (informacion) => {
-    // encuentra el tipo de pasaje en el vuelo
-    const { dataValues: pasaje } = vuelo.pasajes.find((v) => v.id === data.pasaje);
-
-    if (!pasaje) throw new Error('no existe tipo de pasaje en este vuelo');
-
     // agrega al pasajero
-
-    let asientoRandom;
-
-    if (pasaje.id === 1) {
-      asientoRandom = getRandom(asientosPremium);
-    } else {
-      asientoRandom = getRandom(asientosComerciales);
-    }
-
     const pasajero = await postPasajero(informacion);
+
+    const asientoRandom = getRandom(libres);
 
     await pasajeroCompraPasajeServicio.postPasajeroCompraPasaje({
       id_vuelo_pasaje: data.vuelo_pasaje,
       id_pasajero: pasajero.id,
-      monto: pasaje.total,
-      asiento: asientoRandom,
+      monto: data.total,
+      asiento: asientoRandom.placa,
       fecha: new Date().toISOString(),
       estado: 'comprado',
     });
