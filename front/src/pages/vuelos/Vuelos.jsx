@@ -12,10 +12,11 @@ import Vuelo from './components/Vuelo';
 function Vuelos() {
   const { isLoading, error, data } = useQuery({
     queryKey: ['repoData'],
-    queryFn: () => fetch('http://localhost:4000/API/itinerario/vuelos').then((res) => res.json()),
+
+    queryFn: () => fetch('https://api.github.com/repos/tannerlinsley/react-query').then((res) => res.json()),
   });
 
-  console.log(data);
+
   return (
     <div>
       <Vuelo />

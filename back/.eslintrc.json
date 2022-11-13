@@ -14,7 +14,9 @@
     "object-curly-newline": "off",
     "linebreak-style": 0,
     "no-console": "off",
+
     "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
+
 
     "no-restricted-syntax": [
       "error",
