@@ -21,7 +21,7 @@ const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
 const pages = [
   { name: 'Mi Pasaje', path: '/pasaje' },
   { name: 'Vuelo', path: '/vuelos' },
-  { name: 'Informacion', path: '#' },
+  { name: 'Informacion', path: '/informacion' },
 ];
 const settings = ['Perfil', 'Cuenta', 'Tablero', 'Cerrar sesión'];
 

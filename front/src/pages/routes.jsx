@@ -5,6 +5,7 @@ import Home from './home/Home';
 import Login from './login/Login';
 import Vuelos from './vuelos/Vuelos';
 import Pasaje from './pasaje/Pasaje';
+import Informaciones from './informacion/Informacion';
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: 'pasaje',
         element: <Pasaje />,
+      },
+      {
+        path: 'informacion',
+        element: <Informaciones />,
       },
     ],
   },

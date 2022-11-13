@@ -73,13 +73,7 @@ function MyPassage() {
             autoComplete="Identificacion"
           />
         </Box>
-        <Grid
-          container
-          direction="row"
-          justifyContent="center"
-          alignItems="center"
-          xs={5}
-        >
+        <Grid container direction="row" justifyContent="center" alignItems="center" xs={5}>
           <ThemeProvider theme={theme}>
             <Button
               type="submit"
@@ -90,7 +84,7 @@ function MyPassage() {
               sx={{ mt: 3, mb: 2 }}
             >
               <Typography variant="h6" fontFamily="Roboto">
-                SEARCH
+                BUSCAR
               </Typography>
             </Button>
           </ThemeProvider>
