@@ -1,6 +1,7 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import Vuelo from './components/Vuelo';
+import API from '../../api/api';
 // const dummyData = {
 //   origen: 'buenos aires',
 //   destino: 'brazil',
@@ -10,14 +11,9 @@ import Vuelo from './components/Vuelo';
 // };
 
 function Vuelos() {
-  const { isLoading, error, data } = useQuery({
-    queryKey: ['repoData'],
+  const { data } = useQuery(['vueloData'], () => API.get('itinerario/vuelos').then((res) => res.data));
 
-    queryFn: () =>
-      fetch('https://api.github.com/repos/tannerlinsley/react-query').then((res) =>
-        res.json(),
-      ),
-  });
+  console.info(data);
 
   return (
     <div>
