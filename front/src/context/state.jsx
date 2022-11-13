@@ -4,7 +4,8 @@ import useAPIreducer from './reducer';
 const apiContext = createContext();
 const { Provider } = apiContext;
 
-export const apiProvider = ({ children }) => {
+// eslint-disable-next-line react/prop-types
+export function ApiProvider({ children }) {
   const [state, dispatch] = useAPIreducer({
     auth: {},
     vuelo: {},
@@ -12,6 +13,6 @@ export const apiProvider = ({ children }) => {
 
   const value = { state, dispatch };
   return <Provider value={value}>{children}</Provider>;
-};
+}
 
 export const useApiContext = () => useContext(apiContext);
