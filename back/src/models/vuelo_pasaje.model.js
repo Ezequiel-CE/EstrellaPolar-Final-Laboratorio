@@ -1,10 +1,10 @@
 import { DataTypes } from 'sequelize';
-import db from '../configs/database.js';
-import Pasaje from './pasaje.model.js';
 import Vuelo from './vuelo.model.js';
+import Pasaje from './pasaje.model.js';
+import db from '../configs/database.js';
 
-const pasajeVuelo = db.define(
-  'vuelo_pasaje',
+const VueloPasaje = db.define(
+  'VueloPasaje',
   {
     id: {
       field: 'id',
@@ -37,4 +37,5 @@ const pasajeVuelo = db.define(
   },
   { tableName: 'vuelo_pasaje', timestamps: false },
 );
-export default pasajeVuelo;
+
+export default VueloPasaje;

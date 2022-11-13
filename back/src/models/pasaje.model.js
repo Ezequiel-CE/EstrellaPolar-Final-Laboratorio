@@ -12,7 +12,6 @@ const Pasaje = db.define(
     },
     costo: { field: 'costo', type: DataTypes.DECIMAL(10, 2), allowNull: false },
     categoria: { field: 'categoria', type: DataTypes.STRING(60), allowNull: false },
-    asiento: { field: 'asiento', type: DataTypes.STRING(60), allowNull: false },
   },
   { tableName: 'pasaje', timestamps: false },
 );
