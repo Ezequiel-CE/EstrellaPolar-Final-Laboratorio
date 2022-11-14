@@ -7,7 +7,7 @@ import HeaderFormulario from './components/Header.login';
 function Login() {
   return (
     <Grid container>
-      <Grid xs display="flex" justifyContent="center" alignItems="center">
+      <Grid xs display="flex" justifyContent="start">
         <Card
           sx={{
             px: '35px',

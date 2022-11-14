@@ -10,6 +10,7 @@ import {
   Button,
   Tooltip,
   MenuItem,
+  Grid,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { styled } from '@mui/system';
@@ -48,14 +49,16 @@ function NavBar() {
     <div>
       <AppBar position="fixed">
         <Toolbar disableGutters>
-          <img src={OrangeIcon} height="auto" width="14%" alt="Unstick Airlines Icon" />
+          <Grid item sx={{ minWidth: '16%', ml: 2 }}>
+            <img src={OrangeIcon} alt="Unstick Airlines Icon" />
+          </Grid>
           <Typography
-            variant="h6"
+            variant="h5"
             noWrap
             component="a"
             href="/"
             sx={{
-              ml: 3,
+              ml: 5,
               mr: 3,
               display: { xs: 'none', md: 'flex' },
               fontFamily: 'monospace',
@@ -162,7 +165,7 @@ function NavBar() {
             }}
           >
             <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0, mr: 3 }}>
                 <Avatar />
               </IconButton>
             </Tooltip>

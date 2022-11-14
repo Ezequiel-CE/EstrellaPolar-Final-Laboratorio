@@ -13,12 +13,6 @@ import { ThemeProvider } from '@mui/material/styles';
 import { orangeTheme } from '../../../components/styles/themeConfig';
 
 export default function FormularioLogin() {
-  const [loginData, setLoginData] = React.useState({ email: '', password: '' });
-
-  const dataLogin = (e) => {
-    setLoginData({ ...loginData, [e.target.name]: e.target.value });
-  };
-
   const {
     register,
     handleSubmit,
@@ -32,25 +26,26 @@ export default function FormularioLogin() {
 
   return (
     <Container maxWidth="sm">
-      <Grid
-        container
-        direction="column"
-        alignItems="center"
-        justifyContent="center"
-        sx={{ minHeight: '40vh', backgroundColor: '#F3F3F3', mb: 4 }}
-      >
+      <Grid container sx={{ backgroundColor: '#F3F3F3', mb: 4 }}>
         <Grid item>
           <Paper elevation={8} sx={{ padding: '1.2em', borderRadius: '0.5em' }}>
-            <Typography variant="h4" textAlign="center" sx={{ mt: 1, mb: 1 }}>
-              Iniciar Sesión
+            <Typography variant="h4" textAlign="start" sx={{ mt: 1, mb: 1 }}>
+              Login
             </Typography>
-            <Box component="form" onSubmit={handleSubmit((data) => {})}>
+            <Box
+              component="form"
+              onSubmit={handleSubmit((data) => {
+                // eslint-disable-next-line no-restricted-syntax
+                console.log(data);
+              })}
+            >
               <TextField
                 margin="normal"
                 required
                 fullWidth
                 id="email"
                 label="Email Address"
+                // eslint-disable-next-line react/jsx-props-no-spreading
                 {...register('email', {
                   required: true,
                   maxLength: 50,
@@ -59,9 +54,8 @@ export default function FormularioLogin() {
                 type="text"
                 autoFocus
                 sx={{ mt: 1.5, mb: 1.5 }}
-                onChange={dataLogin}
               />
-              <Box component="p" color="red">
+              <Box component="span" color="red">
                 {errors.email?.message}
               </Box>
               <TextField
@@ -70,6 +64,7 @@ export default function FormularioLogin() {
                 fullWidth
                 id="password"
                 label="Password"
+                // eslint-disable-next-line react/jsx-props-no-spreading
                 {...register('password', {
                   required: true,
                   minLength: { value: 6, message: 'Minimo: 6 caracteres' },
@@ -78,9 +73,8 @@ export default function FormularioLogin() {
                 autoComplete="current-password"
                 type="password"
                 sx={{ mt: 1.5, mb: 1.5 }}
-                onChange={dataLogin}
               />
-              <Box component="p" color="red">
+              <Box component="span" color="red">
                 {errors.password?.message}
               </Box>
               <ThemeProvider theme={orangeTheme}>
@@ -93,7 +87,7 @@ export default function FormularioLogin() {
                   sx={{ mt: 1.5, mb: 1 }}
                 >
                   <Typography variant="h6" fontFamily="Roboto">
-                    Log In
+                    Sign In
                   </Typography>
                 </Button>
               </ThemeProvider>
