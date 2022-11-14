@@ -20,7 +20,7 @@ export default function Lainformacion() {
             <Box sx={{ width: '150px' }}>
               <div>
                 <h3>Nombre</h3>
-                <p>Marcelo Alejanro</p>
+                <p>Marcelo Alejandro</p>
               </div>
               <div>
                 <h3>Origen</h3>
