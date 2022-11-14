@@ -14,9 +14,16 @@ export default function Vuelo(props) {
     timeStyle: 'medium',
   });
   const nuevaFecha = new Date(fecha);
-  // console.info(fechaFormateada);
   const fechaFormateada = formateador.format(nuevaFecha);
-  const [clase, setClase] = React.useState(pasajes[0].total);
+
+  const objPasajes = pasajes.reduce((acc, pasaje) => {
+    acc[pasaje.categoria] = pasaje;
+    return acc;
+  }, {});
+
+  const [clase, setClase] = React.useState(
+    objPasajes.comercial ? objPasajes.comercial.total : pasajes[0].total,
+  );
 
   const handleChange = (event) => {
     const valor = event.target.value;

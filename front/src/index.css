@@ -4,12 +4,14 @@
   box-sizing: border-box;
 }
 .container {
-  background: url(../src/assets/background.jpg) no-repeat;
+  background: linear-gradient(rgba(77, 83, 244, 0.5), rgba(190, 190, 190, 0.5)),
+    url(../src/assets/background.jpg) no-repeat;
+
+  background-position: center;
   background-size: cover;
   min-height: 100vh;
   min-width: 100vh;
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
 }

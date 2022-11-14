@@ -2,26 +2,34 @@
 /* eslint-disable react/function-component-definition */
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { Stack } from '@mui/material';
+import { Stack, LinearProgress, Alert } from '@mui/material';
 import Vuelo from './components/Vuelo';
-import API from '../../api/api';
+import { conseguirVuelos } from '../../api/metodos';
 
 const Vuelos = () => {
-  const { data, isLoading } = useQuery(
-    ['vueloData'],
-    () =>
-      API.get('itinerario/vuelos', {
-        responseType: 'json',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-      }).then((res) => res.data.resp),
-    // eslint-disable-next-line function-paren-newline
-  );
+  const { data, isLoading, error } = useQuery(['vueloData'], conseguirVuelos);
+  // eslint-disable-next-line function-paren-newline
 
   let VueloList = '';
+
+  if (isLoading) {
+    return (
+      <div>
+        <LinearProgress />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <Alert variant="filled" severity="error">
+        algo paso
+      </Alert>
+    );
+  }
+
   if (!isLoading) {
+    console.info(data);
     VueloList = data.map((vuelo) => <Vuelo key={vuelo.id} vuelo={vuelo} />);
   }
 
