@@ -6,6 +6,7 @@ import Login from './login/Login';
 import Vuelos from './vuelos/Vuelos';
 import Pasaje from './pasaje/Pasaje';
 import Informaciones from './informacion/Informacion';
+import CompraPasaje from './compraPasaje/compraPasaje';
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
       {
         path: 'informacion',
         element: <Informaciones />,
+      },
+      {
+        path: 'compraPasaje',
+        element: <CompraPasaje />,
       },
     ],
   },
