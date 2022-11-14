@@ -58,8 +58,6 @@ export default function FindFlight() {
       <Box
         shrink
         sx={{
-          width: '110vh',
-          height: 'auto',
           p: 2,
           backgroundColor: 'lightgrey',
           borderRadius: '10px',

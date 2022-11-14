@@ -25,4 +25,11 @@ export const theme = createTheme({
   },
 });
 
-export default theme;
+export const orangeTheme = createTheme({
+  palette: {
+    orange: {
+      main: '#D8552B',
+      contrastText: '#fff',
+    },
+  },
+});
