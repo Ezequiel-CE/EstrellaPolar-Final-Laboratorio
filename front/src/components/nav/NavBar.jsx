@@ -7,15 +7,15 @@ import {
   IconButton,
   Typography,
   Menu,
-  Avatar,
   Button,
-  Tooltip,
   MenuItem,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 // import { styled } from '@mui/system';
 import { Link } from 'react-router-dom';
 import OrangeIcon from '../../assets/logo.svg';
+// import LoginButton from './LoginButton';
+import UserAvatar from './UserAvatar';
 
 // const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
 
@@ -24,7 +24,6 @@ const pages = [
   { name: 'Vuelo', path: '/vuelos' },
   { name: 'Informacion', path: '/informacion' },
 ];
-const settings = ['Perfil', 'Cuenta', 'Tablero', 'Cerrar sesión'];
 
 function NavBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -184,33 +183,12 @@ function NavBar() {
                 alignItems: 'center',
               }}
             >
-              <Tooltip title="Open settings">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar />
-                </IconButton>
-              </Tooltip>
-              <Menu
-                sx={{ mt: '45px' }}
-                id="menu-appbar"
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
-              >
-                {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
-                  </MenuItem>
-                ))}
-              </Menu>
+              <UserAvatar
+                handleOpenUserMenu={handleOpenUserMenu}
+                handleCloseUserMenu={handleCloseUserMenu}
+                anchorElUser={anchorElUser}
+              />
+              {/* <LoginButton /> */}
             </Box>
           </Toolbar>
         </Container>
