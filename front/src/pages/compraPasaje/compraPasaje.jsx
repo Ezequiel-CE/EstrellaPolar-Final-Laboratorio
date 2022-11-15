@@ -1,11 +1,46 @@
+import { Grid, Paper, Typography } from '@mui/material';
+import { Container } from '@mui/system';
 import React from 'react';
+import AirplanemodeActiveIcon from '@mui/icons-material/AirplanemodeActive';
 import Persona from './conponent/persona';
 
 function CompraPasaje() {
   return (
-    <div>
-      <Persona />
-    </div>
+    <Container>
+      <Grid container spacing={3}>
+        <Grid item xs={6}>
+          <Persona />
+        </Grid>
+        <Grid item xs={6}>
+          <Paper elevation={0} sx={{ p: 6 }}>
+            <AirplanemodeActiveIcon sx={{ fontSize: '100px', mb: 4 }} />
+            <Typography variant="h4" component="h4" sx={{ mb: 4 }}>
+              Cordoba- Rio Janerio
+            </Typography>
+            <Typography variant="h4" component="h5" sx={{ mb: 2 }}>
+              Clase
+            </Typography>
+            <Typography variant="p" component="p" sx={{ mb: 4 }}>
+              clase VIP
+            </Typography>
+            <Typography variant="h4" component="h5" sx={{ mb: 2 }}>
+              Fecha
+            </Typography>
+            <Typography variant="p" component="p" sx={{ mb: 4 }}>
+              2 nov 2022 02:11:07
+            </Typography>
+            <Typography variant="h4" component="h5" sx={{ mb: 2 }}>
+              Precio
+            </Typography>
+            <Typography variant="p" component="p" sx={{ fontSize: '80px' }}>
+              $5000
+            </Typography>
+
+          </Paper>
+        </Grid>
+
+      </Grid>
+    </Container>
   );
 }
 
