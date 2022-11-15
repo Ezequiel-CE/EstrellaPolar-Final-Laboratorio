@@ -8,11 +8,9 @@ import {
   InputBase,
   FormControl,
   InputLabel,
-  ThemeProvider,
 } from '@mui/material';
 import { alpha, styled } from '@mui/material/styles';
 import SearchIcon from '@mui/icons-material/Search';
-import { orangeTheme } from '../../../components/styles/themeConfig';
 
 const BootstrapInput = styled(InputBase)(({ theme }) => ({
   'label + &': {
@@ -109,19 +107,17 @@ export default function FindFlight() {
             </FormControl>
           </Grid>
           <Grid item xs={3} display="flex" alignItems="end" justifyContent="center">
-            <ThemeProvider theme={orangeTheme}>
-              <Button
-                variant="contained"
-                color="orange"
-                sx={{
-                  height: '3em',
-                  fontSize: '16px',
-                }}
-              >
-                <SearchIcon />
-                Buscar
-              </Button>
-            </ThemeProvider>
+            <Button
+              variant="contained"
+              color="orange"
+              sx={{
+                height: '3em',
+                fontSize: '16px',
+              }}
+            >
+              <SearchIcon />
+              Buscar
+            </Button>
           </Grid>
         </Grid>
       </Box>
