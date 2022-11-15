@@ -4,14 +4,12 @@
   box-sizing: border-box;
 }
 .container {
-  background: linear-gradient(rgba(77, 83, 244, 0.5), rgba(190, 190, 190, 0.5)),
+  background: linear-gradient(rgba(90, 95, 238, 0.737), rgba(255, 255, 255, 0.732)),
     url(../src/assets/background.jpg) no-repeat;
-
   background-position: center;
   background-size: cover;
   min-height: 100vh;
-  min-width: 100vh;
+  min-width: 100vw;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
 }

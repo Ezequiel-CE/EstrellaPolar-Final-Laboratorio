@@ -31,7 +31,7 @@ export default function Vuelo(props) {
   };
 
   return (
-    <Card sx={{ p: 2, pl: 4, borderRadius: '5px', backgroundColor: '#D3D3D3' }}>
+    <Card sx={{ p: 2, pl: 4, borderRadius: '5px', backgroundColor: '#F3F3F3' }}>
       <Grid container>
         <Grid item xs={9}>
           <Box

@@ -7,7 +7,7 @@ function Layout() {
   return (
     <div className="container">
       <NavBar />
-      <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+      <Container maxWidth="lg" sx={{ mt: 2, mb: 4 }}>
         <Outlet />
       </Container>
     </div>
