@@ -118,7 +118,11 @@ function NavBar() {
                     onClick={handleCloseNavMenu}
                     sx={{ textDecoration: 'none' }}
                   >
-                    <Link to={page.path} key={page.name} style={{ textDecoration: 'none' }}>
+                    <Link
+                      to={page.path}
+                      key={page.name}
+                      style={{ textDecoration: 'none' }}
+                    >
                       <Button
                         onClick={handleCloseNavMenu}
                         sx={{ my: 1, color: 'black', display: 'block' }}
