@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 
 export default function FormularioLogin() {
   const {
-    register,
+    user,
     handleSubmit,
     formState: { errors },
   } = useForm({
@@ -35,7 +35,7 @@ export default function FormularioLogin() {
               id="email"
               label="Email Address"
               // eslint-disable-next-line react/jsx-props-no-spreading
-              {...register('email', {
+              {...user('email', {
                 required: true,
                 maxLength: 50,
               })}
@@ -54,7 +54,7 @@ export default function FormularioLogin() {
               id="password"
               label="Password"
               // eslint-disable-next-line react/jsx-props-no-spreading
-              {...register('password', {
+              {...user('password', {
                 required: true,
                 minLength: { value: 6, message: 'Minimo: 6 caracteres' },
                 maxLength: 300,
