@@ -58,8 +58,6 @@ export default function FindFlight() {
       <Box
         shrink
         sx={{
-          width: '110vh',
-          height: 'auto',
           p: 2,
           backgroundColor: 'lightgrey',
           borderRadius: '10px',
@@ -108,26 +106,16 @@ export default function FindFlight() {
               <BootstrapInput id="fecha-input" type="date" />
             </FormControl>
           </Grid>
-          <Grid
-            item
-            xs={3}
-            sx={{
-              display: 'flex',
-              alingItems: 'center',
-              alignContent: 'center',
-              justifyItems: 'center',
-              justifyContent: 'end',
-            }}
-          >
+          <Grid item xs={3} display="flex" alignItems="end" justifyContent="center">
             <Button
               variant="contained"
-              color="primary"
+              color="orange"
               sx={{
-                fontSize: '120%',
-                backgrounColor: 'lightblue',
+                height: '3em',
+                fontSize: '16px',
               }}
             >
-              <SearchIcon sx={{ margin: '10px 10px 10px 0px' }} />
+              <SearchIcon />
               Buscar
             </Button>
           </Grid>

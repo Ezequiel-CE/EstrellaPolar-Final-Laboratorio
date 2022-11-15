@@ -1,94 +1,86 @@
 import * as React from 'react';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Typography from '@mui/material/Typography';
-
-const theme = createTheme({
-  palette: {
-    orange: {
-      main: '#D8552B',
-      contrastText: '#fff',
-    },
-  },
-  typography: {
-    fontFamily: [
-      '-apple-system',
-      'BlinkMacSystemFont',
-      '"Segoe UI"',
-      'Roboto',
-      '"Helvetica Neue"',
-      'Arial',
-      'sans-serif',
-      '"Apple Color Emoji"',
-      '"Segoe UI Emoji"',
-      '"Segoe UI Symbol"',
-      '"Amatica SC"',
-    ].join(','),
-  },
-});
+import { Grid, Container, Box, TextField, Button, Typography } from '@mui/material';
+import { useForm } from 'react-hook-form';
 
 export default function FormularioLogin() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+  });
+
   return (
-    <Grid
-      sx={{
-        backgroundColor: '#F3F3F3',
-      }}
-    >
-      <Grid
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
-      >
-        <Box component="form" noValidate sx={{ mt: 1 }}>
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-            autoFocus
-          />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-          />
-        </Box>
-        <Grid
-          container
-          direction="row"
-          justifyContent="center"
-          alignItems="center"
-          xs={5}
-        >
-          <ThemeProvider theme={theme}>
+    <Container maxWidth="sm">
+      <Grid container sx={{ backgroundColor: '#F3F3F3', mb: 4 }}>
+        <Grid item>
+          <Typography variant="h4" textAlign="start" sx={{ mt: 1, mb: 1 }}>
+            Login
+          </Typography>
+          <Box
+            component="form"
+            onSubmit={handleSubmit((data) => {
+              // eslint-disable-next-line no-restricted-syntax
+              console.log(data);
+            })}
+          >
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              // eslint-disable-next-line react/jsx-props-no-spreading
+              {...register('email', {
+                required: true,
+                maxLength: 50,
+              })}
+              autoComplete="email"
+              type="text"
+              autoFocus
+              sx={{ mt: 1.5, mb: 1.5 }}
+            />
+            <Box component="span" color="red">
+              {errors.email?.message}
+            </Box>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="password"
+              label="Password"
+              // eslint-disable-next-line react/jsx-props-no-spreading
+              {...register('password', {
+                required: true,
+                minLength: { value: 6, message: 'Minimo: 6 caracteres' },
+                maxLength: 300,
+              })}
+              autoComplete="current-password"
+              type="password"
+              sx={{ mt: 1.5, mb: 1.5 }}
+            />
+            <Box component="span" color="red">
+              {errors.password?.message}
+            </Box>
             <Button
+              color="orange"
               type="submit"
               fullWidth
               variant="contained"
               size="large"
-              color="orange"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ mt: 1.5, mb: 1 }}
             >
               <Typography variant="h6" fontFamily="Roboto">
-                SIGN IN
+                Sign In
               </Typography>
             </Button>
-          </ThemeProvider>
+          </Box>
         </Grid>
       </Grid>
-    </Grid>
+    </Container>
   );
 }
