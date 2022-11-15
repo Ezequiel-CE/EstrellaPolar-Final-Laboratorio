@@ -32,10 +32,14 @@ const theme = createTheme({
 });
 
 export default function Persona() {
-  const [clase, setClase] = React.useState('');
+  const [dni, setDni] = React.useState('');
+  const [sexo, setSexo] = React.useState('');
 
   const handleChange = (event) => {
-    setClase(event.target.value);
+    setDni(event.target.value);
+  };
+  const handleChanges = (event) => {
+    setSexo(event.target.value);
   };
 
   return (
@@ -56,13 +60,13 @@ export default function Persona() {
           </Box>
 
           <Box component="form" noValidate sx={{ mt: 1 }}>
-            <FormControl fullWidth>
+            <FormControl>
               <InputLabel id="demo-simple-select-label">Tipo</InputLabel>
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
-                value={clase}
-                label="clase"
+                value={dni}
+                label="dni"
                 onChange={handleChange}
               >
                 <MenuItem value="dni">DNI</MenuItem>
@@ -70,47 +74,38 @@ export default function Persona() {
                 <MenuItem value="cpf">CPF</MenuItem>
               </Select>
             </FormControl>
-            <TextField margin="normal" required fullWidth label="Numero de documento" autoFocus />
-            <form noValidate>
+            <TextField margin="none" required label="Numero de documento" autoFocus />
+          </Box>
+          <Box component="form" sx={{ mt: 1 }}>
+            <formControl>
               <TextField
                 id="date"
                 label="Fecha de Nacimiento"
                 type="date"
-                defaultValue="2017-05-24"
+                defaultValue="1960-01-01"
                 InputLabelProps={{
                   shrink: true,
                 }}
               />
-            </form>
-            <TextField margin="normal" required fullWidth label="Telefono" autoFocus />
-            <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">Pais</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={clase}
-                label="clase"
-                onChange={handleChange}
-              >
-                <MenuItem value="dni">Argentina</MenuItem>
-                <MenuItem value="rut">Uruguay</MenuItem>
-                <MenuItem value="cpf">Brasil</MenuItem>
-              </Select>
-            </FormControl>
-            <FormControl fullWidth>
+            </formControl>
+            <TextField margin="standar" required label="Telefono" autoFocus />
+          </Box>
+          <Box component="form" noValidate sx={{ mt: 1 }}>
+            <FormControl>
               <InputLabel id="demo-simple-select-label">Sexo</InputLabel>
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
-                value={clase}
-                label="clase"
-                onChange={handleChange}
+                value={sexo}
+                label="sexo"
+                onChange={handleChanges}
               >
-                <MenuItem value="dni">Hombre</MenuItem>
-                <MenuItem value="rut">Mujer</MenuItem>
-                <MenuItem value="cpf">X</MenuItem>
+                <MenuItem value="hombre">Hombre</MenuItem>
+                <MenuItem value="mujer">Mujer</MenuItem>
+                <MenuItem value="x">X</MenuItem>
               </Select>
             </FormControl>
+            <TextField margin="standar" required label="Pais de Origen" autoFocus />
           </Box>
           <Grid
             sx={{
@@ -119,7 +114,7 @@ export default function Persona() {
               alignItems: 'center',
             }}
           >
-            <Grid container direction="row" justifyContent="center" alignItems="center" xs={4}>
+            <Grid container direction="row" justifyContent="center" alignItems="center" xs={8}>
               <ThemeProvider theme={theme}>
                 <Button
                   type="submit"
