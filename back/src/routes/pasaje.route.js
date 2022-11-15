@@ -9,6 +9,6 @@ const routerPasaje = Router();
 
 routerPasaje.get('/adm/:id', VerPasaje);
 routerPasaje.post('/adm/', crearPasaje);
-routerPasaje.get('/', encontrarPasaje);
+routerPasaje.post('/', encontrarPasaje);
 
 export default routerPasaje;

@@ -21,20 +21,34 @@ const encontrarPasaje = async (data) => {
   const { nombre, apellido, tipo_documento, num_documento } = data;
 
   const pasajeCompleto = await model.PasajeroCompraPasaje.findAll({
-    attributes: { exclude: ['id_vuelo_pasaje'] },
     include: [
       {
         where: { nombre, apellido, num_documento, tipo_documento },
         model: model.Pasajero,
       },
       {
-        model: model.Vuelo,
-        attributes: { exclude: ['tarifa'] },
+        model: model.pasajeVuelo,
+        include: [{ model: model.Pasaje }, { model: model.Vuelo }],
       },
     ],
     order: [['fecha', 'DESC']],
   });
-  return pasajeCompleto;
+
+  const pasajeFomat = pasajeCompleto.map((pasaje) => {
+    const format = { fecha: pasaje.fecha,
+      monto: pasaje.monto,
+      asiento: pasaje.asiento,
+      estado: pasaje.estado,
+      pasajero: pasaje.pasajero,
+      pasaje: pasaje.vuelo_pasaje.pasaje,
+      vuelo: pasaje.vuelo_pasaje.vuelo,
+
+    };
+
+    return format;
+  });
+
+  return pasajeFomat;
 };
 
 const servicio = { postPasaje, getPasaje, encontrarPasaje };

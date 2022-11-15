@@ -1,36 +1,45 @@
 import * as React from 'react';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Typography from '@mui/material/Typography';
+import {
+  Box,
+  Grid,
+  TextField,
+  Button,
+  MenuItem,
+  Select,
+  InputLabel,
+  FormControl,
+} from '@mui/material';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 
-const theme = createTheme({
-  palette: {
-    orange: {
-      main: '#D8552B',
-      contrastText: '#fff',
+const schema = yup
+  .object({
+    nombre: yup.string().required().min(3),
+    apellido: yup.string().required().min(3),
+    numero: yup.number().positive().integer().required(),
+    tipo: yup.string().required(),
+  })
+  .required();
+
+// eslint-disable-next-line react/prop-types
+function MyPassage({ encontrarPasaje }) {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      nombre: '',
+      apellido: '',
+      numero: '',
+      tipo: '',
     },
-  },
-  typography: {
-    fontFamily: [
-      '-apple-system',
-      'BlinkMacSystemFont',
-      '"Segoe UI"',
-      'Roboto',
-      '"Helvetica Neue"',
-      'Arial',
-      'sans-serif',
-      '"Apple Color Emoji"',
-      '"Segoe UI Emoji"',
-      '"Segoe UI Symbol"',
-      '"Amatica SC"',
-    ].join(','),
-  },
-});
+    resolver: yupResolver(schema),
+  });
 
-function MyPassage() {
+  const onSubmit = (data) => encontrarPasaje(data);
+
   return (
     <Grid
       sx={{
@@ -44,7 +53,7 @@ function MyPassage() {
           alignItems: 'center',
         }}
       >
-        <Box component="form" noValidate sx={{ mt: 1 }}>
+        <Box component="form" noValidate sx={{ mt: 1 }} onSubmit={handleSubmit(onSubmit)}>
           <TextField
             margin="normal"
             required
@@ -53,6 +62,7 @@ function MyPassage() {
             label="Nombre"
             name="Nombre"
             autoComplete="Nombre"
+            {...register('nombre', { required: true })}
           />
           <TextField
             margin="normal"
@@ -62,33 +72,50 @@ function MyPassage() {
             label="Apellido"
             name="Apellido"
             autoComplete="Apellido"
+            {...register('apellido', { required: true })}
           />
+
+          <FormControl fullWidth sx={{ marginTop: '16px', marginBottom: '8px' }}>
+            <InputLabel id="demo-simple-select-label" required>
+              Tipo de documento
+            </InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              label="Tipo documento"
+              defaultValue=""
+              {...register('tipo', { required: true })}
+            >
+              <MenuItem value="DNI">DNI</MenuItem>
+              <MenuItem value="RUT">RUT</MenuItem>
+              <MenuItem value="ID">ID</MenuItem>
+              <MenuItem value="CPF">CPF</MenuItem>
+            </Select>
+          </FormControl>
+
           <TextField
             margin="normal"
             required
             fullWidth
-            id="Identificacion"
-            label="DNI/RUT/ID/CPF"
-            name="Identificacion"
-            autoComplete="Identificacion"
+            id="numeroDocumento"
+            label="Numero documento"
+            name="numeroDocumento"
+            autoComplete="numeroDocumento"
+            {...register('numero', { required: true })}
           />
-        </Box>
-        <Grid container direction="row" justifyContent="center" alignItems="center" xs={5}>
-          <ThemeProvider theme={theme}>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              size="large"
-              color="orange"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              <Typography variant="h6" fontFamily="Roboto">
-                BUSCAR
-              </Typography>
+          <Box sx={{ color: 'red' }}>
+            <p>{errors.nombre?.message}</p>
+            <p>{errors.apellido?.message}</p>
+            <p>{errors.tipo?.message}</p>
+            <p>{errors.numero?.message}</p>
+          </Box>
+
+          <Grid container direction="row" justifyContent="center" alignItems="center">
+            <Button type="submit" variant="contained" size="large" sx={{ mt: 3, mb: 2 }}>
+              BUSCAR
             </Button>
-          </ThemeProvider>
-        </Grid>
+          </Grid>
+        </Box>
       </Grid>
     </Grid>
   );

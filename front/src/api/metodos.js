@@ -5,4 +5,8 @@ export const conseguirVuelos = async () => {
   return data.resp;
 };
 
-export const conseguirtal = () => 0;
+export const getPasajes = async (data) => {
+  const response = await API.post('/pasaje', data);
+  const pasajes = response.data;
+  return pasajes.resp;
+};

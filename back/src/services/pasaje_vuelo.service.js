@@ -8,18 +8,22 @@ const postPasajeVuelo = async (body) => {
 
   if (exist) throw new Error('Ya se encuentra el pasaje en este vuelo');
 
-  const avionVuelo = model.PasajeVuelo.create(body);
+  const avionVuelo = model.pasajeVuelo.create(body);
   return avionVuelo;
 };
 
 const getPasajeVuelo = async (id) => {
-  const pasajeVuelo = await model.PasajeVuelo.findOne({ where: { id } });
+  const pasajeVuelo = await model.pasajeVuelo.findOne({
+    where: { id },
+    include: [{ model: model.Pasaje }, { model: model.Vuelo }],
+
+  });
+
   if (!pasajeVuelo) {
     throw new Error('No se encontro pasaje vuelo');
   }
   return pasajeVuelo;
 };
-
 const servicio = {
   postPasajeVuelo,
   getPasajeVuelo,

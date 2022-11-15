@@ -140,9 +140,8 @@ function NavBar() {
             }}
           >
             {pages.map((page) => (
-              <Link to={page.path} style={{ textDecoration: 'none' }}>
+              <Link to={page.path} key={page.name} style={{ textDecoration: 'none' }}>
                 <Button
-                  key={page.name}
                   onClick={handleCloseNavMenu}
                   sx={{ my: 2, color: 'white', display: 'block' }}
                 >
