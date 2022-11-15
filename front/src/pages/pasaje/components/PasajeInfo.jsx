@@ -1,12 +1,16 @@
 import React from 'react';
-import AirplanemodeActiveIcon from '@mui/icons-material/AirplanemodeActive';
 import { Box, Card, Grid } from '@mui/material';
+import PersonIcon from '@mui/icons-material/Person';
 
-export default function Lainformacion() {
+export default function PasajeInfo({ info }) {
+  const { pasajero, pasaje, vuelo } = info;
+
+  const fecha = new Date(vuelo.fecha);
+
   return (
-    <Card sx={{ p: 4, pl: 4, borderRadius: '10px', backgroundColor: '#FFFFFF' }}>
+    <Card sx={{ my: 4, p: 4, pl: 4, borderRadius: '10px', backgroundColor: '#FFFFFF' }}>
       <Grid container>
-        <h2>TICKET DE VUELO</h2>
+        <h2>Pasaje </h2>
         <Grid item xs={12}>
           <Box
             sx={{
@@ -16,46 +20,58 @@ export default function Lainformacion() {
               alignItems: 'center',
             }}
           >
-            <AirplanemodeActiveIcon sx={{ fontSize: '100px' }} />
+            <PersonIcon sx={{ fontSize: '100px' }} />
             <Box sx={{ width: '150px' }}>
               <div>
                 <h3>Nombre</h3>
-                <p>Marcelo Alejandro</p>
+                <p>
+
+                  {pasajero.nombre}
+
+                </p>
               </div>
               <div>
                 <h3>Origen</h3>
-                <p>Argentina</p>
+                <p>{vuelo.origen}</p>
               </div>
             </Box>
             <Box sx={{ width: '150px' }}>
               <div>
                 <h3>Apellido</h3>
-                <p>Cabral Giamperi</p>
+                <p>
+                  {pasajero.apellido}
+                </p>
               </div>
               <div>
                 <h3>Destino</h3>
-                <p>Brasil</p>
+                <p>{vuelo.destino}</p>
               </div>
             </Box>
 
             <Box sx={{ width: '150px' }}>
               <div>
                 <h3>Clase</h3>
-                <p>Vip</p>
+                <p>{pasaje.categoria}</p>
               </div>
               <div>
                 <h3>Butaca</h3>
-                <p>12</p>
+                <p>{ info.asiento}</p>
               </div>
             </Box>
             <Box sx={{ width: '150px' }}>
               <div>
                 <h3>Fecha de Salida</h3>
-                <p>20-11-2022</p>
+                <p>{fecha.toDateString()}</p>
               </div>
               <div>
                 <h3>Horario</h3>
-                <p>12:00 Hrs.</p>
+                <p>
+                  {fecha.toLocaleTimeString('es-AR', {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                  })}
+
+                </p>
               </div>
             </Box>
           </Box>

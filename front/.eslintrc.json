@@ -11,6 +11,15 @@
   },
   "plugins": ["react"],
   "rules": {
+    "react/function-component-definition": [
+      2,
+      {
+        "namedComponents": ["arrow-function", "function-declaration"],
+        "unnamedComponents": "arrow-function"
+      }
+    ],
+    "react/prop-types": 0,
+    "react/jsx-props-no-spreading": "off",
     "newline-per-chained-call": 0,
     "object-curly-newline": "off",
     "linebreak-style": 0,
