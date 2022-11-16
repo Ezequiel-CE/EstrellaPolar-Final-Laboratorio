@@ -1,48 +1,65 @@
-import { Grid, Paper, Typography } from '@mui/material';
-import { Container } from '@mui/system';
+import { Grid, Typography, Button } from '@mui/material';
 import React from 'react';
-import AirplanemodeActiveIcon from '@mui/icons-material/AirplanemodeActive';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Persona from './conponent/persona';
+import VueloCompra from './conponent/VueloCompra';
+import ComoPaga from './conponent/ComoPaga';
 import Datos from './conponent/datos';
 
 function CompraPasaje() {
+  const [checkbox, setCheckbox] = React.useState('credito');
+
+  const handleChange = (event) => {
+    setCheckbox(event.target.value);
+  };
+
   return (
-    <Container>
-      <Grid container spacing={3}>
-        <Grid item xs={6}>
-          <Persona />
-        </Grid>
-        <Grid item xs={6}>
-          <Paper elevation={0} sx={{ p: 6 }}>
-            <AirplanemodeActiveIcon sx={{ fontSize: '100px', mb: 4 }} />
-            <Typography variant="h4" component="h4" sx={{ mb: 4 }}>
-              Cordoba- Rio Janerio
-            </Typography>
-            <Typography variant="h4" component="h5" sx={{ mb: 2 }}>
-              Clase
-            </Typography>
-            <Typography variant="p" component="p" sx={{ mb: 4 }}>
-              clase VIP
-            </Typography>
-            <Typography variant="h4" component="h5" sx={{ mb: 2 }}>
-              Fecha
-            </Typography>
-            <Typography variant="p" component="p" sx={{ mb: 4 }}>
-              2 nov 2022 02:11:07
-            </Typography>
-            <Typography variant="h4" component="h5" sx={{ mb: 2 }}>
-              Precio
-            </Typography>
-            <Typography variant="p" component="p" sx={{ fontSize: '80px' }}>
-              $5000
-            </Typography>
-          </Paper>
-        </Grid>
-        <Grid>
-          <Datos />
-        </Grid>
+
+    <Grid container spacing={5}>
+      <Grid item xs={6}>
+        <Typography variant="h4" component="h4" textAlign="center" sx={{ mb: 4 }}>
+          Quienes viajan?
+        </Typography>
+        <Persona />
+        <Typography variant="h4" component="h4" textAlign="center" sx={{ mt: 4, mb: 4 }}>
+          Como Pagas?
+        </Typography>
+        <ComoPaga handleChange={handleChange} value={checkbox} />
+        <Typography variant="h4" component="h4" textAlign="center" sx={{ mt: 4, mb: 4 }}>
+          Datos de la Tarjeta
+        </Typography>
+        <Datos />
       </Grid>
-    </Container>
+      <Grid item xs={6}>
+        <Typography variant="h4" component="h4" textAlign="center" sx={{ mb: 4 }}>
+          Vuelo Escogido
+        </Typography>
+        <VueloCompra />
+      </Grid>
+      <Grid
+        item
+        xs={12}
+        sx={{ display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center' }}
+      >
+
+        <Button
+          variant="contained"
+          sx={{
+            backgroundColor: '#F96D00',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <ShoppingCartIcon />
+          Comprar
+        </Button>
+
+      </Grid>
+    </Grid>
+
   );
 }
 
