@@ -8,6 +8,8 @@ const reducer = (state, action) => {
   switch (action.type) {
     case 'select vuelo':
       return { ...state, vuelo: action.payload };
+    case 'select asiento':
+      return { ...state, asiento: action.payload };
     case AUTH:
       break;
     default:

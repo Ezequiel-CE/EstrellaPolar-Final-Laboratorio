@@ -1,34 +1,56 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 
-import {
-  Box,
-  Card,
-  Grid,
-  Paper,
-  Button,
-  MenuItem,
-  Select,
-  InputLabel,
-  FormControl,
-} from '@mui/material';
+import { Box, Grid, Tooltip } from '@mui/material';
 import React from 'react';
 
-import EventSeatIcon from '@mui/icons-material/EventSeat';
+import WeekendTwoToneIcon from '@mui/icons-material/WeekendTwoTone';
+
+import ToggleButton from '@mui/material/ToggleButton';
+import { useApiContext } from '../../../context/state';
 
 export default function Asiento(props) {
+  const { state, selectAsiento } = useApiContext();
   const { asiento } = props;
+  const { manejarBoton } = props;
+
+  let colorAsiento = asiento.permitido ? 'success' : 'disable';
+  if (asiento.info.estado === 'ocupado') {
+    colorAsiento = 'error';
+  }
+
   return (
-    <Grid item xs={4} md={4} justifyContent="center">
+    <Grid
+      item
+      xs={2}
+      md={3}
+      sx={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
       <Box
         sx={{
           display: 'flex',
-          flexDirection: 'row',
+          flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
         }}
       >
-        <h3>{asiento.placa}</h3>
+        <h5>{asiento.placa}</h5>
+        <Tooltip title={asiento.info.pasajero ? asiento.info.pasajero : 'libre'}>
+          <ToggleButton
+            value="check"
+            selected={state.asiento === asiento.placa}
+            onChange={(e) => {
+              if (asiento.info.estado === 'ocupado' || !asiento.permitido) return;
+              selectAsiento(asiento.placa);
+            }}
+          >
+            <WeekendTwoToneIcon color={colorAsiento} />
+          </ToggleButton>
+        </Tooltip>
       </Box>
     </Grid>
   );
