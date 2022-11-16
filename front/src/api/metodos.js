@@ -21,3 +21,9 @@ export const getAsientos = async (param) => {
 
   return data.resp;
 };
+
+export const comprarPasaje = async (data) => {
+  const response = await API.post('pasajeros/comprar', data);
+  const asientos = response.data;
+  return asientos.resp;
+};

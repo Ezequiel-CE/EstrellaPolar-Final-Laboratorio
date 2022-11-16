@@ -1,4 +1,4 @@
-import React, { createContext, useContext } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 import useAPIreducer from './reducer';
 
 const apiContext = createContext();
@@ -8,18 +8,20 @@ const { Provider } = apiContext;
 export function ApiProvider({ children }) {
   const [state, dispatch] = useAPIreducer({
     auth: {},
-    asiento: 'A14',
     vuelo: null,
   });
+
+  const [pasaje, setPasaje] = useState(null);
 
   const selectVuelo = (data) => {
     dispatch({ type: 'select vuelo', payload: data });
   };
-  const selectAsiento = (data) => {
-    dispatch({ type: 'select asiento', payload: data });
+
+  const selectPasaje = (data) => {
+    setPasaje(data);
   };
 
-  const value = { state, dispatch, selectVuelo, selectAsiento };
+  const value = { state, dispatch, selectVuelo, selectPasaje, pasaje };
   return <Provider value={value}>{children}</Provider>;
 }
 

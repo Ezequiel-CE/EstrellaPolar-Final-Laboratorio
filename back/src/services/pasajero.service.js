@@ -73,6 +73,8 @@ const comprarPasaje = async (data) => {
     fecha: new Date().toISOString(),
     estado: 'comprado',
   });
+
+  return { pasajero, asiento: asientoRandom };
 };
 
 const cambiarPasaje = async (data) => {

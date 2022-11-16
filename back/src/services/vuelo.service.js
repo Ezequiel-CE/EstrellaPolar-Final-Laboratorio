@@ -92,13 +92,16 @@ const getVuelosTratado = async (id) => {
         [Sequelize.fn('DATE_FORMAT', Sequelize.col('fecha'), '%m-%d-%Y %H:%i:%s'), 'fecha'],
       ],
 
-      include: {
-        model: model.Pasaje,
-        attributes: ['id', [Sequelize.literal('tarifa + costo'), 'total'], 'categoria'],
-        through: {
-          attributes: [],
+      include: [
+        {
+          model: model.Pasaje,
+          attributes: ['id', [Sequelize.literal('tarifa + costo'), 'total'], 'categoria'],
+          through: {
+            attributes: [],
+          },
         },
-      },
+        { model: model.Avion },
+      ],
     });
   }
 

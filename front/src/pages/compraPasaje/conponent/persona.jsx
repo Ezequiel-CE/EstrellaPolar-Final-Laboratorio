@@ -7,9 +7,20 @@ import { MenuItem, Select, InputLabel, FormControl, Paper, Stack } from '@mui/ma
 export default function Persona({ register, control, errors }) {
   return (
     <Paper elevation={0} sx={{ p: 6 }} component="form">
-      <TextField fullWidth label="Nombre" autoFocus {...register('nombre', { required: true })} sx={{ marginBottom: '8px', marginTop: '16px' }} />
+      <TextField
+        fullWidth
+        label="Nombre"
+        autoFocus
+        {...register('nombre', { required: true })}
+        sx={{ marginBottom: '8px', marginTop: '16px' }}
+      />
       <p style={{ color: 'red' }}>{errors.nombre?.message}</p>
-      <TextField fullWidth label="Apellido" {...register('apellido', { required: true })} sx={{ marginBottom: '8px', marginTop: '16px' }} />
+      <TextField
+        fullWidth
+        label="Apellido"
+        {...register('apellido', { required: true })}
+        sx={{ marginBottom: '8px', marginTop: '16px' }}
+      />
       <p style={{ color: 'red' }}>{errors.apellido?.message}</p>
 
       <Box sx={{ marginBottom: '8px', marginTop: '16px' }}>
@@ -80,7 +91,20 @@ export default function Persona({ register, control, errors }) {
       </Box>
       <p style={{ color: 'red' }}>{errors.sexo?.message}</p>
       <p style={{ color: 'red' }}>{errors.pais?.message}</p>
-
+      <TextField
+        fullWidth
+        label="direccion"
+        {...register('direccion', { required: true })}
+        sx={{ marginBottom: '8px', marginTop: '16px' }}
+      />
+      <p style={{ color: 'red' }}>{errors.direccion?.message}</p>
+      <TextField
+        fullWidth
+        label="e-mail"
+        {...register('email', { required: true })}
+        sx={{ marginBottom: '8px', marginTop: '16px' }}
+      />
+      <p style={{ color: 'red' }}>{errors.email?.message}</p>
     </Paper>
   );
 }

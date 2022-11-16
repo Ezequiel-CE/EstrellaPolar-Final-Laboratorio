@@ -21,24 +21,27 @@ const schema = yup
     telefono: yup.number().positive().integer().required(),
     sexo: yup.string().required(),
     pais: yup.string().required().min(3),
+    email: yup.string().email().required(),
     numeroT: yup.number().positive().integer().required(),
     codigoT: yup.number().positive().integer().required(),
     fechaT: yup.date().required(),
     numeroD: yup.number().positive().integer().required(),
+    direccion: yup.string().required(),
   })
   .required();
 
-function CompraPasaje() {
+function CompraPasaje({ mutation }) {
   const [checkbox, setCheckbox] = React.useState('credito');
-  const { selectVuelo } = useApiContext();
+  const { selectVuelo, state } = useApiContext();
+  const { vuelo } = state;
 
   const {
     register,
     handleSubmit,
-    // watch,
     control,
     formState: { errors },
-  } = useForm({ mode: 'all',
+  } = useForm({
+    mode: 'all',
     defaultValues: {
       nombre: '',
       apellido: '',
@@ -48,11 +51,12 @@ function CompraPasaje() {
       telefono: '',
       sexo: '',
       pais: '',
+      direccion: '',
+      email: '',
       numeroT: '',
       codigoT: '',
       fechaT: '',
       numeroD: '',
-
     },
     resolver: yupResolver(schema),
   });
@@ -61,11 +65,29 @@ function CompraPasaje() {
     setCheckbox(event.target.value);
   };
 
-  // const { handleSubmit } = useForm();
+  const onClickComprar = (data) => {
+    const { vuelo: vueloInfo, data: dataInfo } = data;
 
-  // const enClick = () => {
-  //   console.info(adasd);
-  // };
+    const dataFormateada = {
+      pasajero: {
+        nombre: dataInfo.nombre,
+        apellido: dataInfo.apellido,
+        tipo_documento: dataInfo.tipo,
+        num_documento: dataInfo.numero,
+        fecha_nacimiento: dataInfo.fecha,
+        telefono: dataInfo.telefono,
+        direccion: dataInfo.direccion,
+        email: dataInfo.email,
+      },
+      vuelo: vueloInfo.vuelo.id,
+      avion: vueloInfo.vuelo.avions[0].id,
+      clase: vueloInfo.pasajeEscogido.categoria,
+      vuelo_pasaje: vueloInfo.vuelo.avions[0].avion_vuelo.id,
+      total: vueloInfo.pasajeEscogido.total,
+    };
+
+    mutation.mutate(dataFormateada);
+  };
 
   return (
     <Grid container spacing={5}>
@@ -102,8 +124,9 @@ function CompraPasaje() {
             justifyContent: 'center',
             alignItems: 'center',
           }}
-          onClick={handleSubmit((data) => console.info(data))}
-
+          onClick={handleSubmit((data) => {
+            onClickComprar({ vuelo, data });
+          })}
         >
           <ShoppingCartIcon />
           Comprar

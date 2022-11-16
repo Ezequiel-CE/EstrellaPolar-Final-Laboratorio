@@ -2,17 +2,22 @@
 /* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable react/function-component-definition */
 import React, { useState } from 'react';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Stack, LinearProgress, Alert, Button } from '@mui/material';
 import Vuelo from './components/Vuelo';
 import FindFlight from './components/FindFlight';
-import { conseguirVuelos } from '../../api/metodos';
+import { conseguirVuelos, comprarPasaje } from '../../api/metodos';
 import CompraPasaje from '../compraPasaje/compraPasaje';
 import { useApiContext } from '../../context/state';
+import Asientos from '../Asiento/Asientos';
 
 const Vuelos = () => {
   const [params, setParams] = useState({ origen: '', destino: '', fecha: '' });
-  // setParams({ origen: 'argentina', destino: 'brasil' });
+
+  const vueloSeleccionado = useApiContext().state.vuelo;
+  const { selectPasaje, pasaje } = useApiContext();
+
+  // query para todos los vuelos
 
   const { data, isLoading, error } = useQuery({
     queryKey: ['vuelos', params],
@@ -22,19 +27,39 @@ const Vuelos = () => {
     retry: 1,
   });
 
+  // query para comprar pasaje
+  const mutation = useMutation({
+    mutationFn: (dataForm) => comprarPasaje(dataForm),
+  });
+
+  // agregar parametros a la query en el buscador
+
   const agregarParams = (objParams) => {
     setParams(objParams);
   };
+
+  // render condicional del matation
+
+  if (mutation.isLoading) {
+    return <h1> comprando el pasaje</h1>;
+  }
+
+  if (mutation.isSuccess) {
+    selectPasaje(mutation.data);
+    return <Asientos />;
+  }
+
   // eslint-disable-next-line function-paren-newline
-  const vueloSeleccionado = useApiContext().state.vuelo;
 
   let VueloList = '';
 
-  if (vueloSeleccionado) {
-    return <CompraPasaje />;
+  // render condicional para mostrar formulario de compra
+
+  if (vueloSeleccionado && !pasaje) {
+    return <CompraPasaje mutation={mutation} />;
   }
 
-  if (isLoading) {
+  if (isLoading && !pasaje) {
     return (
       <div>
         <LinearProgress />
@@ -42,7 +67,7 @@ const Vuelos = () => {
     );
   }
 
-  if (error) {
+  if (error && !pasaje) {
     return (
       <>
         <Alert variant="filled" severity="error">
@@ -64,6 +89,8 @@ const Vuelos = () => {
       <Vuelo key={vuelo.id} vuelo={vuelo} />
     ));
   }
+
+  // listado de vuelo
 
   return (
     <Stack spacing={1}>
