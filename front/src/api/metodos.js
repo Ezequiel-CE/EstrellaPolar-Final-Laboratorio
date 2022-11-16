@@ -10,3 +10,9 @@ export const getPasajes = async (data) => {
   const pasajes = response.data;
   return pasajes.resp;
 };
+
+export const getAsientos = async (data) => {
+  const response = await API.post('avion/asientos', data);
+  const asientos = response.data;
+  return asientos.resp;
+};

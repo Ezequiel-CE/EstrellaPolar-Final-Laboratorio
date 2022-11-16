@@ -193,7 +193,6 @@ function NavBar() {
           </Toolbar>
         </Container>
       </AppBar>
-      <Toolbar />
     </div>
   );
 }
