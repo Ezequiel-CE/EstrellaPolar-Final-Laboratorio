@@ -1,20 +1,34 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable react/function-component-definition */
-import React from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { Stack, LinearProgress, Alert } from '@mui/material';
+import React, { useState } from 'react';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { Stack, LinearProgress, Alert, Button } from '@mui/material';
 import Vuelo from './components/Vuelo';
 import FindFlight from './components/FindFlight';
 
 import { conseguirVuelos } from '../../api/metodos';
 
 const Vuelos = () => {
-  const { data, isLoading, error } = useQuery(['vueloData'], conseguirVuelos);
+  const [params, setParams] = useState({ origen: '', destino: '', fecha: '' });
+  // setParams({ origen: 'argentina', destino: 'brasil' });
+
+  const { data, isLoading, error } = useQuery({
+    queryKey: ['vuelos', params],
+    queryFn: () => conseguirVuelos(params),
+    enabled: !!params,
+    refetchOnWindowFocus: false,
+    retry: 1,
+  });
+
+  const agregarParams = (objParams) => {
+    setParams(objParams);
+  };
   // eslint-disable-next-line function-paren-newline
 
   let VueloList = '';
-
   if (isLoading) {
+    setParams({ origen: '', destino: '', fecha: '' });
     return (
       <div>
         <LinearProgress />
@@ -24,9 +38,18 @@ const Vuelos = () => {
 
   if (error) {
     return (
-      <Alert variant="filled" severity="error">
-        algo paso
-      </Alert>
+      <>
+        <Alert variant="filled" severity="error">
+          No se encontraron resultados
+        </Alert>
+        <Button
+          variant="contained"
+          color="orange"
+          onClick={() => setParams({ origen: '', destino: '', fecha: '' })}
+        >
+          intentar de nuevo
+        </Button>
+      </>
     );
   }
 
@@ -36,7 +59,7 @@ const Vuelos = () => {
 
   return (
     <Stack spacing={1}>
-      <FindFlight />
+      <FindFlight agregarParams={agregarParams} Params={params} vuelo={data} />
       {VueloList}
     </Stack>
   );

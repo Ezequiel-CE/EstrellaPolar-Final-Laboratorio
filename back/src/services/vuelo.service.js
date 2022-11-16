@@ -65,7 +65,12 @@ const getVuelosTratado = async (id) => {
 
   if (id) {
     vuelos = await model.Vuelo.findAll({
-      attributes: ['id', 'origen', 'destino', 'fecha'],
+      attributes: [
+        'id',
+        'origen',
+        'destino',
+        [Sequelize.fn('DATE_FORMAT', Sequelize.col('fecha'), '%m-%d-%Y %H:%i:%s'), 'fecha'],
+      ],
       where: { id },
       include: [
         {
@@ -80,7 +85,12 @@ const getVuelosTratado = async (id) => {
     });
   } else {
     vuelos = await model.Vuelo.findAll({
-      attributes: ['id', 'origen', 'destino', 'fecha'],
+      attributes: [
+        'id',
+        'origen',
+        'destino',
+        [Sequelize.fn('DATE_FORMAT', Sequelize.col('fecha'), '%m-%d-%Y %H:%i:%s'), 'fecha'],
+      ],
 
       include: {
         model: model.Pasaje,
@@ -99,7 +109,12 @@ const getVuelosTratado = async (id) => {
 
 const getVuelosTratadoFiltrado = async (data) => {
   const vuelos = await model.Vuelo.findAll({
-    attributes: ['id', 'origen', 'destino', 'fecha'],
+    attributes: [
+      'id',
+      'origen',
+      'destino',
+      [Sequelize.fn('DATE_FORMAT', Sequelize.col('fecha'), '%m-%d-%Y %H:%i:%s'), 'fecha'],
+    ],
     where: {
       origen: data.origen,
       destino: data.destino,
