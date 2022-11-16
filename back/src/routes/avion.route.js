@@ -12,6 +12,6 @@ routerAvion.post('/adm/', crearAvion);
 routerAvion.get('/adm/:id', verAvion);
 routerAvion.get('/adm/:id/vuelos', verVuelosDelAvion);
 // routerAvion.get('/adm/:id/asiento', verAsientoDisponibles);
-routerAvion.post('/asientos', getAsientosLibres);
+routerAvion.get('/asientos', getAsientosLibres);
 
 export default routerAvion;

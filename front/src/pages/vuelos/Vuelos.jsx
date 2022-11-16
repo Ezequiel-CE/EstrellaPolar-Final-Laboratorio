@@ -67,7 +67,7 @@ const Vuelos = () => {
 
   return (
     <Stack spacing={1}>
-      <FindFlight agregarParams={agregarParams} Params={params} vuelo={data} />
+      <FindFlight agregarParams={agregarParams} vuelo={data} />
       {VueloList}
     </Stack>
   );
