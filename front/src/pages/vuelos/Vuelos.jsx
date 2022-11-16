@@ -6,8 +6,9 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { Stack, LinearProgress, Alert, Button } from '@mui/material';
 import Vuelo from './components/Vuelo';
 import FindFlight from './components/FindFlight';
-
 import { conseguirVuelos } from '../../api/metodos';
+import CompraPasaje from '../compraPasaje/compraPasaje';
+import { useApiContext } from '../../context/state';
 
 const Vuelos = () => {
   const [params, setParams] = useState({ origen: '', destino: '', fecha: '' });
@@ -25,10 +26,15 @@ const Vuelos = () => {
     setParams(objParams);
   };
   // eslint-disable-next-line function-paren-newline
+  const vueloSeleccionado = useApiContext().state.vuelo;
 
   let VueloList = '';
+
+  if (vueloSeleccionado) {
+    return <CompraPasaje />;
+  }
+
   if (isLoading) {
-    setParams({ origen: '', destino: '', fecha: '' });
     return (
       <div>
         <LinearProgress />
@@ -54,7 +60,9 @@ const Vuelos = () => {
   }
 
   if (!isLoading) {
-    VueloList = data.map((vuelo) => <Vuelo key={vuelo.id} vuelo={vuelo} />);
+    VueloList = data.map((vuelo) => (
+      <Vuelo key={vuelo.id} vuelo={vuelo} />
+    ));
   }
 
   return (

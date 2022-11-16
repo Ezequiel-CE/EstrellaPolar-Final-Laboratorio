@@ -8,10 +8,14 @@ const { Provider } = apiContext;
 export function ApiProvider({ children }) {
   const [state, dispatch] = useAPIreducer({
     auth: {},
-    vuelo: {},
+    vuelo: null,
   });
 
-  const value = { state, dispatch };
+  const selectVuelo = (data) => {
+    dispatch({ type: 'select vuelo', payload: data });
+  };
+
+  const value = { state, dispatch, selectVuelo };
   return <Provider value={value}>{children}</Provider>;
 }
 

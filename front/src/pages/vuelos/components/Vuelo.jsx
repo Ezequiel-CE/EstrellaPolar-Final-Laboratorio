@@ -1,11 +1,12 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-
 import AirplanemodeActiveIcon from '@mui/icons-material/AirplanemodeActive';
 import { Box, Card, Grid, Button, MenuItem, Select, InputLabel, FormControl } from '@mui/material';
+import { useApiContext } from '../../../context/state';
 
-export default function Vuelo(props) {
-  const { vuelo } = props;
+export default function Vuelo({ vuelo }) {
+  const { selectVuelo } = useApiContext();
+
   const { pasajes } = vuelo;
   const { fecha } = vuelo;
 
@@ -24,10 +25,15 @@ export default function Vuelo(props) {
   const [clase, setClase] = React.useState(
     objPasajes.comercial ? objPasajes.comercial.total : pasajes[0].total,
   );
+  const [pasajeEscogido, setPasajeEscogido] = React.useState(
+    objPasajes.comercial ? objPasajes.comercial : pasajes[0],
+  );
 
   const handleChange = (event) => {
     const valor = event.target.value;
     setClase(valor);
+    const pasajeE = pasajes.find((el) => el.total === valor);
+    setPasajeEscogido(pasajeE);
   };
 
   return (
@@ -107,7 +113,13 @@ export default function Vuelo(props) {
         <Grid item xs={1} md={2}>
           <Box>
             <h2>{`${clase} U$D`}</h2>
-            <Button variant="contained" sx={{ p: 1 }}>
+            <Button
+              variant="contained"
+              sx={{ p: 1 }}
+              onClick={() => {
+                selectVuelo({ vuelo, pasajeEscogido });
+              }}
+            >
               Comprar
             </Button>
           </Box>

@@ -1,9 +1,7 @@
 import API from './api';
 
-export const conseguirVuelos = async (param) => {
-  const { data } = await API.get('itinerario/vuelos', {
-    params: { origen: param.origen, destino: param.destino, fecha: param.fecha },
-  });
+export const conseguirVuelos = async () => {
+  const { data } = await API.get('itinerario/vuelos');
 
   return data.resp;
 };
