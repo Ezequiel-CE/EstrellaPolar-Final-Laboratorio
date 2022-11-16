@@ -1,9 +1,8 @@
 import * as React from 'react';
-import { Grid, Container, Box, TextField, Button, Typography, Breadcrumbs } from '@mui/material';
+import { Grid, Container, Box, TextField, Button, Typography } from '@mui/material';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
 
-export default function FormularioLogin() {
+export default function Registrar() {
   const {
     register,
     handleSubmit,
@@ -20,7 +19,7 @@ export default function FormularioLogin() {
       <Grid container sx={{ backgroundColor: '#F3F3F3', mb: 4 }}>
         <Grid item>
           <Typography variant="h4" textAlign="start" sx={{ mt: 1, mb: 1 }}>
-            Login
+            Registrar Usuario
           </Typography>
           <Box
             component="form"
@@ -79,32 +78,8 @@ export default function FormularioLogin() {
                   Ingresar
                 </Typography>
               </Button>
-              <Button
-                color="inherit"
-                type="submit"
-                variant="contained"
-                size="large"
-                sx={{ mt: 1.5, mb: 1 }}
-              >
-                <Typography variant="h6" fontFamily="Roboto">
-                  Crear Cuenta
-                </Typography>
-              </Button>
             </Grid>
           </Box>
-          <Grid
-            container
-            direction="row"
-            justifyContent="center"
-            alignItems="flex-end"
-            sx={{ mt: 3, mb: 0.5 }}
-          >
-            <Breadcrumbs aria-label="breadcrumb">
-              <Link color="inherit" href="/registrar">
-                olvide mi contraseña
-              </Link>
-            </Breadcrumbs>
-          </Grid>
         </Grid>
       </Grid>
     </Container>
