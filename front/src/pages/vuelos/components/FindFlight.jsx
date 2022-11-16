@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import * as React from 'react';
 import { Grid, Button, FormControl, TextField } from '@mui/material';
 // import { alpha, styled } from '@mui/material/styles';
@@ -36,7 +37,20 @@ import SearchIcon from '@mui/icons-material/Search';
 //   },
 // }));
 
-export default function FindFlight() {
+export default function FindFlight(props) {
+  const [input, setInput] = React.useState({ origen: '', destino: '', fecha: '' });
+  const { agregarParams } = props;
+
+  const manejadorDeBusqueda = (e) => {
+    agregarParams(input);
+    setInput({ origen: '', destino: '', fecha: '' });
+  };
+
+  const manejadorDeInput = (e) => {
+    const { name, value } = e.target;
+    setInput({ ...input, [name]: value });
+  };
+
   return (
     <Grid
       container
@@ -64,6 +78,9 @@ export default function FindFlight() {
             id="origen-input"
             // value={name}
             label="Origen"
+            name="origen"
+            value={input.origen}
+            onChange={manejadorDeInput}
             variant="outlined"
           />
         </FormControl>
@@ -82,6 +99,9 @@ export default function FindFlight() {
             // value={name}
             label="Destino"
             variant="outlined"
+            name="destino"
+            value={input.destino}
+            onChange={manejadorDeInput}
           />
         </FormControl>
       </Grid>
@@ -96,9 +116,9 @@ export default function FindFlight() {
         >
           <TextField
             id="fecha-input"
-            label="fecha"
-            defaultValue="2022-05-24"
-            // value={name}
+            name="fecha"
+            value={input.fecha}
+            onChange={manejadorDeInput}
             type="date"
           />
         </FormControl>
@@ -115,6 +135,7 @@ export default function FindFlight() {
       >
         <Button
           variant="contained"
+          onClick={manejadorDeBusqueda}
           sx={{
             backgroundColor: '#F96D00',
             minWidth: '15rem',
