@@ -3,6 +3,7 @@ import { Container } from '@mui/system';
 import React from 'react';
 import AirplanemodeActiveIcon from '@mui/icons-material/AirplanemodeActive';
 import Persona from './conponent/persona';
+import Datos from './conponent/datos';
 
 function CompraPasaje() {
   return (
@@ -35,10 +36,11 @@ function CompraPasaje() {
             <Typography variant="p" component="p" sx={{ fontSize: '80px' }}>
               $5000
             </Typography>
-
           </Paper>
         </Grid>
-
+        <Grid>
+          <Datos />
+        </Grid>
       </Grid>
     </Container>
   );

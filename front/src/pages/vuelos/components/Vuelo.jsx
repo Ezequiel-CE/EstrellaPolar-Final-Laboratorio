@@ -104,9 +104,9 @@ export default function Vuelo(props) {
             <p>{fechaFormateada}</p>
           </Box>
         </Grid>
-        <Grid item xs={1} md={1}>
+        <Grid item xs={1} md={2}>
           <Box>
-            <h2>{`${clase}$`}</h2>
+            <h2>{`${clase} U$D`}</h2>
             <Button variant="contained" sx={{ p: 1 }}>
               Comprar
             </Button>
