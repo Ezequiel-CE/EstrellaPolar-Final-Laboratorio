@@ -85,9 +85,7 @@ const Vuelos = () => {
   }
 
   if (!isLoading) {
-    VueloList = data.map((vuelo) => (
-      <Vuelo key={vuelo.id} vuelo={vuelo} />
-    ));
+    VueloList = data.map((vuelo) => <Vuelo key={vuelo.id} vuelo={vuelo} />);
   }
 
   // listado de vuelo
