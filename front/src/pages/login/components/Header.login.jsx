@@ -21,7 +21,7 @@ export default function HeaderFormulario() {
           to
         </Typography>
         <Typography variant="h4" fontFamily="Aboreto" fontWeight="bold">
-          Unstick Airlines
+          Estrella Polar
         </Typography>
       </Grid>
       <Grid>

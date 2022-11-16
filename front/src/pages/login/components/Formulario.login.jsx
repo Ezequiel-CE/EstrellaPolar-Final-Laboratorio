@@ -1,10 +1,11 @@
 import * as React from 'react';
-import { Grid, Container, Box, TextField, Button, Typography } from '@mui/material';
+import { Grid, Container, Box, TextField, Button, Typography, Breadcrumbs } from '@mui/material';
 import { useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom';
 
 export default function FormularioLogin() {
   const {
-    user,
+    register,
     handleSubmit,
     formState: { errors },
   } = useForm({
@@ -35,7 +36,7 @@ export default function FormularioLogin() {
               id="email"
               label="Email Address"
               // eslint-disable-next-line react/jsx-props-no-spreading
-              {...user('email', {
+              {...register('email', {
                 required: true,
                 maxLength: 50,
               })}
@@ -54,7 +55,7 @@ export default function FormularioLogin() {
               id="password"
               label="Password"
               // eslint-disable-next-line react/jsx-props-no-spreading
-              {...user('password', {
+              {...register('password', {
                 required: true,
                 minLength: { value: 6, message: 'Minimo: 6 caracteres' },
                 maxLength: 300,
@@ -66,19 +67,44 @@ export default function FormularioLogin() {
             <Box component="span" color="red">
               {errors.password?.message}
             </Box>
-            <Button
-              color="orange"
-              type="submit"
-              fullWidth
-              variant="contained"
-              size="large"
-              sx={{ mt: 1.5, mb: 1 }}
-            >
-              <Typography variant="h6" fontFamily="Roboto">
-                Sign In
-              </Typography>
-            </Button>
+            <Grid container direction="row" justifyContent="space-around" alignItems="center">
+              <Button
+                color="inherit"
+                type="submit"
+                variant="contained"
+                size="large"
+                sx={{ mt: 1.5, mb: 1 }}
+              >
+                <Typography variant="h6" fontFamily="Roboto">
+                  Ingresar
+                </Typography>
+              </Button>
+              <Button
+                color="inherit"
+                type="submit"
+                variant="contained"
+                size="large"
+                sx={{ mt: 1.5, mb: 1 }}
+              >
+                <Typography variant="h6" fontFamily="Roboto">
+                  Crear Cuenta
+                </Typography>
+              </Button>
+            </Grid>
           </Box>
+          <Grid
+            container
+            direction="row"
+            justifyContent="center"
+            alignItems="flex-end"
+            sx={{ mt: 3, mb: 0.5 }}
+          >
+            <Breadcrumbs aria-label="breadcrumb">
+              <Link color="inherit" href="/">
+                olvide mi contraseña
+              </Link>
+            </Breadcrumbs>
+          </Grid>
         </Grid>
       </Grid>
     </Container>

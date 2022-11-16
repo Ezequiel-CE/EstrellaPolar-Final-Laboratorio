@@ -3,16 +3,9 @@ import { Box, TextField, Paper, Stack } from '@mui/material';
 
 function Datos() {
   return (
-    <Paper
-      elevation={0}
-      sx={{ p: 6 }}
-
-    >
-
+    <Paper elevation={0} sx={{ p: 6 }}>
       <Box sx={{ marginBottom: '8px', marginTop: '16px' }}>
-
         <Stack direction="row" spacing={2} sx={{ display: 'flex' }}>
-
           <Box flexGrow={1}>
             <TextField
               margin="normal"
@@ -23,10 +16,8 @@ function Datos() {
               autoComplete="numero"
               fullWidth
             />
-
           </Box>
           <Box>
-
             <TextField
               margin="normal"
               required
@@ -37,11 +28,9 @@ function Datos() {
               sx={{ width: '100px' }}
             />
           </Box>
-
         </Stack>
       </Box>
       <Box sx={{ marginBottom: '8px', marginTop: '16px', display: 'flex', gap: '15px' }}>
-
         <TextField
           margin="normal"
           id="date"
@@ -63,9 +52,7 @@ function Datos() {
           autoComplete="numeroDocumento"
           fullWidth
         />
-
       </Box>
-
     </Paper>
   );
 }
