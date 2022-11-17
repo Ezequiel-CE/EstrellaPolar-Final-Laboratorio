@@ -43,11 +43,6 @@ function Home() {
               />
             </Box>
           </Grid>
-          <Grid item display="flex" justifyContent="center" xs={12} sm={12}>
-            <Typography variant="body1" color="initial">
-              ALGO MAS AQUI asdasdsa as da sda
-            </Typography>
-          </Grid>
         </Grid>
       </Container>
     </div>
