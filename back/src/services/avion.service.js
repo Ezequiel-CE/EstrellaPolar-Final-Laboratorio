@@ -82,15 +82,9 @@ const getAsientosLibres = async (data) => {
   let pasajerosCompraPasaje = await model.PasajeroCompraPasaje.findAll({
     include: [
       { model: model.Pasajero, attributes: ['nombre', 'apellido'] },
-      {
-        model: model.pasajeVuelo,
-
-        include: { model: model.Vuelo, where: { id: id_vuelo }, include: { model: model.Avion } },
-      },
+      { model: model.pasajeVuelo, where: { id_vuelo } },
     ],
   });
-
-  if (!pasajerosCompraPasaje.length) throw new Error('No se encontro pasajes 2');
   pasajerosCompraPasaje = pasajerosCompraPasaje.map((pasajero) => pasajero.dataValues);
   pasajes.vuelo.pasajes = pasajerosCompraPasaje;
 

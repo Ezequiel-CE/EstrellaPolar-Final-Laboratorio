@@ -82,7 +82,7 @@ function CompraPasaje({ mutation }) {
       vuelo: vueloInfo.vuelo.id,
       avion: vueloInfo.vuelo.avions[0].id,
       clase: vueloInfo.pasajeEscogido.categoria,
-      vuelo_pasaje: vueloInfo.vuelo.avions[0].avion_vuelo.id,
+      vuelo_pasaje: vueloInfo.pasajeEscogido.vuelo_pasaje.id,
       total: vueloInfo.pasajeEscogido.total,
     };
 
