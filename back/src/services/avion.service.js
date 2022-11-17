@@ -84,13 +84,13 @@ const getAsientosLibres = async (data) => {
       { model: model.Pasajero, attributes: ['nombre', 'apellido'] },
       {
         model: model.pasajeVuelo,
-        where: { id_vuelo },
-        include: { model: model.Vuelo, include: { model: model.Avion } },
+
+        include: { model: model.Vuelo, where: { id: id_vuelo }, include: { model: model.Avion } },
       },
     ],
   });
 
-  if (!pasajerosCompraPasaje.length) throw new Error('No se encontro pasajes');
+  if (!pasajerosCompraPasaje.length) throw new Error('No se encontro pasajes 2');
   pasajerosCompraPasaje = pasajerosCompraPasaje.map((pasajero) => pasajero.dataValues);
   pasajes.vuelo.pasajes = pasajerosCompraPasaje;
 
