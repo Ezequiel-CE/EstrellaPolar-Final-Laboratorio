@@ -9,12 +9,11 @@ const UserAvatar = ({ handleOpenUserMenu, handleCloseUserMenu, anchorElUser }) =
 
   const settings = [
     {
-      nombre: 'Datos',
+      nombre: 'Tus Pasajeros',
       click: () => {
-        navigate('/datos');
+        navigate('/pasajeros');
       },
     },
-    { nombre: 'Tus pasajes', click: () => {} },
     {
       nombre: 'Cerrar sesión',
       click: () => {

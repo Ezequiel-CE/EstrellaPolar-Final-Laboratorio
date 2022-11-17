@@ -62,3 +62,13 @@ export const editarAsiento = async (asiento) => {
   const { data } = await API.patch('pasajeros/cambiar', asiento);
   return data.resp;
 };
+
+export const verPasajero = async (auth) => {
+  const config = {
+    headers: { Authorization: `Bearer ${auth.token}` },
+  };
+
+  const response = await API.get('pasaje/cuenta', config);
+  const asientos = response.data;
+  return asientos.resp;
+};
