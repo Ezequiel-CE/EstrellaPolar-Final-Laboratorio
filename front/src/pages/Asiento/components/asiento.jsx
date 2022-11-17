@@ -11,10 +11,10 @@ import { useApiContext } from '../../../context/state';
 
 export default function Asiento(props) {
   const { state, selectAsiento } = useApiContext();
-  const { pasaje } = props;
+  const { aseleccionado } = props;
   const { asiento } = props;
 
-  console.info(state.pasajeSeleccionado);
+  console.info(state);
 
   let colorAsiento = asiento.permitido ? 'success' : 'disable';
   if (asiento.info.estado === 'ocupado') {
@@ -44,7 +44,7 @@ export default function Asiento(props) {
         <Tooltip title={asiento.info.pasajero ? asiento.info.pasajero : 'libre'}>
           <ToggleButton
             value="check"
-            selected={state.pasajeSeleccionado ? state.pasajeSeleccionado : pasaje.placa}
+            selected={state.asientoSeleccionado === asiento.placa}
             onChange={(e) => {
               if (asiento.info.estado === 'ocupado' || !asiento.permitido) return;
               selectAsiento(asiento.placa);

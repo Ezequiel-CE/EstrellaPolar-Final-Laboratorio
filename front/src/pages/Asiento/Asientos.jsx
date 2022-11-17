@@ -8,6 +8,7 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import Asiento from './components/asiento';
 import { useApiContext } from '../../context/state';
 import { getAsientos } from '../../api/metodos';
+import FinalizacionDialog from './components/DialogCompra';
 /* http://localhost:5000/API/avion/asientos
 realizar get api.post(avion/asiento,body)
 {
@@ -25,9 +26,11 @@ const Asientos = (props) => {
   const { state } = useApiContext();
   const { vuelo } = state;
   const { avions } = vuelo.vuelo;
+
   const a = avions[0].id;
   const v = vuelo.vuelo.id;
   const clase = vuelo.pasajeEscogido.categoria;
+  const [open, setOpen] = useState(false);
 
   const { pasajeComprado } = props;
   const params = { v, a, clase };
@@ -42,7 +45,7 @@ const Asientos = (props) => {
   let asientosList;
   if (!isLoading) {
     asientosList = data.asientos.map((asiento, index) => (
-      <Asiento key={index} asiento={asiento} pasaje={pasajeComprado} />
+      <Asiento key={index} asiento={asiento} aseleccionado={pasajeComprado} />
     ));
   }
   if (isLoading) {
@@ -52,6 +55,10 @@ const Asientos = (props) => {
       </div>
     );
   }
+
+  const finalizar = () => {
+    setOpen(!open);
+  };
 
   return (
     <Container
@@ -67,8 +74,9 @@ const Asientos = (props) => {
         Seleccion de asiento
       </Typography>
       <Typography variant="h6" sx={{ m: 5, textAlign: 'center' }}>
-        {' '}
-        Tu asiento: {pasajeComprado.placa}{' '}
+        {!state.asientoSeleccionado
+          ? `Tu asiento es: ${pasajeComprado.placa}`
+          : `Cambiar tu asiento: ${pasajeComprado.placa} por ${state.asientoSeleccionado}`}
       </Typography>
       <Grid
         container
@@ -84,6 +92,7 @@ const Asientos = (props) => {
         <Grid item x={1} md={4}>
           <Button
             variant="contained"
+            onClick={finalizar}
             sx={{
               m: 2,
               backgroundColor: '#F96D00',
@@ -98,6 +107,7 @@ const Asientos = (props) => {
         <Grid item x={1} md={4}>
           <Button
             variant="contained"
+            onClick={finalizar}
             sx={{
               m: 2,
               backgroundColor: '#F96D00',
@@ -110,6 +120,7 @@ const Asientos = (props) => {
           </Button>
         </Grid>
       </Grid>
+      <FinalizacionDialog open={open} finalizar={finalizar} />
     </Container>
   );
 };

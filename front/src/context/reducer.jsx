@@ -6,7 +6,7 @@ const reducer = (state, action) => {
     case 'select vuelo':
       return { ...state, vuelo: action.payload };
     case 'select asiento':
-      return { ...state, pasajeSeleccionado: action.payload };
+      return { ...state, asientoSeleccionado: action.payload };
     case 'add token':
       return { ...state, auth: action.payload };
 

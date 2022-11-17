@@ -29,16 +29,18 @@ export function ApiProvider({ children }) {
   //   },
   // };
 
-  const [pasaje, setPasaje] = useState(null);
   const [state, dispatch] = useAPIreducer({
     auth: {},
-    pasajeSeleccionado: null,
+    asientoSeleccionado: null,
     vuelo: null,
   });
+
+  const [pasaje, setPasaje] = useState(null);
 
   const selectVuelo = (data) => {
     dispatch({ type: 'select vuelo', payload: data });
   };
+
   const selectAsiento = (data) => {
     dispatch({ type: 'select asiento', payload: data });
   };
@@ -52,6 +54,7 @@ export function ApiProvider({ children }) {
   };
 
   const value = { state, dispatch, selectVuelo, selectPasaje, pasaje, selectAsiento, guardarToken };
+
   return <Provider value={value}>{children}</Provider>;
 }
 
