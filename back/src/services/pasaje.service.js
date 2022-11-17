@@ -68,6 +68,7 @@ const encontrarPasajePorCuenta = async (cuenta) => {
       {
         where: { id: cuenta.id },
         model: model.Cuenta,
+        attributes: ['id'],
       },
       {
         model: model.Pasajero,
