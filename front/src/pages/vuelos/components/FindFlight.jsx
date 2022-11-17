@@ -103,7 +103,7 @@ export default function FindFlight(props) {
           variant="contained"
           onClick={manejadorDeBusqueda}
           sx={{
-            backgroundColor: '#F96D00',
+            backgroundColor: 'orange.main',
             minWidth: '15rem',
             display: 'flex',
             justifyContent: 'center',

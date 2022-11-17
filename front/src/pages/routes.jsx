@@ -1,6 +1,7 @@
 import React from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 import Layout from '../components/layout/Layout';
+import Layout2 from '../components/layout/Layout2';
 import Home from './home/Home';
 import Login from './login/Login';
 import Vuelos from './vuelos/Vuelos';
@@ -13,12 +14,18 @@ import Registro from './registrar/Registro';
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Layout />,
+    element: <Layout2 />,
     children: [
       {
         path: '/',
         element: <Home />,
       },
+    ],
+  },
+  {
+    path: '/',
+    element: <Layout />,
+    children: [
       {
         path: 'vuelos',
         element: <Vuelos />,

@@ -111,7 +111,12 @@ function MyPassage({ encontrarPasaje }) {
           </Box>
 
           <Grid container direction="row" justifyContent="center" alignItems="center">
-            <Button type="submit" variant="contained" size="large" sx={{ mt: 3, mb: 2 }}>
+            <Button
+              type="submit"
+              variant="contained"
+              size="large"
+              sx={{ mt: 3, mb: 2, backgroundColor: 'orange.main' }}
+            >
               BUSCAR
             </Button>
           </Grid>

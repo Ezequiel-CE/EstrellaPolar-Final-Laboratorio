@@ -7,8 +7,8 @@ import EmailIcon from '@mui/icons-material/Email';
 import PhoneIcon from '@mui/icons-material/Phone';
 
 const Footer = () => (
-  <footer>
-    <Box py={{ xs: 2, sm: 4 }} bgcolor="text.primary" color="white">
+  <footer className="foot">
+    <Box py={{ xs: 2, sm: 4 }} color="white.main" bgcolor="dark.main">
       <Container maxWidth="lg">
         <Grid container spacing={5}>
           <Grid item xs={12} sm={4}>

@@ -6,20 +6,18 @@ const LoginButton = () => (
   <div>
     <Button
       variant="contained"
-      color="orange"
       component={Link}
       to="/login"
       sx={{
+        backgroundColor: 'orange.main',
         mr: 4,
         flexGrow: 1,
         display: { xs: 'flex', md: 'flex' },
         justifyContent: 'end',
         alignItems: 'center',
       }}
-
     >
       Login
-
     </Button>
   </div>
 );

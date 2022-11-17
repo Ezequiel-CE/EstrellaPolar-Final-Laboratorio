@@ -1,9 +1,16 @@
 import React from 'react';
-import { Typography, Grid, Box } from '@mui/material';
+import { Grid, Container } from '@mui/material';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
 
 function Home() {
   return (
     <div>
+      <Container maxWidth="lg">
+        <Grid container spacing={2}>
+          <Grid item sx={{ height: '200px', width: '100vh' }} />
+        </Grid>
+      </Container>
       <Typography
         fullWidth
         display="flex"
@@ -12,7 +19,7 @@ function Home() {
         color="white"
         fontFamily="Aboreto"
       >
-        Thanks for Flight with us!
+        Come and Flight with us!
       </Typography>
       <Grid item display="flex" justifyContent="center" xs={12} sm={12}>
         <Box>

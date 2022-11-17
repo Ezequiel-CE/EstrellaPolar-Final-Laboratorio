@@ -47,7 +47,7 @@ function NavBar() {
   return (
     <div>
       <AppBar position="static">
-        <Container maxWidth="xl">
+        <Container sx={{ bgcolor: '#2b3a67' }} maxWidth="xl">
           <Toolbar disableGutters>
             <img
               src={OrangeIcon}
@@ -117,7 +117,11 @@ function NavBar() {
                     onClick={handleCloseNavMenu}
                     sx={{ textDecoration: 'none' }}
                   >
-                    <Link to={page.path} key={page.name} style={{ textDecoration: 'none' }}>
+                    <Link
+                      to={page.path}
+                      key={page.name}
+                      style={{ textDecoration: 'none' }}
+                    >
                       <Button
                         onClick={handleCloseNavMenu}
                         sx={{ my: 1, color: 'black', display: 'block' }}
@@ -162,7 +166,12 @@ function NavBar() {
                 <Link to={page.path} key={page.name} style={{ textDecoration: 'none' }}>
                   <Button
                     onClick={handleCloseNavMenu}
-                    sx={{ my: 2, color: 'white', display: 'block' }}
+                    sx={{
+                      backgroundColor: 'primary.main',
+                      my: 2,
+                      color: 'white.main',
+                      display: 'block',
+                    }}
                   >
                     {page.name}
                   </Button>
