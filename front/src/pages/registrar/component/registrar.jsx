@@ -107,7 +107,7 @@ export default function Registrar() {
                 sx={{ mt: 1.5, mb: 1 }}
               >
                 <Typography variant="h6" fontFamily="Roboto">
-                  Ingresar
+                  Registrar Usuario
                 </Typography>
               </Button>
             </Grid>
