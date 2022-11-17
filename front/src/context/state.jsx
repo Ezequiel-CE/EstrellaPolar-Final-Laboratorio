@@ -32,7 +32,7 @@ export function ApiProvider({ children }) {
   const [pasaje, setPasaje] = useState(null);
   const [state, dispatch] = useAPIreducer({
     auth: {},
-    pasajeSeleccionado: pasaje,
+    pasajeSeleccionado: null,
     vuelo: null,
   });
 

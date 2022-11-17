@@ -14,6 +14,8 @@ export default function Asiento(props) {
   const { pasaje } = props;
   const { asiento } = props;
 
+  console.info(state.pasajeSeleccionado);
+
   let colorAsiento = asiento.permitido ? 'success' : 'disable';
   if (asiento.info.estado === 'ocupado') {
     colorAsiento = 'error';
@@ -42,7 +44,7 @@ export default function Asiento(props) {
         <Tooltip title={asiento.info.pasajero ? asiento.info.pasajero : 'libre'}>
           <ToggleButton
             value="check"
-            selected={pasaje.placa === asiento.placa}
+            selected={state.pasajeSeleccionado ? state.pasajeSeleccionado : pasaje.placa}
             onChange={(e) => {
               if (asiento.info.estado === 'ocupado' || !asiento.permitido) return;
               selectAsiento(asiento.placa);
