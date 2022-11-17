@@ -7,6 +7,13 @@ export const conseguirVuelos = async (param) => {
 
   return data.resp;
 };
+export const conseguirPasajeroPorVuelo = async (param) => {
+  const { data } = await API.get('pasajeros/adm/PorVuelo', {
+    params: { v: param },
+  });
+
+  return data;
+};
 
 export const getPasajes = async (data) => {
   const response = await API.post('/pasaje', data);
@@ -23,7 +30,18 @@ export const getAsientos = async (param) => {
 };
 
 export const comprarPasaje = async (data) => {
-  const response = await API.post('pasajeros/comprar', data);
+  console.info(data);
+  let path = 'pasajeros/comprar';
+  let config = {};
+
+  if (data.token) {
+    path = 'pasajeros/comprar/cuenta';
+    config = {
+      headers: { Authorization: `Bearer ${data.token}` },
+    };
+  }
+
+  const response = await API.post(path, data, config);
   const asientos = response.data;
   return asientos.resp;
 };
@@ -31,16 +49,26 @@ export const comprarPasaje = async (data) => {
 export const logearse = async (data) => {
   const response = await API.post('auth/login', data);
   const info = response.data;
-  return info.token;
+  return info.data;
 };
 
 export const registrarse = async (data) => {
   const response = await API.post('auth/register', data);
   const info = response.data;
-  return info.token;
+  return info.data;
 };
 
 export const editarAsiento = async (asiento) => {
   const { data } = await API.patch('pasajeros/cambiar', asiento);
   return data.resp;
+};
+
+export const verPasajero = async (auth) => {
+  const config = {
+    headers: { Authorization: `Bearer ${auth.token}` },
+  };
+
+  const response = await API.get('pasaje/cuenta', config);
+  const asientos = response.data;
+  return asientos.resp;
 };

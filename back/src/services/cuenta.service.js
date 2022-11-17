@@ -16,10 +16,18 @@ const registrarCuenta = async (data) => {
 
   const hashedPassword = await bcrypt.hash(value.password, 8);
 
-  await model.Cuenta.create({
+  const cuentaCreada = await model.Cuenta.create({
     email: value.email,
     password: hashedPassword,
   });
+
+  // crea token
+
+  const token = jwt.sign({ cuenta: value.email, role: cuentaCreada.role }, process.env.JWT_SECRET, {
+    expiresIn: '2h',
+  });
+
+  return { token, role: cuentaCreada.role };
 };
 
 const LogearCuenta = async (data) => {
@@ -40,10 +48,11 @@ const LogearCuenta = async (data) => {
 
   // crea token
 
-  const token = jwt.sign({ cuenta: value.email }, process.env.JWT_SECRET, {
+  const token = jwt.sign({ cuenta: value.email, role: cuenta.role }, process.env.JWT_SECRET, {
     expiresIn: '2h',
   });
-  return token;
+
+  return { token, role: cuenta.role };
 };
 
 export default { registrarCuenta, LogearCuenta };

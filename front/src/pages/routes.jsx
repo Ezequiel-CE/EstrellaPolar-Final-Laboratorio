@@ -5,9 +5,12 @@ import Home from './home/Home';
 import Login from './login/Login';
 import Vuelos from './vuelos/Vuelos';
 import Pasaje from './pasaje/Pasaje';
+import VuelosAdm from './vuelosAdm/VuelosAdm';
 
 import CompraPasaje from './compraPasaje/compraPasaje';
 import Registro from './registrar/Registro';
+
+import TusPasajeros from './TusPasajeros/TusPasajeros';
 
 const router = createBrowserRouter([
   {
@@ -30,6 +33,14 @@ const router = createBrowserRouter([
       {
         path: 'compraPasaje',
         element: <CompraPasaje />,
+      },
+      {
+        path: 'pasajeros',
+        element: <TusPasajeros />,
+      },
+      {
+        path: 'vuelosADM',
+        element: <VuelosAdm />,
       },
     ],
   },

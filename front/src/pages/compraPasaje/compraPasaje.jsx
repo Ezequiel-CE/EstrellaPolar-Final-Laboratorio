@@ -33,7 +33,7 @@ const schema = yup
 function CompraPasaje({ mutation }) {
   const [checkbox, setCheckbox] = React.useState('credito');
   const { selectVuelo, state } = useApiContext();
-  const { vuelo } = state;
+  const { vuelo, auth } = state;
 
   const {
     register,
@@ -84,9 +84,15 @@ function CompraPasaje({ mutation }) {
       clase: vueloInfo.pasajeEscogido.categoria,
       vuelo_pasaje: vueloInfo.pasajeEscogido.vuelo_pasaje.id,
       total: vueloInfo.pasajeEscogido.total,
+      token: null,
     };
 
-    mutation.mutate(dataFormateada);
+    if (auth) {
+      dataFormateada.token = auth.token;
+      mutation.mutate(dataFormateada);
+    } else {
+      mutation.mutate(dataFormateada);
+    }
   };
 
   return (
