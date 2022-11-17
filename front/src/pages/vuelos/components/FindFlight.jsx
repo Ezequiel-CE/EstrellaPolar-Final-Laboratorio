@@ -22,7 +22,7 @@ export default function FindFlight(props) {
       container
       sx={{
         p: 1.5,
-        backgroundColor: 'white',
+        backgroundColor: '#f3f3f3',
         borderRadius: '5px',
       }}
       direction="row"
