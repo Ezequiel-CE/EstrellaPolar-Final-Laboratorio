@@ -1,28 +1,45 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
-
 import AirplanemodeActiveIcon from '@mui/icons-material/AirplanemodeActive';
-import {
-  Box,
-  Card,
-  Grid,
-  Button,
-  MenuItem,
-  Select,
-  InputLabel,
-  FormControl,
-} from '@mui/material';
+import { Box, Card, Grid, Button, MenuItem, Select, InputLabel, FormControl } from '@mui/material';
+import { useApiContext } from '../../../context/state';
 
-export default function Vuelo() {
-  const [clase, setClase] = React.useState('');
+export default function Vuelo({ vuelo }) {
+  const { selectVuelo } = useApiContext();
+
+  const { pasajes } = vuelo;
+  const { fecha } = vuelo;
+
+  const formateador = new Intl.DateTimeFormat('es-AR', {
+    dateStyle: 'medium',
+    timeStyle: 'medium',
+  });
+  const nuevaFecha = new Date(fecha);
+  const fechaFormateada = formateador.format(nuevaFecha);
+
+  const objPasajes = pasajes.reduce((acc, pasaje) => {
+    acc[pasaje.categoria] = pasaje;
+    return acc;
+  }, {});
+
+  const [clase, setClase] = React.useState(
+    objPasajes.comercial ? objPasajes.comercial.total : pasajes[0].total,
+  );
+  const [pasajeEscogido, setPasajeEscogido] = React.useState(
+    objPasajes.comercial ? objPasajes.comercial : pasajes[0],
+  );
 
   const handleChange = (event) => {
-    setClase(event.target.value);
+    const valor = event.target.value;
+    setClase(valor);
+    const pasajeE = pasajes.find((el) => el.total === valor);
+    setPasajeEscogido(pasajeE);
   };
 
   return (
-    <Card sx={{ p: 2, pl: 4, borderRadius: '10px', backgroundColor: '#D3D3D3' }}>
-      <Grid container>
-        <Grid item xs={9}>
+    <Card sx={{ p: 2, pl: 4, borderRadius: '5px', backgroundColor: '#F3F3F3' }}>
+      <Grid container direction="row" alignItems="center" spacing={10}>
+        <Grid item xs={4} md={1}>
           <Box
             sx={{
               display: 'flex',
@@ -31,51 +48,81 @@ export default function Vuelo() {
               alignItems: 'center',
             }}
           >
-            <AirplanemodeActiveIcon sx={{ fontSize: '100px' }} />
-            <div>
-              <h3>Origen</h3>
-              <p>Cordoba</p>
-            </div>
-            <div>
-              <h3>Destino</h3>
-              <p>argentina</p>
-            </div>
-            <Box sx={{ width: '120px' }}>
-              <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">Clase</InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={clase}
-                  label="clase"
-                  onChange={handleChange}
-                >
-                  <MenuItem value="vip">vip</MenuItem>
-                  <MenuItem value="comercial">comercial</MenuItem>
-                </Select>
-              </FormControl>
-            </Box>
-            <div>
-              <h3>fecha</h3>
-              <p>14-28-211</p>
-            </div>
+            <AirplanemodeActiveIcon sx={{ fontSize: '100px', transform: 'rotate(50deg)' }} />
           </Box>
         </Grid>
-        <Grid
-          item
-          xs={3}
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
-            gap: '10px',
-          }}
-        >
-          <h2>$52000</h2>
-          <Button variant="contained" sx={{ p: 1 }}>
-            Comprar
-          </Button>
+        <Grid item xs={3} md={2}>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
+          >
+            <h3>Origen</h3>
+            <p>{vuelo.origen}</p>
+          </Box>
+        </Grid>
+        <Grid item xs={3} md={2}>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
+          >
+            <h3>Destino</h3>
+            <p>{vuelo.destino}</p>
+          </Box>
+        </Grid>
+
+        <Grid item xs={6} md={2}>
+          {' '}
+          <Box sx={{ width: '120px' }}>
+            <FormControl sx={{ m: 1 }} variant="filled" fullWidth>
+              <InputLabel id="demo-simple-select-label">Clase</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={clase}
+                label="clase"
+                onChange={handleChange}
+              >
+                {pasajes.map((pasaje) => (
+                  <MenuItem key={pasaje.id} value={pasaje.total}>
+                    {pasaje.categoria}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Box>
+        </Grid>
+
+        <Grid item xs={6} md={3}>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
+          >
+            <h3>Fecha</h3>
+            <p>{fechaFormateada}</p>
+          </Box>
+        </Grid>
+        <Grid item xs={1} md={2}>
+          <Box>
+            <h2>{`${clase} U$D`}</h2>
+            <Button
+              variant="contained"
+              sx={{ p: 1 }}
+              onClick={() => {
+                selectVuelo({ vuelo, pasajeEscogido });
+              }}
+            >
+              Comprar
+            </Button>
+          </Box>
         </Grid>
       </Grid>
     </Card>

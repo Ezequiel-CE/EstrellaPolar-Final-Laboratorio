@@ -3,7 +3,7 @@ import {
   validacionBodyPasajero,
   validacionBodyPasajeroEdicion,
 } from '../schemas/pasajero.schema.js';
-import servicios from './vuelo.service.js';
+
 import pasajeroCompraPasajeServicio from './pasajero_compra_pasaje.service.js';
 import servicioAvion from './avion.service.js';
 
@@ -50,6 +50,7 @@ const patchPasajero = async (id, data) => {
 const getRandom = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
 const comprarPasaje = async (data) => {
+  console.info(data);
   // trae los asientos disponibles de ese vuelo
   const { libres } = await servicioAvion.getAsientosLibres({
     v: data.vuelo,
@@ -59,25 +60,26 @@ const comprarPasaje = async (data) => {
 
   if (libres.length === 0) throw new Error('no hay lugares disponibles');
 
-  data.pasajeros.forEach(async (informacion) => {
-    // agrega al pasajero
-    const pasajero = await postPasajero(informacion);
+  // agrega al pasajero
+  const pasajero = await postPasajero(data.pasajero);
 
-    const asientoRandom = getRandom(libres);
+  const asientoRandom = getRandom(libres);
 
-    await pasajeroCompraPasajeServicio.postPasajeroCompraPasaje({
-      id_vuelo_pasaje: data.vuelo_pasaje,
-      id_pasajero: pasajero.id,
-      monto: data.total,
-      asiento: asientoRandom.placa,
-      fecha: new Date().toISOString(),
-      estado: 'comprado',
-    });
+  const pasajeroComprapasaje = await pasajeroCompraPasajeServicio.postPasajeroCompraPasaje({
+    id_vuelo_pasaje: data.vuelo_pasaje,
+    id_pasajero: pasajero.id,
+    monto: data.total,
+    asiento: asientoRandom.placa,
+    fecha: new Date().toISOString(),
+    estado: 'comprado',
   });
+
+  return { pasajero, asiento: asientoRandom, pasajero_compra_pasaje: pasajeroComprapasaje.id };
 };
 
 const cambiarPasaje = async (data) => {
   const nuevoPasaje = await pasajeroCompraPasajeServicio.patchPasajeroCompraPasaje(data);
+  return nuevoPasaje;
 };
 
 export default {

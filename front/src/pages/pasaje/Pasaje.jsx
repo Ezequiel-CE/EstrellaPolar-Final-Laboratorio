@@ -1,30 +1,46 @@
-import React from 'react';
-import { Grid } from '@mui/material';
-import Card from '@mui/material/Card';
-import HeaderFormulario from './components/HeaderPasaje';
-import MyPassage from './components/MyPassage.pasaje';
+import React, { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { Alert, LinearProgress } from '@mui/material';
+import { getPasajes } from '../../api/metodos';
+import FormPasaje from './components/FormPasaje';
+import ListadePasajes from './components/ListadePasajes';
 
 function Pasaje() {
-  return (
-    <div>
-      <Grid container>
-        <Grid xs display="flex" justifyContent="center" alignItems="center">
-          <Card
-            sx={{
-              px: '35px',
-              borderRadius: '30px',
-              backgroundColor: '#F3F3F3',
-              boxShadow:
-                '200px 132px 96px rgba(0, 0, 0, 0.01), 113px 74px 81px rgba(0, 0, 0, 0.05), 50px 33px 60px rgba(0, 0, 0, 0.09), 13px 8px 33px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1);',
-            }}
-          >
-            <HeaderFormulario />
-            <MyPassage />
-          </Card>
-        </Grid>
-      </Grid>
-    </div>
-  );
+  const [pasaje, setPasaje] = useState(null);
+
+  const { data, isFetching, error } = useQuery(['pasaje', pasaje], () => getPasajes(pasaje), {
+    enabled: pasaje != null,
+  });
+
+  const encontrarPasaje = (infoPasaje) => {
+    setPasaje({
+      nombre: infoPasaje.nombre,
+      apellido: infoPasaje.apellido,
+      num_documento: infoPasaje.numero,
+      tipo_documento: infoPasaje.tipo,
+    });
+  };
+
+  if (isFetching) {
+    return (
+      <div>
+        <LinearProgress />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <Alert variant="filled" severity="error">
+        algo paso
+      </Alert>
+    );
+  }
+
+  if (data) {
+    return <ListadePasajes pasajes={data} />;
+  }
+  return <FormPasaje encontrarPasaje={encontrarPasaje} />;
 }
 
 export default Pasaje;
