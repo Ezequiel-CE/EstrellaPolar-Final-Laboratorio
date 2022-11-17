@@ -23,7 +23,6 @@ import { useApiContext } from '../../context/state';
 const pages = [
   { name: 'Mi Pasaje', path: '/pasaje' },
   { name: 'Vuelo', path: '/vuelos' },
-  { name: 'Informacion', path: '/informacion' },
 ];
 
 function NavBar() {
