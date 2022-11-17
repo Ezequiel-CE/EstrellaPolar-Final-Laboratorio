@@ -99,7 +99,7 @@ export default function FormularioLogin() {
               size="large"
               sx={{ mt: 1.5, mb: 1 }}
             >
-              <Typography variant="h6" fontFamily="Roboto">
+              <Typography variant="h6" fontFamily="Roboto" color="white">
                 Sign In
               </Typography>
             </Button>
