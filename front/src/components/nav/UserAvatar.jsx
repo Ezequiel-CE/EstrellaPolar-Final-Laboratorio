@@ -8,7 +8,12 @@ const UserAvatar = ({ handleOpenUserMenu, handleCloseUserMenu, anchorElUser }) =
   const navigate = useNavigate();
 
   const settings = [
-    { nombre: 'Datos', click: () => {} },
+    {
+      nombre: 'Datos',
+      click: () => {
+        navigate('/datos');
+      },
+    },
     { nombre: 'Tus pasajes', click: () => {} },
     {
       nombre: 'Cerrar sesión',
