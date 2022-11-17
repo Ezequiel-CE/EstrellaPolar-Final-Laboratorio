@@ -3,7 +3,7 @@ import {
   validacionBodyPasajero,
   validacionBodyPasajeroEdicion,
 } from '../schemas/pasajero.schema.js';
-import servicios from './vuelo.service.js';
+
 import pasajeroCompraPasajeServicio from './pasajero_compra_pasaje.service.js';
 import servicioAvion from './avion.service.js';
 
@@ -79,6 +79,7 @@ const comprarPasaje = async (data) => {
 
 const cambiarPasaje = async (data) => {
   const nuevoPasaje = await pasajeroCompraPasajeServicio.patchPasajeroCompraPasaje(data);
+  return nuevoPasaje;
 };
 
 export default {

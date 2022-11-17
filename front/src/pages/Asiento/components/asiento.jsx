@@ -14,8 +14,6 @@ export default function Asiento(props) {
   const { aseleccionado } = props;
   const { asiento } = props;
 
-  console.info(state);
-
   let colorAsiento = asiento.permitido ? 'success' : 'disable';
   if (asiento.info.estado === 'ocupado') {
     colorAsiento = 'error';

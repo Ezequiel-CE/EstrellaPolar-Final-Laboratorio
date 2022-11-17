@@ -54,7 +54,6 @@ export const comprarPasaje = async (req, res) => {
     const resp = await serviciosPasajero.comprarPasaje(req.body);
     res.status(200).json({ message: 'se compro pasaje', resp });
   } catch (err) {
-    console.log(err);
     res.status(400).json({ message: err.message });
   }
 };
