@@ -31,7 +31,13 @@ export const comprarPasaje = async (data) => {
 export const logearse = async (data) => {
   const response = await API.post('auth/login', data);
   const info = response.data;
-  return info.resp;
+  return info.token;
+};
+
+export const registrarse = async (data) => {
+  const response = await API.post('auth/register', data);
+  const info = response.data;
+  return info.token;
 };
 
 export const editarAsiento = async (asiento) => {
