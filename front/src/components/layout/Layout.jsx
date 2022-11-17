@@ -7,15 +7,13 @@ import '../../index.css';
 
 function Layout() {
   return (
-    <>
-      <div className="container">
-        <NavBar />
-        <Container maxWidth="lg" sx={{ mt: 2, mb: 4 }}>
-          <Outlet />
-        </Container>
-      </div>
+    <div className="container">
+      <NavBar />
+      <Container maxWidth="lg" sx={{ mt: 2, mb: 4 }}>
+        <Outlet />
+      </Container>
       <Footer />
-    </>
+    </div>
   );
 }
 

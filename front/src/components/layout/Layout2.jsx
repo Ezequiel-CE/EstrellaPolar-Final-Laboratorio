@@ -7,15 +7,13 @@ import '../../pages/home/Home.css';
 
 function Layout2() {
   return (
-    <>
-      <div className="hero">
-        <NavBar />
-        <Container maxWidth="lg" sx={{ mt: 2, mb: 4 }}>
-          <Outlet />
-        </Container>
-      </div>
+    <div className="hero">
+      <NavBar />
+      <Container maxWidth="lg" sx={{ mt: 2, mb: 4 }}>
+        <Outlet />
+      </Container>
       <Footer />
-    </>
+    </div>
   );
 }
 
