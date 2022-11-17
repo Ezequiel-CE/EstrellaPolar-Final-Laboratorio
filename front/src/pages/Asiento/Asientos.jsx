@@ -21,10 +21,16 @@ Leer Docu Tanstack Query
 Mutaciones
 */
 
-const Asientos = () => {
+const Asientos = (props) => {
   const { state } = useApiContext();
+  const { vuelo } = state;
+  const { avions } = vuelo.vuelo;
+  const a = avions[0].id;
+  const v = vuelo.vuelo.id;
+  const clase = vuelo.pasajeEscogido.categoria;
 
-  const params = { v: 1, a: 3, clase: 'vip' };
+  const { pasajeComprado } = props;
+  const params = { v, a, clase };
   const { data, isLoading, error } = useQuery({
     queryKey: ['asientos', params],
     queryFn: () => getAsientos(params),
@@ -35,7 +41,9 @@ const Asientos = () => {
 
   let asientosList;
   if (!isLoading) {
-    asientosList = data.asientos.map((asiento, index) => <Asiento key={index} asiento={asiento} />);
+    asientosList = data.asientos.map((asiento, index) => (
+      <Asiento key={index} asiento={asiento} pasaje={pasajeComprado} />
+    ));
   }
   if (isLoading) {
     return (
@@ -60,7 +68,7 @@ const Asientos = () => {
       </Typography>
       <Typography variant="h6" sx={{ m: 5, textAlign: 'center' }}>
         {' '}
-        Tu asiento: {state.asiento}{' '}
+        Tu asiento: {pasajeComprado.placa}{' '}
       </Typography>
       <Grid
         container
