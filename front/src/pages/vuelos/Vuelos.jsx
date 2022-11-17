@@ -17,13 +17,6 @@ const Vuelos = () => {
   const vueloSeleccionado = useApiContext().state.vuelo;
   const { setPasaje } = useApiContext();
 
-  const queryCliente = useQueryClient();
-  // query para todos los vuelos
-
-  const vueloSeleccionado = useApiContext().state.vuelo;
-  const { setPasaje } = useApiContext();
-
-  const queryCliente = useQueryClient();
   // query para todos los vuelos
 
   const { data, isLoading, error } = useQuery({
@@ -37,9 +30,6 @@ const Vuelos = () => {
   // query para comprar pasaje
   const mutation = useMutation({
     mutationFn: (dataForm) => comprarPasaje(dataForm),
-    onSuccess: () => {
-      queryCliente.invalidateQueries('vuelos');
-    },
   });
 
   // agregar parametros a la query en el buscador
