@@ -65,7 +65,7 @@ const comprarPasaje = async (data) => {
 
   const asientoRandom = getRandom(libres);
 
-  await pasajeroCompraPasajeServicio.postPasajeroCompraPasaje({
+  const pasajeroComprapasaje = await pasajeroCompraPasajeServicio.postPasajeroCompraPasaje({
     id_vuelo_pasaje: data.vuelo_pasaje,
     id_pasajero: pasajero.id,
     monto: data.total,
@@ -74,7 +74,7 @@ const comprarPasaje = async (data) => {
     estado: 'comprado',
   });
 
-  return { pasajero, asiento: asientoRandom };
+  return { pasajero, asiento: asientoRandom, pasajero_compra_pasaje: pasajeroComprapasaje.id };
 };
 
 const cambiarPasaje = async (data) => {

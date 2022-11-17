@@ -20,6 +20,12 @@ const Vuelos = () => {
   const queryCliente = useQueryClient();
   // query para todos los vuelos
 
+  const vueloSeleccionado = useApiContext().state.vuelo;
+  const { setPasaje } = useApiContext();
+
+  const queryCliente = useQueryClient();
+  // query para todos los vuelos
+
   const { data, isLoading, error } = useQuery({
     queryKey: ['vuelos', params],
     queryFn: () => conseguirVuelos(params),
