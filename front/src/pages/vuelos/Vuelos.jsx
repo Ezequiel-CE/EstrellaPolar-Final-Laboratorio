@@ -17,6 +17,7 @@ const Vuelos = () => {
   const vueloSeleccionado = useApiContext().state.vuelo;
   const { setPasaje } = useApiContext();
 
+  const queryCliente = useQueryClient();
   // query para todos los vuelos
 
   const { data, isLoading, error } = useQuery({
@@ -60,6 +61,7 @@ const Vuelos = () => {
         estado: 'ocupado',
         pasajero: `${mutation.data.pasajero.nombre} ${mutation.data.pasajero.apellido}`,
       },
+      pasajeroCompraPasajeId: mutation.data.pasajero_compra_pasaje,
     };
     return <Asientos pasajeComprado={formatedAsiento} />;
   }
