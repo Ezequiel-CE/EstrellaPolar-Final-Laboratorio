@@ -96,7 +96,6 @@ const getAsientosLibres = async (data) => {
 
   const pasajesComprados = pasajes.vuelo.pasajes;
   const { capacidad } = pasajes.vuelo.avion;
-  const { categoria } = pasajes;
 
   const asientosVip = Math.round(30 % capacidad);
 
@@ -130,7 +129,8 @@ const getAsientosLibres = async (data) => {
         };
       }
     });
-    if (asiento.clase === categoria) {
+
+    if (asiento.clase === clase) {
       asiento.permitido = !plantillaAsiento.permitido;
     }
 
@@ -140,6 +140,7 @@ const getAsientosLibres = async (data) => {
   const asientosLibres = asientos.filter(
     (asiento) => asiento.permitido && asiento.info.estado === 'libre',
   );
+
   pasajes = {
     asientos,
     libres: asientosLibres,
