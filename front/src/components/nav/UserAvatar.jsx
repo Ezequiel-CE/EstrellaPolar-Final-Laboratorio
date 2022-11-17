@@ -1,9 +1,11 @@
 import React from 'react';
 import { IconButton, Typography, Menu, Avatar, Tooltip, MenuItem } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import { useApiContext } from '../../context/state';
 
 const UserAvatar = ({ handleOpenUserMenu, handleCloseUserMenu, anchorElUser }) => {
   const { desLogear } = useApiContext();
+  const navigate = useNavigate();
 
   const settings = [
     { nombre: 'Datos', click: () => {} },
@@ -12,6 +14,8 @@ const UserAvatar = ({ handleOpenUserMenu, handleCloseUserMenu, anchorElUser }) =
       nombre: 'Cerrar sesión',
       click: () => {
         desLogear();
+        navigate('/');
+        navigate(0);
       },
     },
   ];
