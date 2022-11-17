@@ -5,10 +5,11 @@ import Home from './home/Home';
 import Login from './login/Login';
 import Vuelos from './vuelos/Vuelos';
 import Pasaje from './pasaje/Pasaje';
-
 import CompraPasaje from './compraPasaje/compraPasaje';
 import Registro from './registrar/Registro';
 import Datos from './Datos/Datos';
+import Asientos from './Asiento/Asientos';
+import { VueloAdm } from './vuelosAdm/VueloAdm';
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
       {
         path: 'datos',
         element: <Datos />,
+      },
+      {
+        path: 'vuelosADM',
+        element: <VueloAdm />,
       },
     ],
   },

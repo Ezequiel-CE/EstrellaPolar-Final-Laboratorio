@@ -88,7 +88,7 @@ function CompraPasaje({ mutation }) {
     };
 
     if (auth) {
-      dataFormateada.token = auth;
+      dataFormateada.token = auth.token;
       mutation.mutate(dataFormateada);
     } else {
       mutation.mutate(dataFormateada);

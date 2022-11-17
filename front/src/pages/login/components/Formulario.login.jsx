@@ -40,6 +40,7 @@ export default function FormularioLogin() {
 
   useEffect(() => {
     if (mutation.isSuccess === true) {
+      console.info(mutation.data);
       guardarToken(mutation.data);
 
       navigate('/');

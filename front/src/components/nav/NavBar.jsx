@@ -20,9 +20,15 @@ import { useApiContext } from '../../context/state';
 
 // const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
 
-const pages = [
+const pagesNoAdm = [
   { name: 'Buscar Pasaje', path: '/pasaje' },
   { name: 'Vuelo', path: '/vuelos' },
+];
+
+const pagesAdm = [
+  { name: 'Buscar Pasaje', path: '/pasaje' },
+  { name: 'Vuelo', path: '/vuelos' },
+  { name: 'Vuelos ADM', path: '/vuelosADM' },
 ];
 
 function NavBar() {
@@ -46,6 +52,14 @@ function NavBar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  let pages;
+
+  if (auth && auth.role === 1) {
+    pages = pagesAdm;
+  } else {
+    pages = pagesNoAdm;
+  }
 
   return (
     <div>
