@@ -2,7 +2,6 @@ import * as React from 'react';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import { MenuItem, Select, InputLabel, FormControl, Paper, Stack } from '@mui/material';
-// import { useForm } from 'react-hook-form';
 
 export default function Persona({ register, control, errors }) {
   return (

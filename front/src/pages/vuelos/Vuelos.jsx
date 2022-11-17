@@ -15,7 +15,7 @@ const Vuelos = () => {
   const [params, setParams] = useState({ origen: '', destino: '', fecha: '' });
 
   const vueloSeleccionado = useApiContext().state.vuelo;
-  const { selectPasaje, pasaje } = useApiContext();
+  const { setPasaje } = useApiContext();
 
   // query para todos los vuelos
 
@@ -44,9 +44,19 @@ const Vuelos = () => {
     return <h1> comprando el pasaje</h1>;
   }
 
+  // cuando se compra renderiza los asientos
+
   if (mutation.isSuccess) {
-    selectPasaje(mutation.data);
-    return <Asientos />;
+    const formatedAsiento = {
+      placa: mutation.data.asiento.placa,
+      clase: mutation.data.asiento.clase,
+      permitido: true,
+      info: {
+        estado: 'ocupado',
+        pasajero: `${mutation.data.pasajero.nombre} ${mutation.data.pasajero.apellido}`,
+      },
+    };
+    return <Asientos pasajeComprado={formatedAsiento} />;
   }
 
   // eslint-disable-next-line function-paren-newline
@@ -55,11 +65,11 @@ const Vuelos = () => {
 
   // render condicional para mostrar formulario de compra
 
-  if (vueloSeleccionado && !pasaje) {
+  if (vueloSeleccionado) {
     return <CompraPasaje mutation={mutation} />;
   }
 
-  if (isLoading && !pasaje) {
+  if (isLoading) {
     return (
       <div>
         <LinearProgress />
@@ -67,7 +77,7 @@ const Vuelos = () => {
     );
   }
 
-  if (error && !pasaje) {
+  if (error) {
     return (
       <>
         <Alert variant="filled" severity="error">
