@@ -5,7 +5,7 @@ import NavBar from '../nav/NavBar';
 import Footer from '../footer/Footer';
 import '../../pages/home/Home.css';
 
-function Layout() {
+function Layout2() {
   return (
     <>
       <div className="hero">
@@ -19,4 +19,4 @@ function Layout() {
   );
 }
 
-export default Layout;
+export default Layout2;

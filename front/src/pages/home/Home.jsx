@@ -1,7 +1,5 @@
 import React from 'react';
-import { Grid, Container } from '@mui/material';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
+import { Grid, Container, Box, Typography } from '@mui/material';
 
 function Home() {
   return (
