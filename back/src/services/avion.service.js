@@ -47,30 +47,28 @@ const getAsientosLibres = async (data) => {
       where: { categoria: clase },
       include: {
         model: model.Vuelo,
-        required: false,
-        attributes: [['id', 'vuelo_id']],
+
         where: { id: v },
         through: {
           as: 'vuelo_pasaje',
         },
         include: {
-          required: false,
           model: model.Avion,
           where: { id: a },
-          through: {
-            attributes: [],
-          },
+          through: {},
         },
       },
     },
     // (params) => params.dataValues,
   );
+  // console.log(pasajes);
+
   if (!pasajes) throw new Error('No se encontro pasaje');
 
-  pasajes = pasajes.dataValues;
   const [vuelo] = pasajes.vuelos;
   const [avion] = vuelo.dataValues.avions;
   const { vuelo_pasaje } = vuelo.dataValues;
+  const { id_vuelo } = vuelo_pasaje;
   delete pasajes.vuelos;
 
   pasajes = {
@@ -81,13 +79,17 @@ const getAsientosLibres = async (data) => {
     },
   };
 
-  const { id_vuelo } = pasajes.vuelo.relacion;
   let pasajerosCompraPasaje = await model.PasajeroCompraPasaje.findAll({
     include: [
       { model: model.Pasajero, attributes: ['nombre', 'apellido'] },
-      { where: { id_vuelo }, model: model.pasajeVuelo },
+      {
+        model: model.pasajeVuelo,
+        where: { id_vuelo },
+        include: { model: model.Vuelo, include: { model: model.Avion } },
+      },
     ],
   });
+
   if (!pasajerosCompraPasaje.length) throw new Error('No se encontro pasajes');
   pasajerosCompraPasaje = pasajerosCompraPasaje.map((pasajero) => pasajero.dataValues);
   pasajes.vuelo.pasajes = pasajerosCompraPasaje;

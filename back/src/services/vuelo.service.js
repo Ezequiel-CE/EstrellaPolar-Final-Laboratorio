@@ -96,9 +96,7 @@ const getVuelosTratado = async (id) => {
         {
           model: model.Pasaje,
           attributes: ['id', [Sequelize.literal('tarifa + costo'), 'total'], 'categoria'],
-          through: {
-            attributes: [],
-          },
+          through: {},
         },
         { model: model.Avion },
       ],
