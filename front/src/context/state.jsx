@@ -47,7 +47,11 @@ export function ApiProvider({ children }) {
     setPasaje(data);
   };
 
-  const value = { state, dispatch, selectVuelo, selectPasaje, pasaje, selectAsiento };
+  const guardarToken = (data) => {
+    dispatch({ type: 'add token', payload: data });
+  };
+
+  const value = { state, dispatch, selectVuelo, selectPasaje, pasaje, selectAsiento, guardarToken };
   return <Provider value={value}>{children}</Provider>;
 }
 

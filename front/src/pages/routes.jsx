@@ -36,16 +36,16 @@ const router = createBrowserRouter([
         element: <CompraPasaje />,
       },
       {
-        path: 'registro',
-        element: <Registro />,
-      },
-      {
         path: 'asiento',
         element: <Asientos />,
       },
     ],
   },
   { path: '/login', element: <Login /> },
+  {
+    path: 'register',
+    element: <Registro />,
+  },
 ]);
 
 export default router;

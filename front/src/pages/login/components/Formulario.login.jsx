@@ -1,15 +1,21 @@
+/* eslint-disable no-unused-vars */
 import * as React from 'react';
-import {
-  Grid,
-  Container,
-  Box,
-  TextField,
-  Button,
-  Typography,
-  Breadcrumbs,
-} from '@mui/material';
+import { Grid, Container, Box, TextField, Button, Typography, Breadcrumbs } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import { useMutation } from '@tanstack/react-query';
+import { useEffect } from 'react';
+import { logearse } from '../../../api/metodos';
+import { useApiContext } from '../../../context/state';
+
+const schema = yup
+  .object({
+    email: yup.string().email().required(),
+    password: yup.string().required().min(3).max(15),
+  })
+  .required();
 
 export default function FormularioLogin() {
   const {
@@ -21,7 +27,23 @@ export default function FormularioLogin() {
       email: '',
       password: '',
     },
+    resolver: yupResolver(schema),
+    mode: 'all',
   });
+
+  const { guardarToken } = useApiContext();
+
+  const mutation = useMutation({
+    mutationFn: (data) => logearse(data),
+  });
+
+  console.info(mutation);
+
+  useEffect(() => {
+    if (mutation.isSuccess === true) {
+      guardarToken(mutation.data.token);
+    }
+  }, [mutation.isSuccess]);
 
   return (
     <Container maxWidth="sm">
@@ -34,23 +56,20 @@ export default function FormularioLogin() {
             component="form"
             onSubmit={handleSubmit((data) => {
               // eslint-disable-next-line no-restricted-syntax
-              console.log(data);
+              mutation.mutate(data);
             })}
           >
             <TextField
               margin="normal"
-              required
               fullWidth
               id="email"
               label="Email Address"
               // eslint-disable-next-line react/jsx-props-no-spreading
               {...register('email', {
                 required: true,
-                maxLength: 50,
               })}
               autoComplete="email"
               type="text"
-              autoFocus
               sx={{ mt: 1.5, mb: 1.5 }}
             />
             <Box component="span" color="red">
@@ -58,15 +77,12 @@ export default function FormularioLogin() {
             </Box>
             <TextField
               margin="normal"
-              required
               fullWidth
               id="password"
               label="Password"
               // eslint-disable-next-line react/jsx-props-no-spreading
               {...register('password', {
                 required: true,
-                minLength: { value: 6, message: 'Minimo: 6 caracteres' },
-                maxLength: 300,
               })}
               autoComplete="current-password"
               type="password"
@@ -91,13 +107,13 @@ export default function FormularioLogin() {
           <Grid
             container
             direction="row"
-            justifyContent="center"
+            justifyContent="flex-end"
             alignItems="flex-end"
             sx={{ mt: 3, mb: 0.5 }}
           >
             <Breadcrumbs aria-label="breadcrumb">
-              <Link color="inherit" href="/registrar">
-                olvide mi contraseña
+              <Link color="inherit" to="/register">
+                crear cuenta
               </Link>
             </Breadcrumbs>
           </Grid>

@@ -1,8 +1,5 @@
 import { useReducer } from 'react';
 
-// const VUELO = 'vuelo';
-const AUTH = 'auth';
-
 // eslint-disable-next-line consistent-return
 const reducer = (state, action) => {
   switch (action.type) {
@@ -10,8 +7,8 @@ const reducer = (state, action) => {
       return { ...state, vuelo: action.payload };
     case 'select asiento':
       return { ...state, asiento: action.payload };
-    case AUTH:
-      break;
+    case 'add token':
+      return { ...state, auth: action.payload };
     default:
       return state;
   }

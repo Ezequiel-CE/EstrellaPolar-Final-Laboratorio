@@ -27,3 +27,10 @@ export const comprarPasaje = async (data) => {
   const asientos = response.data;
   return asientos.resp;
 };
+
+export const logearse = async (data) => {
+  console.info(data);
+  const response = await API.post('auth/login', data);
+  const info = response.data;
+  return info;
+};

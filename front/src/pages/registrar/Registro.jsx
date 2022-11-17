@@ -9,7 +9,7 @@ function Registro() {
   return (
     <LayoutNoNav>
       <Grid container>
-        <Grid xs display="flex" justifyContent="start">
+        <Grid xs display="flex" justifyContent="center">
           <Card
             sx={{
               px: '35px',
