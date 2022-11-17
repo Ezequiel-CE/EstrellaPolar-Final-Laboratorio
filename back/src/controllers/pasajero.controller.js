@@ -66,3 +66,15 @@ export const cambiarPasaje = async (req, res) => {
     res.status(400).json({ message: err.message });
   }
 };
+
+export const comprarPasajeConCuenta = async (req, res) => {
+  console.log(req.user);
+
+  try {
+    const resp = await serviciosPasajero.comprarPasaje(req.body, req.user.id);
+    res.status(200).json({ message: 'se compro pasaje', resp });
+  } catch (err) {
+    console.log(err);
+    res.status(400).json({ message: err.message });
+  }
+};

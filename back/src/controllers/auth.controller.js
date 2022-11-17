@@ -2,8 +2,8 @@ import cuentaServicios from '../services/cuenta.service.js';
 
 export const register = async (req, res) => {
   try {
-    await cuentaServicios.registrarCuenta(req.body);
-    res.status(200).json({ mensaje: 'Cuenta creada con exito' });
+    const token = await cuentaServicios.registrarCuenta(req.body);
+    res.status(200).json({ mensaje: 'Cuenta creada con exito', token });
   } catch (err) {
     res.status(403).json({ mensaje: err.message });
   }

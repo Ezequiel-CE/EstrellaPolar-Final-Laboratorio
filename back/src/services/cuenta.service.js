@@ -20,6 +20,14 @@ const registrarCuenta = async (data) => {
     email: value.email,
     password: hashedPassword,
   });
+
+  // crea token
+
+  const token = jwt.sign({ cuenta: value.email }, process.env.JWT_SECRET, {
+    expiresIn: '2h',
+  });
+
+  return token;
 };
 
 const LogearCuenta = async (data) => {

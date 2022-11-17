@@ -23,7 +23,18 @@ export const getAsientos = async (param) => {
 };
 
 export const comprarPasaje = async (data) => {
-  const response = await API.post('pasajeros/comprar', data);
+  console.info(data);
+  let path = 'pasajeros/comprar';
+  let config = {};
+
+  if (data.token) {
+    path = 'pasajeros/comprar/cuenta';
+    config = {
+      headers: { Authorization: `Bearer ${data.token}` },
+    };
+  }
+
+  const response = await API.post(path, data, config);
   const asientos = response.data;
   return asientos.resp;
 };

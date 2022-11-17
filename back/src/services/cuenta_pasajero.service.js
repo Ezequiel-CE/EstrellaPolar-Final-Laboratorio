@@ -1,19 +1,12 @@
 import CuentaPasajero from '../models/cuenta_pasajero.model.js';
-import validacionBodyCuentaPasajero from '../schemas/cuenta_pasajero.schema.js';
 
-const postCuentaPasajero = async (data) => {
-  const { error, value } = validacionBodyCuentaPasajero(data);
+const postCuentaPasajero = async (data) => CuentaPasajero.create(data);
 
-  if (error) throw new Error(error);
+// const exist = await CuentaPasajero.findOne({
+//   where: { id_cuenta: data.id_cuenta, id_pasajero: data.id_pasajero },
+// });
 
-  const exist = await CuentaPasajero.findOne({
-    where: { id_cuenta: value.id_cuenta, id_pasajero: value.id_pasajero },
-  });
-
-  if (exist) throw new Error('pasaje ya fue comprado');
-
-  return CuentaPasajero.create(value);
-};
+// if (exist) throw new Error('pasaje ya fue comprado');
 
 const getAllCuentaPasajero = async () => CuentaPasajero.findAll();
 

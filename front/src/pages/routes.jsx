@@ -8,6 +8,7 @@ import Pasaje from './pasaje/Pasaje';
 
 import CompraPasaje from './compraPasaje/compraPasaje';
 import Registro from './registrar/Registro';
+import Datos from './Datos/Datos';
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,14 @@ const router = createBrowserRouter([
       {
         path: 'compraPasaje',
         element: <CompraPasaje />,
+      },
+      {
+        path: 'asiento',
+        element: <Asientos />,
+      },
+      {
+        path: 'datos',
+        element: <Datos />,
       },
     ],
   },

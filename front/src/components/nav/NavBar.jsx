@@ -21,7 +21,7 @@ import { useApiContext } from '../../context/state';
 // const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
 
 const pages = [
-  { name: 'Mi Pasaje', path: '/pasaje' },
+  { name: 'Buscar Pasaje', path: '/pasaje' },
   { name: 'Vuelo', path: '/vuelos' },
 ];
 
