@@ -8,6 +8,15 @@ export const obtenerPasajeros = async (_, res) => {
     res.status(400).json({ message: err.message });
   }
 };
+export const obtenerPasajerosPorVuelo = async (_, res) => {
+  const { v } = _.query;
+  try {
+    const pasajeros = await serviciosPasajero.conseguirPasajeroPorVuelo(v);
+    res.status(200).json(pasajeros);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+};
 
 export const obtenerPasajero = async (req, res) => {
   const { id } = req.params;

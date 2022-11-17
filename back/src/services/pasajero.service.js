@@ -9,6 +9,14 @@ import servicioAvion from './avion.service.js';
 
 const getPasajeros = async () => model.Pasajero.findAll();
 
+const conseguirPasajeroPorVuelo = async (id) => {
+  const vuelos = await model.PasajeroCompraPasaje.findAll({
+    include: [{ model: model.pasajeVuelo, where: { id_vuelo: id } }, { model: model.Pasajero }],
+  });
+
+  return vuelos;
+};
+
 const getPasajero = async (id) => {
   const pasajero = await model.Pasajero.findOne({ where: { id } });
 
@@ -90,4 +98,5 @@ export default {
   patchPasajero,
   comprarPasaje,
   cambiarPasaje,
+  conseguirPasajeroPorVuelo,
 };

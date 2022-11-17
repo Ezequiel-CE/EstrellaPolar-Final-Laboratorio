@@ -7,6 +7,13 @@ export const conseguirVuelos = async (param) => {
 
   return data.resp;
 };
+export const conseguirPasajeroPorVuelo = async (param) => {
+  const { data } = await API.get('pasajeros/adm/PorVuelo', {
+    params: { v: param },
+  });
+
+  return data;
+};
 
 export const getPasajes = async (data) => {
   const response = await API.post('/pasaje', data);

@@ -7,11 +7,14 @@ import {
   crearPasajero,
   comprarPasaje,
   cambiarPasaje,
+  obtenerPasajerosPorVuelo,
 } from '../controllers/pasajero.controller.js';
 
 const pasajeroRouter = Router();
 
 pasajeroRouter.get('/adm/', obtenerPasajeros);
+pasajeroRouter.get('/adm/PorVuelo', obtenerPasajerosPorVuelo);
+
 pasajeroRouter.post('/post/', crearPasajero);
 pasajeroRouter
   .route('/adm/:id')
