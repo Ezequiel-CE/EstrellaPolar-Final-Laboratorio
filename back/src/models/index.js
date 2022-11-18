@@ -11,6 +11,10 @@ import pasajeVuelo from './pasaje_vuelo.model.js';
 // Relaciones de cuenta_pasajero
 Cuenta.belongsToMany(Pasajero, { through: CuentaPasajero, foreignKey: 'id_cuenta' });
 Pasajero.belongsToMany(Cuenta, { through: CuentaPasajero, foreignKey: 'id_pasajero' });
+Cuenta.hasMany(CuentaPasajero, { foreignKey: 'id' });
+CuentaPasajero.belongsTo(Cuenta, { foreignKey: 'id_cuenta' });
+Pasajero.hasMany(pasajeVuelo, { foreignKey: 'id' });
+CuentaPasajero.belongsTo(Pasajero, { foreignKey: 'id_pasajero' });
 
 // Relaciones de PasajeCompraPasaje pasaje
 

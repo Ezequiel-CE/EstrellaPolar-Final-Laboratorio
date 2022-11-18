@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import model from '../models/index.js';
 import BodyPasaje from '../schemas/pasaje.schema.js';
 
@@ -10,11 +11,21 @@ const postPasaje = (body) => {
 };
 
 const getPasaje = async (id) => {
-  const pasaje = await model.Pasaje.findOne({ where: { id } });
-  if (!pasaje) {
-    throw new Error('No se encontro pasaje');
-  }
-  return pasaje;
+  const pasajeCompleto = await model.PasajeroCompraPasaje.findOne({
+    include: [
+      {
+        where: { id },
+        model: model.Pasajero,
+      },
+      {
+        model: model.pasajeVuelo,
+        include: [{ model: model.Pasaje }, { model: model.Vuelo }],
+      },
+    ],
+    order: [['fecha', 'DESC']],
+  });
+
+  return pasajeCompleto;
 };
 
 const encontrarPasaje = async (data) => {
@@ -51,6 +62,23 @@ const encontrarPasaje = async (data) => {
   return pasajeFomat;
 };
 
-const servicio = { postPasaje, getPasaje, encontrarPasaje };
+const encontrarPasajePorCuenta = async (cuenta) => {
+  const pasajeros = await model.CuentaPasajero.findAll({
+    include: [
+      {
+        where: { id: cuenta.id },
+        model: model.Cuenta,
+        attributes: ['id'],
+      },
+      {
+        model: model.Pasajero,
+      },
+    ],
+  });
+
+  return pasajeros;
+};
+
+const servicio = { postPasaje, getPasaje, encontrarPasaje, encontrarPasajePorCuenta };
 
 export default servicio;

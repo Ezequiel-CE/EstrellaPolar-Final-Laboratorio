@@ -8,6 +8,15 @@ export const obtenerPasajeros = async (_, res) => {
     res.status(400).json({ message: err.message });
   }
 };
+export const obtenerPasajerosPorVuelo = async (_, res) => {
+  const { v } = _.query;
+  try {
+    const pasajeros = await serviciosPasajero.conseguirPasajeroPorVuelo(v);
+    res.status(200).json(pasajeros);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+};
 
 export const obtenerPasajero = async (req, res) => {
   const { id } = req.params;
@@ -54,7 +63,6 @@ export const comprarPasaje = async (req, res) => {
     const resp = await serviciosPasajero.comprarPasaje(req.body);
     res.status(200).json({ message: 'se compro pasaje', resp });
   } catch (err) {
-    console.log(err);
     res.status(400).json({ message: err.message });
   }
 };
@@ -64,6 +72,18 @@ export const cambiarPasaje = async (req, res) => {
     await serviciosPasajero.cambiarPasaje(req.body);
     res.status(200).json({ message: 'se cambio pasaje' });
   } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+};
+
+export const comprarPasajeConCuenta = async (req, res) => {
+  console.log(req.user);
+
+  try {
+    const resp = await serviciosPasajero.comprarPasaje(req.body, req.user.id);
+    res.status(200).json({ message: 'se compro pasaje', resp });
+  } catch (err) {
+    console.log(err);
     res.status(400).json({ message: err.message });
   }
 };

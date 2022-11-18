@@ -55,6 +55,7 @@ const Vuelos = () => {
   if (mutation.isSuccess) {
     const formatedAsiento = {
       placa: mutation.data.asiento.placa,
+      compraId: mutation.data.pasajero_compra_pasaje,
       clase: mutation.data.asiento.clase,
       permitido: true,
       info: {

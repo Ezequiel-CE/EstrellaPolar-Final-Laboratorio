@@ -11,7 +11,7 @@ const Footer = () => (
     <Box py={{ xs: 2, sm: 4 }} color="white.main" bgcolor="dark.main">
       <Container maxWidth="lg">
         <Grid container spacing={5}>
-          <Grid item xs={12} sm={4}>
+          <Grid item xs={12} sm={3}>
             <Box borderBottom={1}>Help</Box>
             <Box>
               <Typography color="inherit">Contact:</Typography>
@@ -37,7 +37,7 @@ const Footer = () => (
               <Box pl="1.1em" pr="1em">
                 <PhoneIcon />
               </Box>
-              <Typography color="inherit">3804-999999</Typography>
+              <Typography color="inherit">+54 9 380-4999999</Typography>
             </Box>
             <Box display="flex" direction="row" py="1px">
               <Box pl="1.1em" pr="1em">
@@ -46,7 +46,25 @@ const Footer = () => (
               <Typography color="inherit">flights@estrellapolar.com</Typography>
             </Box>
           </Grid>
-          <Grid item xs={12} sm={4}>
+          <Grid item xs={12} sm={3}>
+            <Box borderBottom={1}>About us</Box>
+            <Box pt="1em" pb="0.3em">
+              <Link style={{ textDecoration: 'none' }} href="/" color="inherit">
+                Company
+              </Link>
+            </Box>
+            <Box pb="0.3em">
+              <Link style={{ textDecoration: 'none' }} href="/" color="inherit">
+                Information
+              </Link>
+            </Box>
+            <Box>
+              <Link style={{ textDecoration: 'none' }} href="/" color="inherit">
+                Reviews
+              </Link>
+            </Box>
+          </Grid>
+          <Grid item xs={12} sm={3}>
             <Box borderBottom={1}>Account</Box>
             <Box pt="1em" pb="0.3em">
               <Link style={{ textDecoration: 'none' }} href="/login" color="inherit">
@@ -59,7 +77,7 @@ const Footer = () => (
               </Link>
             </Box>
           </Grid>
-          <Grid item xs={12} sm={4}>
+          <Grid item xs={12} sm={3}>
             <Box borderBottom={1}>Legal</Box>
             <Box pt="1em" pb="0.3em">
               <Link style={{ textDecoration: 'none' }} href="/" color="inherit">

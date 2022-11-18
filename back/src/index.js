@@ -20,6 +20,9 @@ app.use(express.json());
 app.use(morgan('tiny'));
 app.use(cors());
 
+// eslint-disable-next-line import/first
+import './configs/auth.js';
+
 app.use('/API/auth', authRouter);
 app.use('/API/itinerario', routerVuelo);
 app.use('/API/pasajeros', pasajeroRouter);

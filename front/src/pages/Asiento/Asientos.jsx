@@ -3,29 +3,19 @@
 /* eslint-disable arrow-body-style */
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Container, Grid, Typography, LinearProgress, Button } from '@mui/material';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery, useQueryClient, useMutation } from '@tanstack/react-query';
 import Asiento from './components/asiento';
 import { useApiContext } from '../../context/state';
-import { getAsientos } from '../../api/metodos';
+import { getAsientos, editarAsiento } from '../../api/metodos';
 import FinalizacionDialog from './components/DialogCompra';
-/* http://localhost:5000/API/avion/asientos
-realizar get api.post(avion/asiento,body)
-{
-  "v": 1,
-  "a": 3,
-  "clase": "vip"
-}
-paso hookquery + key + request recibo 3 estados data loading y error y
-hacer condiciones en base a eso
-Leer Docu Tanstack Query
-Mutaciones
-*/
 
 const Asientos = (props) => {
   const { state } = useApiContext();
   const { vuelo } = state;
   const { avions } = vuelo.vuelo;
+  const navigate = useNavigate();
 
   const a = avions[0].id;
   const v = vuelo.vuelo.id;
@@ -33,6 +23,7 @@ const Asientos = (props) => {
   const [open, setOpen] = useState(false);
 
   const { pasajeComprado } = props;
+
   const params = { v, a, clase };
   const { data, isLoading, error } = useQuery({
     queryKey: ['asientos', params],
@@ -40,6 +31,10 @@ const Asientos = (props) => {
     // enabled: !!params,
     refetchOnWindowFocus: false,
     retry: 1,
+  });
+
+  const mutation = useMutation({
+    mutationFn: (dataAsiento) => editarAsiento(dataAsiento),
   });
 
   let asientosList;
@@ -56,8 +51,28 @@ const Asientos = (props) => {
     );
   }
 
-  const finalizar = () => {
+  const navigateHome = () => {
+    // 👇️ navigate to /
+    navigate('/');
+  };
+
+  const finalizar = (type) => {
     setOpen(!open);
+    switch (type) {
+      case 'conservar':
+        console.info('conservar');
+        break;
+      case 'cambiar':
+        console.info('cambiar');
+        mutation.mutate({
+          asiento: state.asientoSeleccionado,
+          pasajeroCompraPasajeId: pasajeComprado.compraId,
+        });
+
+        break;
+      default:
+        break;
+    }
   };
 
   return (
@@ -92,7 +107,7 @@ const Asientos = (props) => {
         <Grid item x={1} md={4}>
           <Button
             variant="contained"
-            onClick={finalizar}
+            onClick={() => finalizar('cambiar')}
             sx={{
               m: 2,
               backgroundColor: '#F96D00',
@@ -107,7 +122,7 @@ const Asientos = (props) => {
         <Grid item x={1} md={4}>
           <Button
             variant="contained"
-            onClick={finalizar}
+            onClick={() => finalizar('conservar')}
             sx={{
               m: 2,
               backgroundColor: '#F96D00',
@@ -120,7 +135,7 @@ const Asientos = (props) => {
           </Button>
         </Grid>
       </Grid>
-      <FinalizacionDialog open={open} finalizar={finalizar} />
+      <FinalizacionDialog open={open} finalizar={finalizar} navigateHome={navigateHome} />
     </Container>
   );
 };

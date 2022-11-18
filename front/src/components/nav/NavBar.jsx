@@ -15,34 +15,51 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { Link } from 'react-router-dom';
 import OrangeIcon from '../../assets/logo.svg';
 import LoginButton from './LoginButton';
-// import UserAvatar from './UserAvatar';
+import UserAvatar from './UserAvatar';
+import { useApiContext } from '../../context/state';
 
 // const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
 
-const pages = [
-  { name: 'Mi Pasaje', path: '/pasaje' },
+const pagesNoAdm = [
+  { name: 'Buscar Pasaje', path: '/pasaje' },
   { name: 'Vuelo', path: '/vuelos' },
-  { name: 'Informacion', path: '/informacion' },
+];
+
+const pagesAdm = [
+  { name: 'Buscar Pasaje', path: '/pasaje' },
+  { name: 'Vuelo', path: '/vuelos' },
+  { name: 'Vuelos ADM', path: '/vuelosADM' },
 ];
 
 function NavBar() {
+  const { state } = useApiContext();
+  const { auth } = state;
+
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-  // const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
-  // const handleOpenUserMenu = (event) => {
-  //   setAnchorElUser(event.currentTarget);
-  // };
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
 
-  // const handleCloseUserMenu = () => {
-  //   setAnchorElUser(null);
-  // };
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
+
+  let pages;
+
+  if (auth && auth.role === 1) {
+    pages = pagesAdm;
+  } else {
+    pages = pagesNoAdm;
+  }
 
   return (
     <div>
@@ -188,12 +205,20 @@ function NavBar() {
                 alignItems: 'center',
               }}
             >
+              {auth ? (
+                <UserAvatar
+                  handleOpenUserMenu={handleOpenUserMenu}
+                  handleCloseUserMenu={handleCloseUserMenu}
+                  anchorElUser={anchorElUser}
+                />
+              ) : (
+                <LoginButton />
+              )}
               {/* <UserAvatar
                 handleOpenUserMenu={handleOpenUserMenu}
                 handleCloseUserMenu={handleCloseUserMenu}
                 anchorElUser={anchorElUser}
               /> */}
-              <LoginButton />
             </Box>
           </Toolbar>
         </Container>

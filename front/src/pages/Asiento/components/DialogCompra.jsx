@@ -5,14 +5,18 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import Slide from '@mui/material/Slide';
+import { useApiContext } from '../../../context/state';
 
 const Transition = React.forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 
 export default function FinalizacionDialog(props) {
-  const { open, finalizar } = props;
+  const { open, navigateHome } = props;
+  const { selectVuelo, selectAsiento } = useApiContext();
 
   const handleClose = () => {
-    finalizar();
+    navigateHome();
+    selectVuelo(null);
+    selectAsiento(null);
   };
 
   return (
@@ -29,9 +33,7 @@ export default function FinalizacionDialog(props) {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} autoFocus>
-            Salir
-          </Button>
+          <Button onClick={handleClose}>Salir</Button>
         </DialogActions>
       </Dialog>
     </div>

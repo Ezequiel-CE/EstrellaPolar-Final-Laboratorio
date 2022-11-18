@@ -17,6 +17,7 @@ const Cuenta = db.define(
       unique: true,
     },
     password: { field: 'password', type: DataTypes.STRING, allowNull: false },
+    role: { field: 'role', type: DataTypes.NUMBER, allowNull: false, defaultValue: '0' },
   },
   { tableName: 'cuenta', timestamps: false },
 );

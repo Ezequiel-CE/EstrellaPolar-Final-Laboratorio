@@ -30,7 +30,7 @@ export function ApiProvider({ children }) {
   // };
 
   const [state, dispatch] = useAPIreducer({
-    auth: {},
+    auth: null,
     asientoSeleccionado: null,
     vuelo: null,
   });
@@ -53,7 +53,20 @@ export function ApiProvider({ children }) {
     dispatch({ type: 'add token', payload: data });
   };
 
-  const value = { state, dispatch, selectVuelo, selectPasaje, pasaje, selectAsiento, guardarToken };
+  const desLogear = () => {
+    dispatch({ type: 'delete token' });
+  };
+
+  const value = {
+    state,
+    dispatch,
+    selectVuelo,
+    selectPasaje,
+    pasaje,
+    selectAsiento,
+    guardarToken,
+    desLogear,
+  };
 
   return <Provider value={value}>{children}</Provider>;
 }

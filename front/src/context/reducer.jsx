@@ -9,6 +9,8 @@ const reducer = (state, action) => {
       return { ...state, asientoSeleccionado: action.payload };
     case 'add token':
       return { ...state, auth: action.payload };
+    case 'delete token':
+      return { ...state, auth: null };
 
     default:
       return state;

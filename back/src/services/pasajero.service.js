@@ -3,11 +3,19 @@ import {
   validacionBodyPasajero,
   validacionBodyPasajeroEdicion,
 } from '../schemas/pasajero.schema.js';
-import servicios from './vuelo.service.js';
+import cuentaPasajerServicio from './cuenta_pasajero.service.js';
 import pasajeroCompraPasajeServicio from './pasajero_compra_pasaje.service.js';
 import servicioAvion from './avion.service.js';
 
 const getPasajeros = async () => model.Pasajero.findAll();
+
+const conseguirPasajeroPorVuelo = async (id) => {
+  const vuelos = await model.PasajeroCompraPasaje.findAll({
+    include: [{ model: model.pasajeVuelo, where: { id_vuelo: id } }, { model: model.Pasajero }],
+  });
+
+  return vuelos;
+};
 
 const getPasajero = async (id) => {
   const pasajero = await model.Pasajero.findOne({ where: { id } });
@@ -49,7 +57,7 @@ const patchPasajero = async (id, data) => {
 
 const getRandom = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
-const comprarPasaje = async (data) => {
+const comprarPasaje = async (data, idCuenta) => {
   console.info(data);
   // trae los asientos disponibles de ese vuelo
   const { libres } = await servicioAvion.getAsientosLibres({
@@ -63,6 +71,10 @@ const comprarPasaje = async (data) => {
   // agrega al pasajero
   const pasajero = await postPasajero(data.pasajero);
 
+  if (idCuenta) {
+    // eslint-disable-next-line max-len
+    await cuentaPasajerServicio.postCuentaPasajero({ id_cuenta: idCuenta, id_pasajero: pasajero.id, puntos: 100 });
+  }
   const asientoRandom = getRandom(libres);
 
   const pasajeroComprapasaje = await pasajeroCompraPasajeServicio.postPasajeroCompraPasaje({
@@ -79,6 +91,7 @@ const comprarPasaje = async (data) => {
 
 const cambiarPasaje = async (data) => {
   const nuevoPasaje = await pasajeroCompraPasajeServicio.patchPasajeroCompraPasaje(data);
+  return nuevoPasaje;
 };
 
 export default {
@@ -89,4 +102,5 @@ export default {
   patchPasajero,
   comprarPasaje,
   cambiarPasaje,
+  conseguirPasajeroPorVuelo,
 };

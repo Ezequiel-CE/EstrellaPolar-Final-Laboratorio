@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { Grid, Container, Box, TextField, Button, Typography, Breadcrumbs } from '@mui/material';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useMutation } from '@tanstack/react-query';
@@ -18,6 +18,7 @@ const schema = yup
   .required();
 
 export default function FormularioLogin() {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -37,11 +38,11 @@ export default function FormularioLogin() {
     mutationFn: (data) => logearse(data),
   });
 
-  console.info(mutation);
-
   useEffect(() => {
     if (mutation.isSuccess === true) {
-      guardarToken(mutation.data.token);
+      guardarToken(mutation.data);
+
+      navigate('/');
     }
   }, [mutation.isSuccess]);
 
@@ -91,6 +92,11 @@ export default function FormularioLogin() {
             <Box component="span" color="red">
               {errors.password?.message}
             </Box>
+            {mutation.isError && (
+              <Box component="span" color="red" textAlign="center">
+                Usuario o contraseña incorrecta
+              </Box>
+            )}
             <Button
               color="orange"
               type="submit"
