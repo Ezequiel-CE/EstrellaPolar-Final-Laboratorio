@@ -1,2 +1,7 @@
-# trabajo-final-lab-2022
-trabajo final de laboratorio 4
+# Trabajo final de laboratorio 4
+
+Integrantes:
+-Cabral, Marcelo Ezequiel
+-Carrizo Escudero, Carlos Ezequiel
+-Diaz, Ezequiel Alejandro
+-Wamba Ferreyra, Marcos Andres
